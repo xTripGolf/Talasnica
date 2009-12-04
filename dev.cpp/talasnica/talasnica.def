@@ -1,0 +1,14 @@
+LIBRARY talasnica
+
+EXPORTS	talasnica_addOrder
+		talasnica_reset
+		talasnica_getTradepacketInfo
+		GetIntValue
+        GetDoubleValue
+        GetStringValue
+        GetArrayItemValue
+        SetArrayItemValue
+        GetRatesItemValue
+        SortStringArray
+        ProcessStringArray
+        testSorting
