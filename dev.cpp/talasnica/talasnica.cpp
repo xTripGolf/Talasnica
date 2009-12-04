@@ -48,11 +48,10 @@ int __stdcall talasnica_addOrder(const int ticket,
 											const int magicNumber)
   {
 	//printf("Registrován obchod %d\n",ticket);
-	cout << "Registruji obchod " << ticket << endl;
+	cout << "Registruji obchod " << endl;
 	//Order *order = new Order();
 	Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (unsigned short)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 	cout << order << endl;
-	
 	tradePacket.add(order);
 	cout << "registrovano " << tradePacket.count() << " obchodu" << endl;
 	return ticket;
@@ -62,9 +61,13 @@ void __stdcall talasnica_reset(void){
 	tradePacket.reset();
 }
 
-  char* __stdcall talasnica_getTradepacketInfo(void)
+char* __stdcall talasnica_getTradepacketInfo(void)
   {
-		string info = tradePacket.getInfo();
+		stringstream proud(ios_base::out);
+
+		proud << tradePacket;
+		//return (proud.str().c_str());
+		string info = proud.str();
 		//return(info.c_str());
 		char *str;
 		str = new char[info.length() + 1];

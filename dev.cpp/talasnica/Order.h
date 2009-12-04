@@ -12,7 +12,8 @@ namespace Talasnica
 {
 	class Order
 	{
-	private:
+	//private:
+	public:
 		unsigned long ticket;
 		string symbol;
 		unsigned int openTime;
@@ -58,6 +59,6 @@ namespace Talasnica
 	friend bool operator<(const Order& a, const Order& b);
 	friend bool operator>(const Order& a, const Order& b);
 	friend bool operator==(const Order& a, const Order& b);
-//	friend TradePacket::add(Order order);
+	//friend Talasnica::TradePacket::add(Order order);
 	};
 }
