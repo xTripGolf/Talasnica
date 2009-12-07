@@ -7,7 +7,7 @@
 
 using namespace std;
 
-Talasnica::TradePacket tradePacket;
+Talasnica::TradePacket g_tradePacket;
 
 static int CompareMqlStr(const void *left,const void *right);
 //+------------------------------------------------------------------+
@@ -52,20 +52,20 @@ int __stdcall talasnica_addOrder(const int ticket,
 	//Order *order = new Order();
 	Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (unsigned short)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 	cout << order << endl;
-	tradePacket.add(order);
-	cout << "registrovano " << tradePacket.count() << " obchodu" << endl;
+	g_tradePacket.add(order);
+	cout << "registrovano " << g_tradePacket.count() << " obchodu" << endl;
 	return ticket;
   }
 
 void __stdcall talasnica_reset(void){
-	tradePacket.reset();
+	g_tradePacket.reset();
 }
 
 char* __stdcall talasnica_getTradepacketInfo(void)
   {
 		stringstream proud(ios_base::out);
 
-		proud << tradePacket;
+		proud << g_tradePacket;
 		//return (proud.str().c_str());
 		string info = proud.str();
 		//return(info.c_str());

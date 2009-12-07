@@ -24,6 +24,8 @@ using namespace std;
 namespace Talasnica
 {
 
+	class Order;
+
 	class TradePacket
 	{
 		private:

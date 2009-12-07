@@ -4,16 +4,19 @@
 #include <iostream>
 #include <sstream>
 
-//#include "TradePacket.h"
+#include "TradePacket.h"
 
 using namespace std;
 
 namespace Talasnica
 {
+
+	class TradePacket;
+
 	class Order
 	{
-	//private:
-	public:
+	private:
+	//public:
 		unsigned long ticket;
 		string symbol;
 		unsigned int openTime;
@@ -59,6 +62,7 @@ namespace Talasnica
 	friend bool operator<(const Order& a, const Order& b);
 	friend bool operator>(const Order& a, const Order& b);
 	friend bool operator==(const Order& a, const Order& b);
-	//friend Talasnica::TradePacket::add(Order order);
+	//friend void Talasnica::TradePacket::add(Order);
+	friend class Talasnica::TradePacket;
 	};
 }
