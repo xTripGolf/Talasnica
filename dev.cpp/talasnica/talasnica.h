@@ -10,9 +10,6 @@
 #include "TradePacket.h"
 #include "Order.h"
 
-
-using namespace std;
-
 //----
 #define MT4_EXPFUNC __declspec(dllexport)
 //+------------------------------------------------------------------+

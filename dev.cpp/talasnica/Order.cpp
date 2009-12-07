@@ -1,5 +1,7 @@
 #include "Order.h"
 
+using namespace std;
+
 namespace Talasnica
 {
 

@@ -6,8 +6,6 @@
 
 #include "TradePacket.h"
 
-using namespace std;
-
 namespace Talasnica
 {
 
@@ -18,7 +16,7 @@ namespace Talasnica
 	private:
 	//public:
 		unsigned long ticket;
-		string symbol;
+		std::string symbol;
 		unsigned int openTime;
 		unsigned short type;
 		double lots;
@@ -31,7 +29,7 @@ namespace Talasnica
 		double commission;
 		double profit;
 		double swap;
-		string comment;
+		std::string comment;
 		unsigned int magicNumber;
 
 		//
@@ -40,7 +38,7 @@ namespace Talasnica
 	public:
 		Order(void);
 		Order(const unsigned long ticket,
-				 const string symbol,
+			const std::string symbol,
 				 const unsigned int openTime,
 				 const unsigned short type,
 				 const double lots,
@@ -53,12 +51,12 @@ namespace Talasnica
 				 const double commission,
 				 const double profit,
 				 const double swap,
-				 const string comment,
+				 const std::string comment,
 				 const unsigned int magicNumber);
 		~Order(void);
 		int Order::getTicket(void);
 
-	friend ostream& operator<<(ostream &os, Order &objekt);
+	friend std::ostream& operator<<(std::ostream &os, Order &objekt);
 	friend bool operator<(const Order& a, const Order& b);
 	friend bool operator>(const Order& a, const Order& b);
 	friend bool operator==(const Order& a, const Order& b);

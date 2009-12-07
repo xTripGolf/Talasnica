@@ -7,31 +7,30 @@
 #include<utility>
 #include<functional>
 
-#define OP_BUY 0 //Buying position. 
-#define OP_SELL 1 //Selling position. 
-#define OP_BUYLIMIT 2 //Buy limit pending position. 
-#define OP_SELLLIMIT 3 //Sell limit pending position. 
-#define OP_BUYSTOP 4 //Buy stop pending position. 
-#define OP_SELLSTOP 5 //Sell stop pending position. 
-// extended positions type
-#define OP_PROFIT 6 // positions in profit
-#define OP_LOSS 7 // loss positions 
-#define OP_OPENED 8 // all opened positions
-#define OP_PREMOC 9 // nezamèené pozice
-
-using namespace std;
 
 namespace Talasnica
 {
 
 	class Order;
 
+	const int OP_BUY = 0; //Buying position. 
+	const int  OP_SELL = 1; //Selling position. 
+	const int  OP_BUYLIMIT = 2; //Buy limit pending position. 
+	const int  OP_SELLLIMIT = 3; //Sell limit pending position. 
+	const int  OP_BUYSTOP = 4; //Buy stop pending position. 
+	const int  OP_SELLSTOP = 5; //Sell stop pending position. 
+	// extended positions type
+	const int  OP_PROFIT = 6; // positions in profit
+	const int  OP_LOSS = 7; // loss positions 
+	const int  OP_OPENED = 8; // all opened positions
+	const int  OP_PREMOC = 9; // nezamèené pozice
+
 	class TradePacket
 	{
 		private:
 			//
-			map<int,Order> tradeList;
-			map<int, vector<Order> > packet;
+			std::map<int,Order> tradeList;
+			std::map<int, std::vector<Order> > packet;
 			public:
         TradePacket(void);
 				~TradePacket(void);
@@ -39,6 +38,6 @@ namespace Talasnica
 				void reset(void);
 				int count();
 				//string getInfo(void);
-		friend ostream& operator<<(ostream &os, TradePacket &objekt);
+		friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
   };
 }
