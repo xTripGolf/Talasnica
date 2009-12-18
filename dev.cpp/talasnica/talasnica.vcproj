@@ -207,6 +207,14 @@
 	</References>
 	<Files>
 		<File
+			RelativePath=".\AverageOrder.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\AverageOrder.h"
+			>
+		</File>
+		<File
 			RelativePath=".\Order.cpp"
 			>
 		</File>

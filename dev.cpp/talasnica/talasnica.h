@@ -6,6 +6,7 @@
 
 #include <string>
 #include <iostream>
+#include<vector>
 //#include <cstring>
 #include "TradePacket.h"
 #include "Order.h"
