@@ -31,13 +31,14 @@ namespace Talasnica
 			//
 			std::map<int,Order> tradeList;
 			std::map<int, std::vector<Order> > packet;
+
 			public:
         TradePacket(void);
 				~TradePacket(void);
-        void add(Order);
+        void add(Order&);
 				void reset(void);
 				int count();
-				//string getInfo(void);
+				std::map<int, std::string> names;
 		friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
   };
 }

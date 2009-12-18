@@ -56,7 +56,7 @@ namespace Talasnica
 		~Order(void);
 		int Order::getTicket(void);
 
-	friend std::ostream& operator<<(std::ostream &os, Order &objekt);
+	friend std::ostream& operator<<(std::ostream &os, const Order &objekt);
 	friend bool operator<(const Order& a, const Order& b);
 	friend bool operator>(const Order& a, const Order& b);
 	friend bool operator==(const Order& a, const Order& b);

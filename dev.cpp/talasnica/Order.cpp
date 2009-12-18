@@ -75,9 +75,32 @@ namespace Talasnica
     return a.openPrice > b.openPrice;
 	}
 
-	ostream& operator<<(ostream &os, Order &objekt)
+	ostream& operator<<(ostream &os, const Order &order)
 	{
-		return(os << "order " << objekt.ticket << " open on " << objekt.openPrice);
+		os << order.symbol;
+		//os << ": " << TradePacket.names[order.type];
+		os << " #" << order.ticket;
+		os << " open on " << order.openTime;
+		os << " price: " << order.openPrice;
+		os << " lots " << order.lots;
+		os << " total profit " << order.totalProfit;
+		os << endl;
+		
+		
+		/* nevypisuji zatím toto
+		this->stopLoss = stopLoss;
+		this->takeProfit = takeProfit;
+		this->expiration = expiration;
+		this->closeTime = closeTime;
+		this->closePrice = closePrice;
+		this->commission = commission;
+		this->profit = profit;
+		this->swap = swap;
+		this->comment = comment;
+		this->magicNumber = magicNumber;*/
+
+								return os;
+		
 	} 
 
 }
