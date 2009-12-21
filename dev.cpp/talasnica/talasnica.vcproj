@@ -215,6 +215,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\dataType.h"
+			>
+		</File>
+		<File
 			RelativePath=".\Order.cpp"
 			>
 		</File>

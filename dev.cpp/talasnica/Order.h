@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-
+#include "dataType.h"
 #include "TradePacket.h"
 
 namespace Talasnica
@@ -18,7 +18,7 @@ namespace Talasnica
 		unsigned long ticket;
 		std::string symbol;
 		unsigned int openTime;
-		unsigned short type;
+		/*unsigned short*/ OperationType type;
 		double lots;
 		double openPrice;
 		double stopLoss;
@@ -40,7 +40,7 @@ namespace Talasnica
 		Order(const unsigned long ticket,
 			const std::string symbol,
 				 const unsigned int openTime,
-				 const unsigned short type,
+				 const OperationType type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,

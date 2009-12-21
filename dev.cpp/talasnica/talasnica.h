@@ -8,6 +8,7 @@
 #include <iostream>
 #include<vector>
 //#include <cstring>
+#include "dataType.h"
 #include "TradePacket.h"
 #include "Order.h"
 

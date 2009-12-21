@@ -2,9 +2,8 @@
 
 #include <string>
 //#include <map>
-//#include <vector>
+#include <vector>
 #include <iostream>
-
 
 namespace Talasnica
 {
@@ -20,11 +19,13 @@ namespace Talasnica
 		//double lots;
 		int type;
 		std::string description;
+		std::vector<Order *> orders;
 	public:
 		AverageOrder(void);
 		AverageOrder(std::string);
 		~AverageOrder(void);
 		void add(Order&);
+	friend std::ostream& operator<<(std::ostream &os, const AverageOrder &averageOrder);
 	friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
 	};

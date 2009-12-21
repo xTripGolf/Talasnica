@@ -7,12 +7,13 @@ namespace Talasnica
 
 	Order::Order(void)
 	{
+		cout << "Order::Order(void)" << endl;
 	}
 
 	Order::Order(const unsigned long ticket,
 				 const string symbol,
 				 const unsigned int openTime,
-				 const unsigned short type,
+				 const OperationType type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -26,6 +27,7 @@ namespace Talasnica
 				 const string comment,
 				 const unsigned int magicNumber)
 	{
+		cout << "Order::Order(...)" << endl;
 		this->ticket = ticket;
 		this->symbol = symbol;
 		this->openPrice = openPrice;
@@ -48,30 +50,21 @@ namespace Talasnica
 
 	Order::~Order(void)
 	{
+		cout << "destructor Order::~Order(void)" << endl;
 	}
-
-	int Order::getTicket(void) {
-		return ticket;
-	}
-
-	/*string Order::toString(void) {
-
-		 stringstream proud(ios_base::out);
-
-		 proud << "order " << ticket << " open on " << openPrice;
-		 return proud.str();
-	   
-	}*/
 
 	bool operator<(const Order& a, const Order& b) {
+		cout << "bool operator<(const Order& a, const Order& b)" << endl;
     return a.openPrice < b.openPrice;
 	}
 
 	bool operator==(const Order& a, const Order& b) {
+		cout << "bool operator==(const Order& a, const Order& b)" << endl;
     return a.openPrice == b.openPrice;
 	}
 
 	bool operator>(const Order& a, const Order& b) {
+		cout << "bool operator>(const Order& a, const Order& b)" << endl;
     return a.openPrice > b.openPrice;
 	}
 
