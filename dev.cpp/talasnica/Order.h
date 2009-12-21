@@ -10,6 +10,7 @@ namespace Talasnica
 {
 
 	class TradePacket;
+	class AverageOrder;
 
 	class Order
 	{
@@ -60,7 +61,7 @@ namespace Talasnica
 	friend bool operator<(const Order& a, const Order& b);
 	friend bool operator>(const Order& a, const Order& b);
 	friend bool operator==(const Order& a, const Order& b);
-	//friend void Talasnica::TradePacket::add(Order);
 	friend class Talasnica::TradePacket;
+	friend class Talasnica::AverageOrder;
 	};
 }

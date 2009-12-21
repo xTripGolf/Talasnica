@@ -19,7 +19,7 @@ namespace Talasnica
     return c;
 	}
 
-	//map<int, const string> TradePacket::descriptions = TradePacket::initialize_descriptions();
+	map<OrdersGroup, const string> TradePacket::descriptions = TradePacket::initialize_descriptions();
  	map<OrdersGroup, const string> TradePacket::initialize_descriptions(void)
  	{
 		cout << "map<int, const string> TradePacket::initialize_descriptions(void)" << endl;
@@ -46,20 +46,20 @@ namespace Talasnica
 	map<OrdersGroup, AverageOrder> TradePacket::initialize_packet(void)
 	{
 		cout << "map<int, AverageOrder> TradePacket::initialize_packet(void)" << endl;
-		map<OrdersGroup, AverageOrder> map;
+		//map<OrdersGroup, AverageOrder> map;
 		for(OrdersGroup i = BUY; i <= PREMOC; i++) {
-			map.insert(std::make_pair(i,AverageOrder(TradePacket::descriptions[i])));
+			/*map.*/ packet.insert(std::make_pair(i,AverageOrder(TradePacket::descriptions[i])));
 			//map.insert(std::make_pair(i,AverageOrder()));
 		}
 		
-		return map;
+		return packet/*map*/;
 	}
 
 	TradePacket::TradePacket(void)
 	{
 		cout << "TradePacket::TradePacket(void)" << endl;
-		descriptions = initialize_descriptions();
-		packet = initialize_packet();
+		//descriptions = initialize_descriptions();
+		//packet = initialize_packet();
 	}
 
 	TradePacket::~TradePacket(void)
@@ -67,29 +67,43 @@ namespace Talasnica
 		cout << "TradePacket::~TradePacket(void)" << endl;
 	}
 
-  void TradePacket::add(Order &order)
+  void TradePacket::add(Order order)
   {
-		cout << "TradePacket::add(Order &order)" << endl;
+		cout << "TradePacket::add(Order order)" << endl;
 		tradeList.insert(std::make_pair(order.ticket,order));
+	}
 
-		OrdersGroup type = (OrdersGroup)order.type;
+	void TradePacket::sort(void)
+	{
+		cout << "void TradePacket::sort(void)" << endl;
 
-		packet[type].add(order);
+		initialize_packet();
 
-		OrdersGroup index;
-		if(order.totalProfit > 0) {
-			index = PROFITED;
-		}
-		else {
-			index = LOSSED;
-		}
-		packet[index].add(order);
+
+		// projdeme tradelist
+		map<int, Order>::iterator ordersIterator;
+		for(ordersIterator = tradeList.begin(); ordersIterator != tradeList.end(); ordersIterator++) {
+			Order & order = ordersIterator->second;
+			OrdersGroup type = (OrdersGroup)order.type;
+			packet[type].add(order);
+
+			if(order.totalProfit > 0) {
+				packet[PROFITED].add(order);
+			}
+			else {
+				packet[LOSSED].add(order);
+			}
 		
-		if(order.type == OP_BUY || order.type == OP_SELL) {
-			order.openPrice += 10;
-			packet[ALL_OPENED].add(order);
+			if(order.type == OP_BUY || order.type == OP_SELL) {
+				packet[ALL_OPENED].add(order);
+			}
 		}
-		
+
+		map<OrdersGroup, AverageOrder>::iterator packetIterator;
+		for(packetIterator = packet.begin(); packetIterator != packet.end(); packetIterator++) {
+			packetIterator->second.sort();
+		}
+
   }
 
 	void TradePacket::reset(void) {
@@ -108,6 +122,7 @@ namespace Talasnica
 		os << "*********** TALASNICA TRADE PACKET *********** " << endl;
 		os << "Celkový poèet obchodù " << packet.count() << endl;
 		os << " všechny obchody jsou zde " << endl;
+
 		//copy(packet.tradeList.begin(),packet.tradeList.end(),ostream_iterator<Order>(cout,"\n"));
 		//copy(packet.packet[OP_BUY].begin(),packet.packet[OP_BUY].end(),ostream_iterator<Order>(os,"\n"));
 		

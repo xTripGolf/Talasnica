@@ -22,14 +22,15 @@ namespace Talasnica
 			std::map<int,Order> tradeList;
 			std::map<OrdersGroup, AverageOrder> packet;
 			std::map<OrdersGroup, AverageOrder> initialize_packet();
-			/*static*/ std::map<OrdersGroup, const std::string> descriptions;
-			/*static*/ std::map<OrdersGroup, const std::string> initialize_descriptions(void);
-			public:
-        TradePacket(void);
-				~TradePacket(void);
-        void add(Order&);
-				void reset(void);
-				int count();
+			static std::map<OrdersGroup, const std::string> descriptions;
+			static std::map<OrdersGroup, const std::string> initialize_descriptions(void);
+		public:
+      TradePacket(void);
+			~TradePacket(void);
+      void add(Order);
+			void sort();
+			void reset(void);
+			int count();
 		friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
   };
 

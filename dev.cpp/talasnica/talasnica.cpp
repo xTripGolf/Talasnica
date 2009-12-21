@@ -52,14 +52,21 @@ int __stdcall talasnica_addOrder(const int ticket,
 		
 		Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (Talasnica::OperationType)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 		
-		cout << order << endl;
+		cout << "order pred g_tradePacket.add(order); " << order << " on " << &order << endl;
 		
 		g_tradePacket.add(order);
+
+		cout << "order po g_tradePacket.add(order); " << order << " on " << &order << endl;
 		
 		cout << "registrovano " << g_tradePacket.count() << " obchodu" << endl;
 		
 		return ticket;
   }
+
+void __stdcall talasnica_sortOrders(void)
+{
+	g_tradePacket.sort();
+}
 
 void __stdcall talasnica_reset(void){
 	g_tradePacket.reset();
@@ -275,8 +282,8 @@ void __stdcall testSorting(void) {
 	//Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (unsigned short)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 	Talasnica::Order order1(100, "GBPUSD", 1259050941, Talasnica::OP_SELL, 0.10000000, 1.6, 0.00000000, 0.00000000, 0, 0, 1.65440000, 0.00000000, -5.97000000, -0.65000000, "", 0);
 	Talasnica::Order order2(110, "GBPUSD", 1259137924, Talasnica::OP_BUY, 0.10000000, 1.7, 0.00000000, 0.00000000, 0, 0, 1.65440000, 0.00000000, -77.56000000, -0.22000000, "", 0);
-	Talasnica::Order order3(120, "GBPUSD", 1259050941, Talasnica::OP_SELL, 0.10000000, 1.5, 0.00000000, 0.00000000, 0, 0, 1.65440000, 0.00000000, -5.97000000, -0.65000000, "", 0);
-	Talasnica::Order order4(130, "GBPUSD", 1259137924, Talasnica::OP_BUY, 0.10000000, 1.9, 0.00000000, 0.00000000, 0, 0, 1.65440000, 0.00000000, -77.56000000, -0.22000000, "", 0);
+	Talasnica::Order order3(120, "GBPUSD", 1259050951, Talasnica::OP_SELL, 0.10000000, 1.5, 0.00000000, 0.00000000, 0, 0, 1.65440000, 0.00000000, -5.97000000, -0.65000000, "", 0);
+	Talasnica::Order order4(130, "GBPUSD", 1259137974, Talasnica::OP_BUY, 0.10000000, 1.9, 0.00000000, 0.00000000, 0, 0, 1.65440000, 0.00000000, -77.56000000, -0.22000000, "", 0);
 
 	vector<Talasnica::Order> zasobnik;
 	zasobnik.push_back(order1);

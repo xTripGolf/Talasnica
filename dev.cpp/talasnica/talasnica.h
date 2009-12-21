@@ -51,6 +51,7 @@ MT4_EXPFUNC int __stdcall talasnica_addOrder(const int ticket,
 											const char *comment,
 											const int magicNumber
 	);
+MT4_EXPFUNC void __stdcall talasnica_sortOrders(void);
 MT4_EXPFUNC void __stdcall talasnica_reset(void);
 MT4_EXPFUNC char* __stdcall talasnica_getTradepacketInfo(void);
 // sample
