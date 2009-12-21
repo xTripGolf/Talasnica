@@ -51,11 +51,18 @@ namespace Talasnica
 	void AverageOrder::sort(void)
 	{
 		cout << "void AverageOrder::sort(void)" << endl;
-		std::sort(orders.begin(),orders.end(),less<Talasnica::Order *>());
-			cout << "serazeno podle ceny - zle, je to podle adresz" << endl;
+		OrderSort sort;
+		std::sort(orders.begin(),orders.end(),sort);
+			cout << "serazeno podle ceny" << endl;
 		for(unsigned int i = 0; i < orders.size(); i++){
 			cout << orders[i] << endl;
 		}
 	}
+
+		bool OrderSort::operator()(Order * o1, Order * o2) {
+			cout << "bool OrderSort::operator()(Order * o1, Order * o2)" << endl;
+			return o1->openPrice < o2->openPrice;
+    }
+
 
 }

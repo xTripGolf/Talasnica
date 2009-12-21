@@ -3,6 +3,7 @@ LIBRARY talasnica
 EXPORTS	talasnica_addOrder
 		talasnica_reset
 		talasnica_getTradepacketInfo
+		talasnica_sortOrders
 		GetIntValue
         GetDoubleValue
         GetStringValue
@@ -11,4 +12,3 @@ EXPORTS	talasnica_addOrder
         GetRatesItemValue
         SortStringArray
         ProcessStringArray
-        testSorting

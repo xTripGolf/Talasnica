@@ -79,7 +79,6 @@ namespace Talasnica
 
 		initialize_packet();
 
-
 		// projdeme tradelist
 		map<int, Order>::iterator ordersIterator;
 		for(ordersIterator = tradeList.begin(); ordersIterator != tradeList.end(); ordersIterator++) {

@@ -53,21 +53,6 @@ namespace Talasnica
 		cout << "destructor Order::~Order(void)" << endl;
 	}
 
-	bool operator<(const Order& a, const Order& b) {
-		cout << "bool operator<(const Order& a, const Order& b)" << endl;
-    return a.openPrice < b.openPrice;
-	}
-
-	bool operator==(const Order& a, const Order& b) {
-		cout << "bool operator==(const Order& a, const Order& b)" << endl;
-    return a.openPrice == b.openPrice;
-	}
-
-	bool operator>(const Order& a, const Order& b) {
-		cout << "bool operator>(const Order& a, const Order& b)" << endl;
-    return a.openPrice > b.openPrice;
-	}
-
 	ostream& operator<<(ostream &os, const Order &order)
 	{
 		os << order.symbol;

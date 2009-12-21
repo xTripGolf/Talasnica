@@ -63,6 +63,3 @@ MT4_EXPFUNC BOOL __stdcall SetArrayItemValue(double *arr,const int arraysize,con
 MT4_EXPFUNC double __stdcall GetRatesItemValue(const RateInfo* rates,const int rates_total,const int shift,const int nrate);
 MT4_EXPFUNC int __stdcall SortStringArray(MqlStr *arr,const int arraysize);
 MT4_EXPFUNC int __stdcall ProcessStringArray(MqlStr *arr,const int arraysize);
-
-
-MT4_EXPFUNC void __stdcall testSorting(void);

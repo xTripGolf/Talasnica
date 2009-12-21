@@ -31,4 +31,9 @@ namespace Talasnica
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
 	};
 
+	class OrderSort {
+		public:
+				bool operator()(Order * o1, Order * o2);
+	};
+
 }

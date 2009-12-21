@@ -11,6 +11,7 @@ namespace Talasnica
 
 	class TradePacket;
 	class AverageOrder;
+	class OrderSort;
 
 	class Order
 	{
@@ -58,10 +59,8 @@ namespace Talasnica
 		int Order::getTicket(void);
 
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
-	friend bool operator<(const Order& a, const Order& b);
-	friend bool operator>(const Order& a, const Order& b);
-	friend bool operator==(const Order& a, const Order& b);
 	friend class Talasnica::TradePacket;
 	friend class Talasnica::AverageOrder;
+	friend class Talasnica::OrderSort;
 	};
 }
