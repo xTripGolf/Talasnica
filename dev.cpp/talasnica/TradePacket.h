@@ -42,6 +42,7 @@ namespace Talasnica
 			double totalProfit(OrdersGroup type);
 			double averageOpenPrice(void);
 			double averageOpenPrice(OrdersGroup type);
+			int getTicket(OrdersGroup type, unsigned int index);
 		friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
   };
 

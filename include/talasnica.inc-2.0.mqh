@@ -61,6 +61,10 @@
    *
    */
    double talasnica_averageOpenPrice(int type);
+   /**
+   * vybere obchod
+   **/
+   int talasnica_getTicket(int type, int index);
    
    
    // sample
@@ -72,6 +76,9 @@
    double GetRatesItemValue(double rates[][6],int,int,int);
    int    SortStringArray(string& arr[],int);
    int    ProcessStringArray(string& arr[],int);
+#import "talasnica/talasnica.lib-2.0.ex4"
+   bool talasnica_recalculate();
+   bool talasnica_OrderSelect(int type, int index);
 #import
 
 /**

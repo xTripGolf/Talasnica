@@ -137,6 +137,15 @@ double __stdcall talasnica_averageOpenPrice(int type)
 {
 	return g_tradePacket.averageOpenPrice((Talasnica::OrdersGroup)type);
 }
+   /**
+   * vybere obchod
+   *
+   */
+int __stdcall talasnica_getTicket(int type, int index)
+{
+	return g_tradePacket.getTicket((Talasnica::OrdersGroup)type, index);
+}
+
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+

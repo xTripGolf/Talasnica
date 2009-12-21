@@ -165,6 +165,13 @@ namespace Talasnica
 		return 0;
 	}
 
+	int TradePacket::getTicket(OrdersGroup type, unsigned int index){
+		if(index > packet[type].orders.size()) {
+			return 0;
+		}
+		return packet[type].orders[index]->ticket;
+	}
+
 	ostream& operator<<(ostream &os, TradePacket &packet)
 	{
 		os << "*********** TALASNICA TRADE PACKET *********** " << endl;

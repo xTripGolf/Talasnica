@@ -87,6 +87,12 @@ MT4_EXPFUNC double __stdcall talasnica_totalProfit(int type);
    *
    */
 MT4_EXPFUNC double __stdcall talasnica_averageOpenPrice(int type);
+   /**
+   * vybere obchod
+   *
+   */
+MT4_EXPFUNC int __stdcall talasnica_getTicket(int type, int index);
+
 // sample
 MT4_EXPFUNC int __stdcall GetIntValue(const int ipar);
 MT4_EXPFUNC double __stdcall GetDoubleValue(const double dpar);

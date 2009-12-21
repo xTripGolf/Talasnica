@@ -18,7 +18,7 @@
 //+------------------------------------------------------------------+
 int init()
   {
-   double ret,some_value=10.5;
+   /*double ret,some_value=10.5;
    string sret;
    int    cnt;
    string strarray[6]={ "first", "second", "third", "fourth", "fifth" };
@@ -33,7 +33,7 @@ int init()
    cnt=SortStringArray(strarray,ArraySize(strarray));
    for(int i=0; i<cnt; i++) Print(i," - ",strarray[i]);
    cnt=ProcessStringArray(strarray,ArraySize(strarray));
-   for(i=0; i<cnt; i++) Print(i," - ",strarray[i]);
+   for(i=0; i<cnt; i++) Print(i," - ",strarray[i]);*/
 //----
    return(0);
   }
@@ -42,54 +42,13 @@ int init()
 //+------------------------------------------------------------------+
 int start()
   {
-   Print("Pøed resetem " + talasnica_getTradepacketInfo());
-   talasnica_reset();
-   Print("Po resetu " + talasnica_getTradepacketInfo());
    
-   for(int i = 0; i<OrdersTotal(); i++){
-      if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES) && OrderSymbol()==Symbol() /*&& OrderComment() == tl_Comment()*/){
-      /*Print(OrderTicket()+ ", " +
-                             OrderSymbol()+ ", " +
-                             OrderOpenTime()+ ", " +
-                             OrderType()+ ", " +
-                             OrderLots()+ ", " +
-                             OrderOpenPrice()+ ", " +
-                             OrderStopLoss()+ ", " +
-                             OrderTakeProfit()+ ", " +
-                             OrderExpiration()+ ", " +
-                             OrderCloseTime()+ ", " +
-                             OrderClosePrice()+ ", " +
-                             OrderCommission()+ ", " +
-                             OrderProfit()+ ", " +
-                             OrderSwap()+ ", " +
-                             OrderComment()+ ", " +
-                             OrderMagicNumber()
-                             );*/
-         talasnica_addOrder(OrderTicket(),
-                             OrderSymbol(),
-                             OrderOpenTime(),
-                             OrderType(),
-                             OrderLots(),
-                             OrderOpenPrice(),
-                             OrderStopLoss(),
-                             OrderTakeProfit(),
-                             OrderExpiration(),
-                             OrderCloseTime(),
-                             OrderClosePrice(),
-                             OrderCommission(),
-                             OrderProfit(),
-                             OrderSwap(),
-                             OrderComment(),
-                             OrderMagicNumber()
-                             );
-      }
-      
-  }
+   talasnica_recalculate();
   
-  Print("Po naètení " + talasnica_getTradepacketInfo());
+  //Print("Po naètení " + talasnica_getTradepacketInfo());
   
   /*******************************/
-   double price;
+   /*double price;
    double arr[5]={1.5, 2.6, 3.7, 4.8, 5.9 };
    double rates[][6];
 //---- get first item from passed array
@@ -101,7 +60,7 @@ int start()
 //---- get current close
    ArrayCopyRates(rates);
    price=GetRatesItemValue(rates,Bars,0,CLOSE_INDEX);
-   Print("Returned from Close ",price);
+   Print("Returned from Close ",price);*/
 //----
    return(0);
   }

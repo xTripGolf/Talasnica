@@ -10,6 +10,7 @@ EXPORTS	talasnica_addOrder
 		talasnica_swap
 		talasnica_totalProfit
 		talasnica_averageOpenPrice
+		talasnica_getTicket
 		GetIntValue
         GetDoubleValue
         GetStringValue
