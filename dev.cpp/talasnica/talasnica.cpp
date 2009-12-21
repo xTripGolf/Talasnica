@@ -86,6 +86,57 @@ char* __stdcall talasnica_getTradepacketInfo(void)
 		return str;
 		
   }
+   /**
+   * poèítadlo obchodù
+   *
+   * poèet obchodù dle druhu
+   */
+int __stdcall talasnica_count(int type)
+{
+	return g_tradePacket.count((Talasnica::OrdersGroup)type);
+}
+   /**
+   * poèítadlo obchodù
+   *
+   * poèet lotù
+   */
+double __stdcall talasnica_volume(int type)
+{
+	return g_tradePacket.volume((Talasnica::OrdersGroup)type);
+}
+   /**
+   * poèítadlo obchodù
+   *
+   * profit
+   */
+double __stdcall talasnica_profit(int type)
+{
+	return g_tradePacket.profit((Talasnica::OrdersGroup)type);
+}
+   /**
+   * swap
+   *
+   */
+double __stdcall talasnica_swap(int type)
+{
+	return g_tradePacket.swap((Talasnica::OrdersGroup)type);
+}
+   /**
+   * profit + swap
+   *
+   */
+double __stdcall talasnica_totalProfit(int type)
+{
+	return g_tradePacket.totalProfit((Talasnica::OrdersGroup)type);
+}
+   /**
+   * aproximovaná vstupní cena
+   *
+   */
+double __stdcall talasnica_averageOpenPrice(int type)
+{
+	return g_tradePacket.averageOpenPrice((Talasnica::OrdersGroup)type);
+}
 //+------------------------------------------------------------------+
 //|                                                                  |
 //+------------------------------------------------------------------+

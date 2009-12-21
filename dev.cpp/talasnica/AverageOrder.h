@@ -14,9 +14,12 @@ namespace Talasnica
 	class AverageOrder
 	{
 	private:
-		double citatel = 0;
-		double jmenovatel = 0;
-		//double lots;
+		double citatel;
+		double jmenovatel;
+		int count;
+		double volume;
+		double profit;
+		double swap;
 		int type;
 		std::string description;
 		std::vector<Order *> orders;
@@ -29,6 +32,7 @@ namespace Talasnica
 	friend std::ostream& operator<<(std::ostream &os, const AverageOrder &averageOrder);
 	friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
+	friend TradePacket;
 	};
 
 	class OrderSort {

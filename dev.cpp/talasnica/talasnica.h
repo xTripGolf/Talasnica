@@ -54,6 +54,39 @@ MT4_EXPFUNC int __stdcall talasnica_addOrder(const int ticket,
 MT4_EXPFUNC void __stdcall talasnica_sortOrders(void);
 MT4_EXPFUNC void __stdcall talasnica_reset(void);
 MT4_EXPFUNC char* __stdcall talasnica_getTradepacketInfo(void);
+   /**
+   * poèítadlo obchodù
+   *
+   * poèet obchodù dle druhu
+   */
+MT4_EXPFUNC int __stdcall talasnica_count(int type);
+   /**
+   * poèítadlo obchodù
+   *
+   * poèet lotù
+   */
+MT4_EXPFUNC double __stdcall talasnica_volume(int type);
+   /**
+   * poèítadlo obchodù
+   *
+   * profit
+   */
+MT4_EXPFUNC double __stdcall talasnica_profit(int type);
+   /**
+   * swap
+   *
+   */
+MT4_EXPFUNC double __stdcall talasnica_swap(int type);
+   /**
+   * profit + swap
+   *
+   */
+MT4_EXPFUNC double __stdcall talasnica_totalProfit(int type);
+   /**
+   * aproximovaná vstupní cena
+   *
+   */
+MT4_EXPFUNC double __stdcall talasnica_averageOpenPrice(int type);
 // sample
 MT4_EXPFUNC int __stdcall GetIntValue(const int ipar);
 MT4_EXPFUNC double __stdcall GetDoubleValue(const double dpar);

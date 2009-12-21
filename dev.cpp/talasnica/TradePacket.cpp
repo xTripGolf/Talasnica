@@ -111,9 +111,58 @@ namespace Talasnica
 		packet.clear();
 	}
 
-	int TradePacket::count() {
+	int TradePacket::count(void) {
 		cout << "int TradePacket::count()" << endl;
 		return tradeList.size();
+	}
+
+	//int count(void);
+	int TradePacket::count(OrdersGroup type)
+	{
+		return packet[type].count;
+	}
+	double TradePacket::volume(void)
+	{
+		return 0;
+	}
+	double TradePacket::volume(OrdersGroup type)
+	{
+		return packet[type].volume;
+	}
+	double TradePacket::profit(void)
+	{
+		return 0;
+	}
+	double TradePacket::profit(OrdersGroup type)
+	{
+		return packet[type].profit;
+	}
+	double TradePacket::swap(void)
+	{
+		return 0;
+	}
+	double TradePacket::swap(OrdersGroup type)
+	{
+		return packet[type].swap;
+	}
+	double TradePacket::totalProfit(void)
+	{
+		return 0;
+	}
+	double TradePacket::totalProfit(OrdersGroup type)
+	{
+				return packet[type].profit + packet[type].swap;
+	}
+	double TradePacket::averageOpenPrice(void)
+	{
+		return 0;
+	}
+	double TradePacket::averageOpenPrice(OrdersGroup type)
+	{
+		if(packet[type].jmenovatel != 0) {
+			return packet[type].citatel / packet[type].jmenovatel;
+		}
+		return 0;
 	}
 
 	ostream& operator<<(ostream &os, TradePacket &packet)

@@ -30,7 +30,18 @@ namespace Talasnica
       void add(Order);
 			void sort();
 			void reset(void);
-			int count();
+			int count(void);
+			int count(OrdersGroup type);
+			double volume(void);
+			double volume(OrdersGroup type);
+			double profit(void);
+			double profit(OrdersGroup type);
+			double swap(void);
+			double swap(OrdersGroup type);
+			double totalProfit(void);
+			double totalProfit(OrdersGroup type);
+			double averageOpenPrice(void);
+			double averageOpenPrice(OrdersGroup type);
 		friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
   };
 

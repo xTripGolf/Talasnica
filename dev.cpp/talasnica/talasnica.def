@@ -4,6 +4,12 @@ EXPORTS	talasnica_addOrder
 		talasnica_reset
 		talasnica_getTradepacketInfo
 		talasnica_sortOrders
+		talasnica_count
+		talasnica_volume
+		talasnica_profit
+		talasnica_swap
+		talasnica_totalProfit
+		talasnica_averageOpenPrice
 		GetIntValue
         GetDoubleValue
         GetStringValue
