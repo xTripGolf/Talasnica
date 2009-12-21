@@ -14,8 +14,8 @@ namespace Talasnica
 	class AverageOrder
 	{
 	private:
-		//double citatel;
-		//double jmenovatel;
+		double citatel = 0;
+		double jmenovatel = 0;
 		//double lots;
 		int type;
 		std::string description;

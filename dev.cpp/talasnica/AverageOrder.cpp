@@ -26,11 +26,12 @@ namespace Talasnica
 	void AverageOrder::add(Order &order){
 		cout << "void AverageOrder::add(Order &order)" << endl;
 		cout << "AverageOrder " << description << endl << " add " << order << endl;
-		//order.openPrice += 10;
 		orders.push_back(&order);
+		citatel += order.lots * order.openPrice;
+		jmenovatel += order.lots; 
 	}
 
-		ostream& operator<<(ostream &os, const AverageOrder &averageOrder)
+	ostream& operator<<(ostream &os, const AverageOrder &averageOrder)
 	{
 
 		os << endl << "---------------------" << endl << averageOrder.description << endl;
@@ -59,10 +60,8 @@ namespace Talasnica
 		}
 	}
 
-		bool OrderSort::operator()(Order * o1, Order * o2) {
-			cout << "bool OrderSort::operator()(Order * o1, Order * o2)" << endl;
-			return o1->openPrice < o2->openPrice;
-    }
-
-
+	bool OrderSort::operator()(Order * o1, Order * o2) {
+		cout << "bool OrderSort::operator()(Order * o1, Order * o2)" << endl;
+		return o1->openPrice < o2->openPrice;
+  }
 }
