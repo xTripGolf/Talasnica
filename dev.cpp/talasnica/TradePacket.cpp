@@ -25,7 +25,6 @@ namespace Talasnica
 	map<OrdersGroup, const string> TradePacket::descriptions = TradePacket::initialize_descriptions();
  	map<OrdersGroup, const string> TradePacket::initialize_descriptions(void)
  	{
-		cout << "map<int, const string> TradePacket::initialize_descriptions(void)" << endl;
 
 		map<OrdersGroup, const string> map;
 
@@ -39,6 +38,25 @@ namespace Talasnica
 		map.insert(std::make_pair(LOSSED,std::string("Pozice ve ztrátì.")));
 		map.insert(std::make_pair(ALL_OPENED,std::string("Všechny pozice.")));
 		map.insert(std::make_pair(PREMOC,std::string("Nespárované pozice.")));
+
+		return map;
+ 	}
+
+	map<OrdersGroup, const string> TradePacket::names = TradePacket::initialize_names();
+ 	map<OrdersGroup, const string> TradePacket::initialize_names(void)
+ 	{
+		map<OrdersGroup, const string> map;
+
+		map.insert(std::make_pair(BUY,std::string("Buy")));
+		map.insert(std::make_pair(SELL,std::string("Sell")));
+		map.insert(std::make_pair(BUYLIMIT,std::string("Buy limit")));
+		map.insert(std::make_pair(SELLLIMIT,std::string("Sell limit")));
+		map.insert(std::make_pair(BUYSTOP,std::string("Buy stop")));
+		map.insert(std::make_pair(SELLSTOP,std::string("Sell stop")));
+		map.insert(std::make_pair(PROFITED,std::string("Profit")));
+		map.insert(std::make_pair(LOSSED,std::string("Ztrátové")));
+		map.insert(std::make_pair(ALL_OPENED,std::string("Všechny")));
+		map.insert(std::make_pair(PREMOC,std::string("Nespárované")));
 
 		return map;
  	}
@@ -178,6 +196,13 @@ namespace Talasnica
 			return 0;
 		}
 		return packet[type].orders[index]->ticket;
+	}
+
+	string TradePacket::getPacketName(OrdersGroup type){
+		return TradePacket::names[type];
+	}
+	string TradePacket::getPacketDescription(OrdersGroup type){
+		return TradePacket::descriptions[type];
 	}
 
 	ostream& operator<<(ostream &os, TradePacket &packet)

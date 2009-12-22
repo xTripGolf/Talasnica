@@ -68,6 +68,16 @@
    * vybere obchod
    **/
    int talasnica_getTicket(int type, int index);
+   /**
+   * vrátí název paketu obchodù
+   *
+   */
+   string talasnica_getPacketName(int type);
+   /**
+   * vrátí popis paketu obchodù
+   *
+   */
+   string talasnica_getPacketDescription(int type);
    
 #import
 

@@ -25,6 +25,8 @@ namespace Talasnica
 			std::map<OrdersGroup, AverageOrder> initialize_packet();
 			static std::map<OrdersGroup, const std::string> descriptions;
 			static std::map<OrdersGroup, const std::string> initialize_descriptions(void);
+			static std::map<OrdersGroup, const std::string> names;
+ 			static std::map<OrdersGroup, const std::string> initialize_names(void);
 		public:
       TradePacket(void);
 			~TradePacket(void);
@@ -44,6 +46,8 @@ namespace Talasnica
 			double averageOpenPrice(void);
 			double averageOpenPrice(OrdersGroup type);
 			int getTicket(OrdersGroup type, unsigned int index);
+			std::string getPacketName(OrdersGroup type);
+			std::string getPacketDescription(OrdersGroup type);
 		friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
   };
 

@@ -11,11 +11,5 @@ EXPORTS	talasnica_addOrder
 		talasnica_totalProfit
 		talasnica_averageOpenPrice
 		talasnica_getTicket
-		GetIntValue
-        GetDoubleValue
-        GetStringValue
-        GetArrayItemValue
-        SetArrayItemValue
-        GetRatesItemValue
-        SortStringArray
-        ProcessStringArray
+		talasnica_getPacketName
+		talasnica_getPacketDescription

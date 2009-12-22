@@ -8,6 +8,7 @@
 
 #include <talasnica_session.mqh>
 #include <talasnica_order.mqh>
+#include <talasnica_infoBox.mqh>
 
 extern bool development_mode = true;
 
@@ -39,8 +40,8 @@ int init()
    
    Comment(talasnica_session_getComment());
    
-  
-   //CreateInfoBox();
+   talasnica_recalculate();
+   talasnica_createTradeList();
  
    // nezùstal zaseknutý globální InTrade ?
    // Jednou se mi to stalo, nešly obchody a já nevìdìl co s tím
@@ -100,6 +101,7 @@ int start()
   {
    
    talasnica_recalculate();
+   talasnica_refreshTradeList();
   
   //Print("Po naètení " + talasnica_getTradepacketInfo());
   

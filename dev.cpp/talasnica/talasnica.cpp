@@ -10,6 +10,15 @@ using namespace std;
 
 Talasnica::TradePacket g_tradePacket;
 
+char * string2char(string s){
+	
+	int lenght = s.length() + 1;
+	char *ch;
+	ch = new char[lenght];
+	strcpy_s(ch, lenght, s.c_str());
+	return ch;
+}
+
 static int CompareMqlStr(const void *left,const void *right);
 //+------------------------------------------------------------------+
 //|                                                                  |
@@ -53,6 +62,7 @@ int __stdcall talasnica_addOrder(const int ticket,
 		
 		try {
 			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (Talasnica::OperationType)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
+			g_tradePacket.add(order);
 		}
 		catch (Talasnica::Exception e) {
 			return 0;
@@ -76,12 +86,7 @@ char* __stdcall talasnica_getTradepacketInfo(void)
 
 		proud << g_tradePacket;
 		//return (proud.str().c_str());
-		string info = proud.str();
-		//return(info.c_str());
-		char *str;
-		str = new char[info.length() + 1];
-		strcpy(str, info.c_str());
-		return str;
+		return string2char(proud.str());
 		
   }
    /**
@@ -142,6 +147,23 @@ double __stdcall talasnica_averageOpenPrice(int type)
 int __stdcall talasnica_getTicket(int type, int index)
 {
 	return g_tradePacket.getTicket((Talasnica::OrdersGroup)type, index);
+}
+
+   /**
+   * vrátí název paketu obchodù
+   *
+   */
+char* __stdcall talasnica_getPacketName(int type){
+	string name = g_tradePacket.getPacketName((Talasnica::OrdersGroup)type);
+	return string2char(name);
+}
+   /**
+   * vrátí popis paketu obchodù
+   *
+   */
+char* __stdcall talasnica_getPacketDescription(int type){
+	string desc = g_tradePacket.getPacketDescription((Talasnica::OrdersGroup)type);
+	return string2char(desc);
 }
 
 //+------------------------------------------------------------------+
@@ -312,7 +334,7 @@ double __stdcall GetArrayItemValue(const double *arr,const int arraysize,const i
       //---- memory piece is less than needed and cannot be reallocated within dll
       if(arr[i].len<len1+len2)  continue;
       //---- final processing
-      strcat(arr[i].string,arr[i+1].string);
+      //strcat(arr[i].string,arr[i+1].string);
      }
 //----
    return(arraysize);
