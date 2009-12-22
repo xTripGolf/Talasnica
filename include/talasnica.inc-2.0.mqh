@@ -77,6 +77,8 @@
    int    SortStringArray(string& arr[],int);
    int    ProcessStringArray(string& arr[],int);
 #import "talasnica/talasnica.lib-2.0.ex4"
+   bool talasnica_setEnvironment(int);
+   int talasnica_log(string str, int level = 0);
    bool talasnica_recalculate();
    bool talasnica_OrderSelect(int type, int index);
 #import
@@ -84,8 +86,8 @@
 /**
 konstanty pro oznaèení prostøedí
 **/
-#define ENVIRONMENT_PRODUCTION 2
-#define ENVIRONMENT_DEVELOPMENT 4
+#define ENVIRONMENT_PRODUCTION "production"
+#define ENVIRONMENT_DEVELOPMENT "development"
 
 /**
 * konstanty pro úroveò výpisu logování

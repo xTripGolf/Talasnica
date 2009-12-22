@@ -17,6 +17,8 @@
    //string IntegerToHexString(int integer_number);
 #import
 
+string environment = ENVIRONMENT_PRODUCTION;
+
 /**
 * barvy pro 6 typu obchodu
 *
@@ -31,7 +33,142 @@ color ArrowColors[18] = {Tomato, RoyalBlue, DeepPink, DarkTurquoise, Red, Blue, 
 extern int Slippage=3;
 double Lots = 0.1;
 //+------------------------------------------------------------------+
-//| My function                                                      |
+//| Talasnica 2 functions                                                     |
+//+------------------------------------------------------------------+
+// int MyCalculator(int value,int value2)
+//   {
+//    return(value+value2);
+//   }
+//+------------------------------------------------------------------+
+
+/*****************************************
+inicializace
+******************************************/
+
+bool talasnica_setEnvironment(int _env) {
+   environment = _env;
+   return(true);
+}
+
+/*****************************************
+loging
+******************************************/
+
+/**
+* zapíše øetìzec do logovacího souboru
+*/
+ 
+ int talasnica_log(string str, int level = 0)
+{
+   int handle;
+ 
+   handle = FileOpen(tlLog_journalFileName(), FILE_CSV|FILE_WRITE|FILE_READ, ';');
+   if(handle < 1 || environment == ENVIRONMENT_DEVELOPMENT)
+   {
+     Print("can't open journal file. Error-" + ErrorDescription(GetLastError()));
+   }
+   else {
+      FileSeek(handle,0,SEEK_END);
+      str = tlLog_vcil() + "\t" + str;
+      FileWrite(handle, str);
+   } 
+   FileClose(handle);
+}
+
+/**
+* vrací cestu k log souboru
+*
+*/
+
+string tlLog_journalFileName () {
+   return (AccountName() + "/" + environment + "/" + tl_Id() + "_" + Symbol() + "_ "+ Year() + "-" + Month() + "-" + Day() + ".log");
+}
+
+/**
+* aktuální èas jako øetìzec
+*/
+
+string tlLog_vcil() {
+   return (Symbol() + " at " + TimeToStr(TimeCurrent(),TIME_DATE|TIME_SECONDS));
+}
+
+/****************************************************************
+funkce pro poèítání obchodù
+****************************************************************/
+
+bool talasnica_recalculate(){
+   
+      //Print("Pøed resetem " + talasnica_getTradepacketInfo());
+      talasnica_reset();
+      //Print("Po resetu " + talasnica_getTradepacketInfo());
+   
+      for(int i = 0; i<OrdersTotal(); i++){
+      if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES) && OrderSymbol()==Symbol() /*&& OrderComment() == tl_Comment()*/){
+      /*Print(OrderTicket()+ ", " +
+                             OrderSymbol()+ ", " +
+                             OrderOpenTime()+ ", " +
+                             OrderType()+ ", " +
+                             OrderLots()+ ", " +
+                             OrderOpenPrice()+ ", " +
+                             OrderStopLoss()+ ", " +
+                             OrderTakeProfit()+ ", " +
+                             OrderExpiration()+ ", " +
+                             OrderCloseTime()+ ", " +
+                             OrderClosePrice()+ ", " +
+                             OrderCommission()+ ", " +
+                             OrderProfit()+ ", " +
+                             OrderSwap()+ ", " +
+                             OrderComment()+ ", " +
+                             OrderMagicNumber()
+                             );*/
+         talasnica_addOrder(OrderTicket(),
+                             OrderSymbol(),
+                             OrderOpenTime(),
+                             OrderType(),
+                             OrderLots(),
+                             OrderOpenPrice(),
+                             OrderStopLoss(),
+                             OrderTakeProfit(),
+                             OrderExpiration(),
+                             OrderCloseTime(),
+                             OrderClosePrice(),
+                             OrderCommission(),
+                             OrderProfit(),
+                             OrderSwap(),
+                             OrderComment(),
+                             OrderMagicNumber()
+                             );
+      }
+   }
+    return(true);
+}
+
+/****************************************************************
+funkce pro obchodování
+****************************************************************/
+
+/*** ORDER SELECT ***/
+/*
+vybere obchod ze seynamu obchodù
+param type - typ obchodu
+param index - poøadí v poli
+*/
+
+bool tl_OrderSelect(int type, int index) {
+   
+   int ticket = talasnica_getTicket(type, index);
+   
+   bool ret = OrderSelect(ticket, SELECT_BY_TICKET);
+   
+   if(!ret) {
+      talasnica_log ("Error in _OrderSelect() ticket = " + ticket + " : " + ErrorDescription(GetLastError()), LOG_ERROR);
+   }
+   
+   return (ret);
+   
+}
+//+------------------------------------------------------------------+
+//| Talasnica 1 functions                                                     |
 //+------------------------------------------------------------------+
 // int MyCalculator(int value,int value2)
 //   {
@@ -68,22 +205,9 @@ string tl_Comment() {
    return (tl_Id() + " " + Symbol());
    
 }
-/**
-* vrací cestu k log souboru
-*
-*/
 
-string tl_JournalFileName () {
-   return (AccountName() + "/" + tl_Id() + "_" + Symbol() + "_ "+ Year() + "-" + Month() + "-" + Day() + ".log");
-}
 
-/**
-* aktuální èas jako øetìzec
-*/
 
-string tl_Vcil() {
-   return (Symbol() + " at " + TimeToStr(TimeCurrent(),TIME_DATE|TIME_SECONDS));
-}
 
 /*****************************************
 trading
@@ -102,16 +226,16 @@ int tl_OrderSend (int type, double volume, double price, double stoploss=0, doub
      {
        GlobalVariableSet("InTrade", TimeCurrent());  // set lock indicator
        ticket = OrderSend(Symbol(),type,volume,price,Slippage,stoploss,takeprofit,tl_Comment(),magic,0,ArrowColors[type]);
-       //tl_Log("in function _OrderSend() Executed , ticket ="+ticket, LOG_);
+       //talasnica_log("in function _OrderSend() Executed , ticket ="+ticket, LOG_);
        GlobalVariableDel("InTrade");   // clear lock indicator
        if(ticket<=0) {
-         tl_Log("ERROR on _OrderSend () : "+ErrorDescription(GetLastError())+" of enterPrice @ "+price+" SL @ "+stoploss+" TP @ "+takeprofit+" lots @"+volume);
+         talasnica_log("ERROR on _OrderSend () : "+ErrorDescription(GetLastError())+" of enterPrice @ "+price+" SL @ "+stoploss+" TP @ "+takeprofit+" lots @"+volume);
          tries++;
        } else tries = chance;
     }
   }
   else {
-      tl_Log("ERROR on _OrderSend() : GlobalVariableCheck exists - " + ErrorDescription(GetLastError()) + " - ticket = " + ticket + " of enterPrice = "+price+" SL = "+stoploss+" TP = "+takeprofit);
+      talasnica_log("ERROR on _OrderSend() : GlobalVariableCheck exists - " + ErrorDescription(GetLastError()) + " - ticket = " + ticket + " of enterPrice = "+price+" SL = "+stoploss+" TP = "+takeprofit);
   }
   return(ticket);
 } // end tl_OrderSend()
@@ -146,17 +270,17 @@ bool tl_OrderModify (double price, double stoploss = 0, double takeprofit = 0) {
     }
     
     if(modified == false) {
-      tl_Log("ERROR on _OrderModify () : "+ErrorDescription(GetLastError()) + " - ticket = " + OrderTicket(), LOG_);
-      tl_Log("price: " + OrderOpenPrice() + " -> " + price, LOG_);
-      tl_Log("SL: " + OrderStopLoss() + " -> " + stoploss, LOG_);
-      tl_Log("TP: " + OrderTakeProfit() + " -> " + takeprofit, LOG_);
-      tl_Log("***", LOG_);
+      talasnica_log("ERROR on _OrderModify () : "+ErrorDescription(GetLastError()) + " - ticket = " + OrderTicket(), LOG_);
+      talasnica_log("price: " + OrderOpenPrice() + " -> " + price, LOG_);
+      talasnica_log("SL: " + OrderStopLoss() + " -> " + stoploss, LOG_);
+      talasnica_log("TP: " + OrderTakeProfit() + " -> " + takeprofit, LOG_);
+      talasnica_log("***", LOG_);
     }
   }
   else {
   
    if(modified == false) {
-      tl_Log("ERROR on _OrderModify () : GlobalVariableCheck exists - "+ErrorDescription(GetLastError()) + " - ticket = " + OrderTicket() + " of enterPrice = "+price+" SL = "+stoploss+" TP = "+takeprofit, LOG_);
+      talasnica_log("ERROR on _OrderModify () : GlobalVariableCheck exists - "+ErrorDescription(GetLastError()) + " - ticket = " + OrderTicket() + " of enterPrice = "+price+" SL = "+stoploss+" TP = "+takeprofit, LOG_);
    }
   }
   
@@ -187,7 +311,7 @@ bool tl_OrderClose () {
       }  
       GlobalVariableDel("InTrade");   // clear lock indicator
       if(closed == false) {
-         tl_Log("ERROR on _OrderClose () : "+ErrorDescription(GetLastError())+" ticket = " + OrderTicket(), LOG_);
+         talasnica_log("ERROR on _OrderClose () : "+ErrorDescription(GetLastError())+" ticket = " + OrderTicket(), LOG_);
          tries++;
       } else tries = chance;
     }
@@ -195,32 +319,13 @@ bool tl_OrderClose () {
   else {
   
    if(closed == false) {
-      tl_Log("ERROR on _OrderClose () : GlobalVariableCheck exists - "+ErrorDescription(GetLastError()) + " - ticket = " + OrderTicket(), LOG_);
+      talasnica_log("ERROR on _OrderClose () : GlobalVariableCheck exists - "+ErrorDescription(GetLastError()) + " - ticket = " + OrderTicket(), LOG_);
    }
   }
   return(closed); 
 } // end _OrderClose
 
-/*** ORDER SELECT ***/
-/*
-vybere obchod ze seynamu obchodù
-param type - typ obchodu
-param index - poøadí v poli
-*/
 
-bool tl_OrderSelect(int type, int index) {
-   
-   int ticket = talasnica_OrderSelect(type, index);
-   
-   bool ret = OrderSelect(ticket, SELECT_BY_TICKET);
-   
-   if(!ret) {
-      tl_Log ("Error in _OrderSelect() ticket = " + ticket + " : " + ErrorDescription(GetLastError()), LOG_);
-   }
-   
-   return (ret);
-   
-}
 
 double tl_OrderTakeProfit() {
    return(NormalizeDouble(OrderTakeProfit(), Digits));
@@ -360,56 +465,6 @@ string tl_OrderName(int type) {
          return("unknown");
    }
  }
-/****************************************************************
-funkce pro poèítání obchodù
-****************************************************************/
-
-bool talasnica_recalculate(){
-   
-      //Print("Pøed resetem " + talasnica_getTradepacketInfo());
-      talasnica_reset();
-      //Print("Po resetu " + talasnica_getTradepacketInfo());
-   
-      for(int i = 0; i<OrdersTotal(); i++){
-      if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES) && OrderSymbol()==Symbol() /*&& OrderComment() == tl_Comment()*/){
-      /*Print(OrderTicket()+ ", " +
-                             OrderSymbol()+ ", " +
-                             OrderOpenTime()+ ", " +
-                             OrderType()+ ", " +
-                             OrderLots()+ ", " +
-                             OrderOpenPrice()+ ", " +
-                             OrderStopLoss()+ ", " +
-                             OrderTakeProfit()+ ", " +
-                             OrderExpiration()+ ", " +
-                             OrderCloseTime()+ ", " +
-                             OrderClosePrice()+ ", " +
-                             OrderCommission()+ ", " +
-                             OrderProfit()+ ", " +
-                             OrderSwap()+ ", " +
-                             OrderComment()+ ", " +
-                             OrderMagicNumber()
-                             );*/
-         talasnica_addOrder(OrderTicket(),
-                             OrderSymbol(),
-                             OrderOpenTime(),
-                             OrderType(),
-                             OrderLots(),
-                             OrderOpenPrice(),
-                             OrderStopLoss(),
-                             OrderTakeProfit(),
-                             OrderExpiration(),
-                             OrderCloseTime(),
-                             OrderClosePrice(),
-                             OrderCommission(),
-                             OrderProfit(),
-                             OrderSwap(),
-                             OrderComment(),
-                             OrderMagicNumber()
-                             );
-      }
-   }
-    return(true);
-}
 
 
 /*****************************************
@@ -432,31 +487,3 @@ konverzní funkce
       double pipsValue = MarketInfo(Symbol(), MODE_TICKVALUE);
       return (ret / pipsValue);
    }
-
-
-/*****************************************
-loging
-******************************************/
-
-/**
-* zapíše øetìzec do logovacího souboru
-*/
- 
- int tl_Log(string str, int errorLevel = 0)
-{
-   int handle;
- 
-   handle = FileOpen(tl_JournalFileName(), FILE_CSV|FILE_WRITE|FILE_READ, ';');
-   if(handle < 1)
-   {
-     Print("can't open journal file. Error-" + ErrorDescription(GetLastError()));
-   }
-   else {
-      FileSeek(handle,0,SEEK_END);
-      str = tl_Vcil() + "\t" + str;
-      FileWrite(handle, str);
-   } 
-   FileClose(handle);
-   //Print("LOG level " + errorLevel);
-   //Print(">> " + str);
-}
