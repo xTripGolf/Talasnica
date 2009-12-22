@@ -7,6 +7,7 @@
 #include<utility>
 #include<functional>
 
+#include "Exception.h"
 #include "dataType.h"
 
 namespace Talasnica

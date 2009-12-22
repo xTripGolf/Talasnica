@@ -13,9 +13,12 @@ namespace Talasnica
 
 	OrdersGroup operator++(OrdersGroup& c, int) {
 		cout << "OrdersGroup operator++(const OrdersGroup& c) with " << c << endl;
+		if(c >= PREMOC) {
+			throw Exception("OrdersGroup se dostává mimo povolený rozsah.");
+		}
 		int t = (int)c;
 		t++;
-		c = (OrdersGroup)t;
+		c = (OrdersGroup)t; 
     return c;
 	}
 
@@ -47,7 +50,7 @@ namespace Talasnica
 	{
 		cout << "map<int, AverageOrder> TradePacket::initialize_packet(void)" << endl;
 		//map<OrdersGroup, AverageOrder> map;
-		for(OrdersGroup i = BUY; i <= PREMOC; i++) {
+		for(OrdersGroup i = BUY; i < PREMOC; i++) {
 			/*map.*/ packet.insert(std::make_pair(i,AverageOrder(TradePacket::descriptions[i])));
 			//map.insert(std::make_pair(i,AverageOrder()));
 		}
@@ -77,7 +80,12 @@ namespace Talasnica
 	{
 		cout << "void TradePacket::sort(void)" << endl;
 
-		initialize_packet();
+		try {
+			initialize_packet();
+		}
+		catch(Exception e) {
+			cerr << e.message << endl;
+		}
 
 		// projdeme tradelist
 		map<int, Order>::iterator ordersIterator;
@@ -151,7 +159,7 @@ namespace Talasnica
 	}
 	double TradePacket::totalProfit(OrdersGroup type)
 	{
-				return packet[type].profit + packet[type].swap;
+				return packet[type].totalProfit;
 	}
 	double TradePacket::averageOpenPrice(void)
 	{

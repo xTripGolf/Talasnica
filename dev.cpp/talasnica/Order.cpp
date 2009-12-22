@@ -1,4 +1,5 @@
 #include "Order.h"
+#include "Exception.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ namespace Talasnica
 		this->symbol = symbol;
 		this->openPrice = openPrice;
 		this->type = type;
-		this->lots = lots;
+		this->lots = reverse(type) * lots;
 		this->openPrice = openPrice;
 		this->stopLoss = stopLoss;
 		this->takeProfit = takeProfit;
@@ -52,6 +53,22 @@ namespace Talasnica
 	{
 		cout << "destructor Order::~Order(void)" << endl;
 	}
+
+	int Order::reverse(OperationType type) {
+   
+     switch (type) {
+         case OP_BUY:
+         case OP_BUYLIMIT:
+         case OP_BUYSTOP:
+            return 1;
+         case OP_SELL:
+         case OP_SELLLIMIT:
+         case OP_SELLSTOP:
+            return -1;
+         default:
+            throw Exception("Neplatný typ obchodu."); 
+      }
+}
 
 	ostream& operator<<(ostream &os, const Order &order)
 	{

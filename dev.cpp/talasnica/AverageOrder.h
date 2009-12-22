@@ -20,6 +20,7 @@ namespace Talasnica
 		double volume;
 		double profit;
 		double swap;
+		double totalProfit;
 		int type;
 		std::string description;
 		std::vector<Order *> orders;

@@ -23,6 +23,7 @@ namespace Talasnica
 		volume = 0;
 		profit = 0;
 		swap = 0;
+		totalProfit = 0;
 	}
 
 	AverageOrder::~AverageOrder(void)
@@ -40,6 +41,7 @@ namespace Talasnica
 		volume += order.lots;
 		profit += order.profit;
 		swap += order.swap;
+		totalProfit += order.totalProfit;
 	}
 
 	ostream& operator<<(ostream &os, const AverageOrder &averageOrder)

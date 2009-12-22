@@ -20,7 +20,7 @@ namespace Talasnica
 		unsigned long ticket;
 		std::string symbol;
 		unsigned int openTime;
-		/*unsigned short*/ OperationType type;
+		OperationType type;
 		double lots;
 		double openPrice;
 		double stopLoss;
@@ -34,8 +34,12 @@ namespace Talasnica
 		std::string comment;
 		unsigned int magicNumber;
 
-		//
 		double totalProfit;
+
+		/**
+		* vrací 1 pro long pozice a -1 pro short pozice
+		**/
+		int reverse(OperationType);
 
 	public:
 		Order(void);

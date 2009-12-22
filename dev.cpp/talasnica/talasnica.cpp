@@ -4,6 +4,7 @@
 //|                                        http://www.metaquotes.net |
 //+------------------------------------------------------------------+
 #include "talasnica.h"
+#include "Exception.h"
 
 using namespace std;
 
@@ -50,15 +51,12 @@ int __stdcall talasnica_addOrder(const int ticket,
 	
 		cout << "talasnica_addOrder() " << endl;
 		
-		Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (Talasnica::OperationType)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
-		
-		cout << "order pred g_tradePacket.add(order); " << order << " on " << &order << endl;
-		
-		g_tradePacket.add(order);
-
-		cout << "order po g_tradePacket.add(order); " << order << " on " << &order << endl;
-		
-		cout << "registrovano " << g_tradePacket.count() << " obchodu" << endl;
+		try {
+			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (Talasnica::OperationType)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
+		}
+		catch (Talasnica::Exception e) {
+			return 0;
+		}
 		
 		return ticket;
   }
