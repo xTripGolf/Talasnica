@@ -5,10 +5,11 @@
 //+------------------------------------------------------------------+
 #property copyright "Copyright © 2005, MetaQuotes Software Corp."
 #property link      "http://www.metaquotes.net/"
-#include <talasnica.inc-2.0.mqh>
 
-//int environment = ENVIRONMENT_PRODUCTION;
-string environment = ENVIRONMENT_DEVELOPMENT;
+#include <talasnica_session.mqh>
+#include <talasnica_order.mqh>
+
+extern bool development_mode = true;
 
 /*#define TIME_INDEX   0
 #define OPEN_INDEX   1
@@ -21,35 +22,25 @@ string environment = ENVIRONMENT_DEVELOPMENT;
 //+------------------------------------------------------------------+
 int init()
   {
-    
-//---- 
+
+//----
+
+   string name = "talasnica EA";
+
    Print("******************************");
    Print("*** TALASNICA STARTUJE ***");
+   Print("*** " + name + " ***");
    Print("******************************");
+
+   talasnica_session_setId(name);
+   if(development_mode) {
+      talasnica_session_setEnv(ENVIRONMENT_DEVELOPMENT);
+   }
    
-   talasnica_log("talasnica::init()", LOG_INIT);
+   Comment(talasnica_session_getComment());
    
-   talasnica_setEnvironment(environment);
-   
-   // nastavíme velikost lotù pro nové obchody
-   
-   //tl_setLots(StartLots);
-   
-   ObjectsDeleteAll(-1, OBJ_LABEL);
-   
+  
    //CreateInfoBox();
-   
-   Print("Obchodovaná mìna: Order Symbol = ", Symbol());
-   
-  /* if (Period() != xronos)
-    {
-    Print("Nastavena nesprávná perioda pracovního grafu.");
-    Print("Perioda aktuálního grafu je ", Period(), ", požadovaná perioda je ", xronos);
-    return (-1);
-    }
-   else {
-   Print("Èasová perioda grafu: Period = ", Period());
-   }*/
  
    // nezùstal zaseknutý globální InTrade ?
    // Jednou se mi to stalo, nešly obchody a já nevìdìl co s tím
@@ -68,15 +59,14 @@ int init()
 //+------------------------------------------------------------------+
 int deinit()
   {
-//---- 
-
-   Print("*** FUNCTION DEINIT ***");
-
 //----
    Print("******************************");
+   Print("*** " + talasnica_session_getId() + " ***");
    Print("*** TALASNICA GOTOVO ***");
    Print("******************************");
-   talasnica_log("*** TALASNICA GOTOVO ***", LOG_INIT);
+   return(0);   
+//----
+
    return(0);
   }
 //+------------------------------------------------------------------+

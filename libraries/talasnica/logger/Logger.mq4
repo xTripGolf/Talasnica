@@ -7,16 +7,10 @@
 #property link      "http://www.mithrades.com"
 #property library
 
-#import "stdlib.ex4"
-   string ErrorDescription(int error_code);
-   //int    RGB(int red_value, int green_value, int blue_value);
-   //bool   CompareDoubles(double number1, double number2);
-   //string DoubleToStrMorePrecision(double number, int precision);
-   //string IntegerToHexString(int integer_number);
-#import "talasnica/session/Session.ex4"
-   string talasnica_session_getId();
-   string talasnica_session_getEnv();
-#import
+#include "./../../../include/stdlib.mqh"
+//#include "./../../../include/talasnica_dll.mqh"
+//#include "./../../../include/talasnica_logger.mqh"
+#include "./../../../include/talasnica_session.mqh"
 
 /*****************************************
 loging
@@ -26,13 +20,13 @@ loging
 * zapíše øetìzec do logovacího souboru
 */
  
- int talasnica_logger_log(string str, int errorLevel = 0)
+ int talasnica_logger_log(string str, int level = 0)
 {
    
-   /*if(debug){
+   if(talasnica_session_getEnv() == ENVIRONMENT_DEVELOPMENT){
       Print(str);
-      return(0);
-   }*/
+      //return(0);
+   }
 
    int handle;
  
@@ -47,7 +41,7 @@ loging
       FileWrite(handle, str);
    } 
    FileClose(handle);
-   //Print("LOG level " + errorLevel);
+   //Print("LOG level " + level);
    //Print(">> " + str);
 }
 
@@ -57,7 +51,7 @@ loging
 */
 
 string talasnica_logger_getFileName () {
-   return (AccountName() + "/" + talasnica_session_getId() + "_" + Symbol() + "_ "+ Year() + "-" + Month() + "-" + Day() + ".log");
+   return (AccountName() + "/" + talasnica_session_getEnvName() + "/" + talasnica_session_getId() + "_" + Symbol() + "_ "+ Year() + "-" + Month() + "-" + Day() + ".log");
 }
 
 /**
@@ -67,5 +61,4 @@ string talasnica_logger_getFileName () {
 string tl_Vcil() {
    return (Symbol() + " at " + TimeToStr(TimeCurrent(),TIME_DATE|TIME_SECONDS));
 }
-
 
