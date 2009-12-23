@@ -44,7 +44,7 @@ bool talasnica_recalculate(){
            talasnica_addOrder(OrderTicket(),
                                OrderSymbol(),
                                OrderOpenTime(),
-                               Talasnica::Type::Order(),
+                               OrderType(),
                                OrderLots(),
                                OrderOpenPrice(),
                                OrderStopLoss(),

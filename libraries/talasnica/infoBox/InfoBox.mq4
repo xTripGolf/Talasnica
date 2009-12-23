@@ -99,7 +99,7 @@ void talasnica_createTradeList() {
    int i, index;
    LabelCreate(INFOBOX_TABLEHEADER, 5, 20, ROH_HORE_PRAVO, tableHeader, InfoboxFontSize, Yellow);
 
-   for(i = 0; i < ArraySize(InfoboxRows); i++) {
+   for(i = 0; i < 10; i++) {
       index = InfoboxRows[i];
       LabelCreate(talasnica_packetName(index), 5, 40 + i * move, ROH_HORE_PRAVO, talasnica_packetName(index), InfoboxFontSize, DarkGray);
    }
