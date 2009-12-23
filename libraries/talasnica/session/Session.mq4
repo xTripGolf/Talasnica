@@ -7,9 +7,10 @@
 #property link      "http://www.mithrades.com"
 #property library
 
-#include <talasnica.mqh>
-
-//#include <talasnica.mqh>
+//#include "./../../../include/stdlib.mqh"
+//#include "./../../../include/talasnica_dll.mqh"
+//#include "./../../../include/talasnica_logger.mqh"
+#include "./../../../include/talasnica_session.mqh"
 
 #import "stdlib.ex4"
    //string ErrorDescription(int error_code);

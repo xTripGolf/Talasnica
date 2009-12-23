@@ -4,12 +4,12 @@ EXPORTS	talasnica_addOrder
 		talasnica_reset
 		talasnica_getTradepacketInfo
 		talasnica_sortOrders
-		talasnica_count
-		talasnica_volume
-		talasnica_profit
-		talasnica_swap
-		talasnica_totalProfit
-		talasnica_averageOpenPrice
+		talasnica_packetCount
+		talasnica_packetVolume
+		talasnica_packetProfit
+		talasnica_packetSwap
+		talasnica_packetTotalProfit
+		talasnica_packetOpenPrice
 		talasnica_getTicket
-		talasnica_getPacketName
-		talasnica_getPacketDescription
+		talasnica_packetName
+		talasnica_packetDescription

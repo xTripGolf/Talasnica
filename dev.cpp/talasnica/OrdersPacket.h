@@ -8,10 +8,10 @@
 namespace Talasnica
 {
 
-	class TradePacket;
+	class OrdersManager;
 	class Order;
 
-	class AverageOrder
+	class OrdersPacket
 	{
 	private:
 		double citatel;
@@ -25,15 +25,15 @@ namespace Talasnica
 		std::string description;
 		std::vector<Order *> orders;
 	public:
-		AverageOrder(void);
-		AverageOrder(std::string);
-		~AverageOrder(void);
+		OrdersPacket(void);
+		OrdersPacket(std::string);
+		~OrdersPacket(void);
 		void add(Order &);
 		void sort(void);
-	friend std::ostream& operator<<(std::ostream &os, const AverageOrder &averageOrder);
-	friend std::ostream& operator<<(std::ostream &os, TradePacket &objekt);
+	friend std::ostream& operator<<(std::ostream &os, const OrdersPacket &averageOrder);
+	friend std::ostream& operator<<(std::ostream &os, OrdersManager &objekt);
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
-	friend TradePacket;
+	friend OrdersManager;
 	};
 
 	class OrderSort {

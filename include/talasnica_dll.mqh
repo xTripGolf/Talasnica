@@ -15,7 +15,7 @@
    int    talasnica_addOrder(int ticket,
                              string symbol,
                              int openTime,
-                             int type,
+                             int orderType,
                              double lots,
                              double openPrice,
                              double stopLoss,
@@ -34,50 +34,50 @@
    /**
    * poèítadlo obchodù
    *
-   * poèet obchodù dle druhu
+   * poèet obchodù v packetu
    */
-   int talasnica_count(int type);
+   int talasnica_packetCount(int packetFilter);
    /**
    * poèítadlo obchodù
    *
-   * poèet lotù
+   * poèet lotù  v packetu
    */
-    double talasnica_volume(int type);
+    double talasnica_packetVolume(int packetFilter);
    /**
    * poèítadlo obchodù
    *
-   * profit
+   * celkový profit v packetu
    */
-   double talasnica_profit(int type);
+   double talasnica_packetProfit(int packetFilter);
    /**
-   * swap
+   * celkový swap v packetu
    *
    */
-   double talasnica_swap(int type);
+   double talasnica_packetSwap(int packetFilter);
    /**
-   * profit + swap
+   * profit + swap v packetu
    *
    */
-   double talasnica_totalProfit(int type);
+   double talasnica_packetTotalProfit(int packetFilter);
    /**
-   * aproximovaná vstupní cena
+   * aproximovaná vstupní cena v packetu
    *
    */
-   double talasnica_averageOpenPrice(int type);
+   double talasnica_packetOpenPrice(int packetFilter);
    /**
-   * vybere obchod
+   * vrací ticket obchodu v packetu
    **/
-   int talasnica_getTicket(int type, int index);
+   int talasnica_getTicket(int packetFilter, int orderIndex);
    /**
-   * vrátí název paketu obchodù
+   * vrátí název paketu
    *
    */
-   string talasnica_getPacketName(int type);
+   string talasnica_packetName(int packetFilter);
    /**
-   * vrátí popis paketu obchodù
+   * vrátí popis paketu
    *
    */
-   string talasnica_getPacketDescription(int type);
+   string talasnica_packetDescription(int packetFilter);
    
 #import
 

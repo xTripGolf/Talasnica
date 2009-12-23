@@ -4,13 +4,13 @@
 #include <iostream>
 #include <sstream>
 #include "dataType.h"
-#include "TradePacket.h"
+#include "OrdersManager.h"
 
 namespace Talasnica
 {
 
-	class TradePacket;
-	class AverageOrder;
+	class OrdersManager;
+	class OrdersPacket;
 	class OrderSort;
 
 	class Order
@@ -20,7 +20,7 @@ namespace Talasnica
 		unsigned long ticket;
 		std::string symbol;
 		unsigned int openTime;
-		OperationType type;
+		OrderType type;
 		double lots;
 		double openPrice;
 		double stopLoss;
@@ -39,14 +39,14 @@ namespace Talasnica
 		/**
 		* vrací 1 pro long pozice a -1 pro short pozice
 		**/
-		int reverse(OperationType);
+		int reverse(OrderType);
 
 	public:
 		Order(void);
 		Order(const unsigned long ticket,
 			const std::string symbol,
 				 const unsigned int openTime,
-				 const OperationType type,
+				 const OrderType type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -63,8 +63,8 @@ namespace Talasnica
 		int Order::getTicket(void);
 
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
-	friend class Talasnica::TradePacket;
-	friend class Talasnica::AverageOrder;
+	friend class Talasnica::OrdersManager;
+	friend class Talasnica::OrdersPacket;
 	friend class Talasnica::OrderSort;
 	};
 }

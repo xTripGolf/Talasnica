@@ -9,7 +9,7 @@
 #include<vector>
 //#include <cstring>
 #include "dataType.h"
-#include "TradePacket.h"
+#include "OrdersManager.h"
 #include "Order.h"
 
 //----
@@ -59,49 +59,49 @@ MT4_EXPFUNC char* __stdcall talasnica_getTradepacketInfo(void);
    *
    * poèet obchodù dle druhu
    */
-MT4_EXPFUNC int __stdcall talasnica_count(int type);
+MT4_EXPFUNC int __stdcall talasnica_packetCount(int packetFilter);
    /**
    * poèítadlo obchodù
    *
    * poèet lotù
    */
-MT4_EXPFUNC double __stdcall talasnica_volume(int type);
+MT4_EXPFUNC double __stdcall talasnica_packetVolume(int packetFilter);
    /**
    * poèítadlo obchodù
    *
    * profit
    */
-MT4_EXPFUNC double __stdcall talasnica_profit(int type);
+MT4_EXPFUNC double __stdcall talasnica_packetProfit(int packetFilter);
    /**
    * swap
    *
    */
-MT4_EXPFUNC double __stdcall talasnica_swap(int type);
+MT4_EXPFUNC double __stdcall talasnica_packetSwap(int packetFilter);
    /**
    * profit + swap
    *
    */
-MT4_EXPFUNC double __stdcall talasnica_totalProfit(int type);
+MT4_EXPFUNC double __stdcall talasnica_packetTotalProfit(int packetFilter);
    /**
    * aproximovaná vstupní cena
    *
    */
-MT4_EXPFUNC double __stdcall talasnica_averageOpenPrice(int type);
+MT4_EXPFUNC double __stdcall talasnica_packetOpenPrice(int packetFilter);
    /**
    * vybere obchod
    *
    */
-MT4_EXPFUNC int __stdcall talasnica_getTicket(int type, int index);
+MT4_EXPFUNC int __stdcall talasnica_getTicket(int packetFilter, int index);
    /**
    * vrátí název paketu obchodù
    *
    */
-MT4_EXPFUNC char* __stdcall talasnica_getPacketName(int type);
+MT4_EXPFUNC char* __stdcall talasnica_packetName(int packetFilter);
    /**
    * vrátí popis paketu obchodù
    *
    */
-MT4_EXPFUNC char* __stdcall talasnica_getPacketDescription(int type);
+MT4_EXPFUNC char* __stdcall talasnica_packetDescription(int packetFilter);
 
 
 // sample

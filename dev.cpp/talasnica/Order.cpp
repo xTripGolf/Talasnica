@@ -14,7 +14,7 @@ namespace Talasnica
 	Order::Order(const unsigned long ticket,
 				 const string symbol,
 				 const unsigned int openTime,
-				 const OperationType type,
+				 const OrderType type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -54,7 +54,7 @@ namespace Talasnica
 		cout << "destructor Order::~Order(void)" << endl;
 	}
 
-	int Order::reverse(OperationType type) {
+	int Order::reverse(OrderType type) {
    
      switch (type) {
          case OP_BUY:
@@ -73,7 +73,7 @@ namespace Talasnica
 	ostream& operator<<(ostream &os, const Order &order)
 	{
 		os << order.symbol;
-		//os << ": " << TradePacket.names[order.type];
+		//os << ": " << OrdersManager.names[order.type];
 		os << " #" << order.ticket;
 		os << " open on " << order.openTime;
 		os << " price: " << order.openPrice;

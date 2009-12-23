@@ -101,7 +101,7 @@ void talasnica_createTradeList() {
 
    for(i = 0; i < ArraySize(InfoboxRows); i++) {
       index = InfoboxRows[i];
-      LabelCreate(talasnica_getPacketName(index), 5, 40 + i * move, ROH_HORE_PRAVO, talasnica_getPacketName(index), InfoboxFontSize, DarkGray);
+      LabelCreate(talasnica_packetName(index), 5, 40 + i * move, ROH_HORE_PRAVO, talasnica_packetName(index), InfoboxFontSize, DarkGray);
    }
    
    LabelCreate(INFOBOX_STOPS, 5, 40 + i * move, ROH_HORE_PRAVO, INFOBOX_STOPS, InfoboxFontSize, DarkGray);
@@ -152,10 +152,10 @@ void talasnica_refreshTradeList() {
 
    string label;
    
-   label = "STOPS - još èaka " + talasnica_count(OP_BUYSTOP) + " gore " + talasnica_count(OP_SELLSTOP) + " dole ";
+   label = "STOPS - još èaka " + talasnica_packetCount(OP_BUYSTOP) + " gore " + talasnica_packetCount(OP_SELLSTOP) + " dole ";
    ObjectSetText(INFOBOX_STOPS, label, InfoboxFontSize, InfoboxFontName, White);
    
-   label = "LIMITS - još èaka " + talasnica_count(OP_BUYLIMIT) + " gore " + talasnica_count(OP_SELLLIMIT) + " dole ";
+   label = "LIMITS - još èaka " + talasnica_packetCount(OP_BUYLIMIT) + " gore " + talasnica_packetCount(OP_SELLLIMIT) + " dole ";
    ObjectSetText(INFOBOX_LIMITS, label, InfoboxFontSize, InfoboxFontName, White);
 
    double tickValue = MarketInfo(Symbol(), MODE_TICKVALUE);
@@ -166,33 +166,33 @@ void talasnica_refreshTradeList() {
    
    for(int i = 0; i < ArraySize(InfoboxRows); i++) {
       index = InfoboxRows[i];
-      label = formatText2Cell(talasnica_getPacketName(index), INFOBOX_CELLSIZE_NAME) +
-              formatText2Cell(talasnica_count(index), INFOBOX_CELLSIZE_COUNT) +
-              formatText2Cell(DoubleToStr(talasnica_volume(index), 2), INFOBOX_CELLSIZE_VOLUME) +
-              formatText2Cell(DoubleToStr(talasnica_averageOpenPrice(index), Digits), INFOBOX_CELLSIZE_PRICE) +
-              formatText2Cell(DoubleToStr(talasnica_totalProfit(index), 2), INFOBOX_CELLSIZE_PROFIT);
-      if (talasnica_count(index) == 0) {
+      label = formatText2Cell(talasnica_packetName(index), INFOBOX_CELLSIZE_NAME) +
+              formatText2Cell(talasnica_packetCount(index), INFOBOX_CELLSIZE_COUNT) +
+              formatText2Cell(DoubleToStr(talasnica_packetVolume(index), 2), INFOBOX_CELLSIZE_VOLUME) +
+              formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(index), Digits), INFOBOX_CELLSIZE_PRICE) +
+              formatText2Cell(DoubleToStr(talasnica_packetTotalProfit(index), 2), INFOBOX_CELLSIZE_PROFIT);
+      if (talasnica_packetCount(index) == 0) {
          barva = DarkGray;
       }
       else {              
-         if (talasnica_totalProfit(index) < 0) {
+         if (talasnica_packetTotalProfit(index) < 0) {
             barva = Magenta;
          }
-         /*else if (talasnica_totalProfit(index) < BerProfitPips * tickValue * StartLots) {
+         /*else if (talasnica_packetTotalProfit(index) < BerProfitPips * tickValue * StartLots) {
             barva = Aqua;
          }*/
          else {
             barva = LawnGreen;
          }
       }
-      ObjectSetText(talasnica_getPacketName(index), label, InfoboxFontSize, InfoboxFontName, barva);
+      ObjectSetText(talasnica_packetName(index), label, InfoboxFontSize, InfoboxFontName, barva);
    }
   
    // hedged
    CreateInfoBoxHedged();
    /*i = 0;
-   int bulls = talasnica_count(OP_BUY);
-   int bears = talasnica_count(OP_SELL);
+   int bulls = talasnica_packetCount(OP_BUY);
+   int bears = talasnica_packetCount(OP_SELL);
    int iBears, iBulls;
    string name = "hedged_" + i;
    double profitZamku;

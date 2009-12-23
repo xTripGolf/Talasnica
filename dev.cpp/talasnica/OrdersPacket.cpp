@@ -1,20 +1,20 @@
 #include "Order.h"
-#include "AverageOrder.h"
+#include "OrdersPacket.h"
 
 using namespace std;
 
 namespace Talasnica
 {
 
-	AverageOrder::AverageOrder(void)
+	OrdersPacket::OrdersPacket(void)
 	{
-		cout << "AverageOrder::AverageOrder(void)" << endl;
-		AverageOrder::AverageOrder(string("Unknown description"));
+		cout << "OrdersPacket::OrdersPacket(void)" << endl;
+		OrdersPacket::OrdersPacket(string("Unknown description"));
 	}
 
-	AverageOrder::AverageOrder(string description)
+	OrdersPacket::OrdersPacket(string description)
 	{
-		cout << "AverageOrder::AverageOrder(string description)" << endl;
+		cout << "OrdersPacket::OrdersPacket(string description)" << endl;
 		//this->type = type;
 		this->description = description;
 		citatel = 0;
@@ -26,14 +26,14 @@ namespace Talasnica
 		totalProfit = 0;
 	}
 
-	AverageOrder::~AverageOrder(void)
+	OrdersPacket::~OrdersPacket(void)
 	{
-		cout << "AverageOrder::~AverageOrder(void)" << endl;
+		cout << "OrdersPacket::~OrdersPacket(void)" << endl;
 	}
 
-	void AverageOrder::add(Order &order){
-		cout << "void AverageOrder::add(Order &order)" << endl;
-		cout << "AverageOrder " << description << endl << " add " << order << endl;
+	void OrdersPacket::add(Order &order){
+		cout << "void OrdersPacket::add(Order &order)" << endl;
+		cout << "OrdersPacket " << description << endl << " add " << order << endl;
 		orders.push_back(&order);
 		citatel += order.lots * order.openPrice;
 		jmenovatel += order.lots;
@@ -44,7 +44,7 @@ namespace Talasnica
 		totalProfit += order.totalProfit;
 	}
 
-	ostream& operator<<(ostream &os, const AverageOrder &averageOrder)
+	ostream& operator<<(ostream &os, const OrdersPacket &averageOrder)
 	{
 
 		os << endl << "---------------------" << endl << averageOrder.description << endl;
@@ -67,9 +67,9 @@ namespace Talasnica
 		
 	}
 
-	void AverageOrder::sort(void)
+	void OrdersPacket::sort(void)
 	{
-		cout << "void AverageOrder::sort(void)" << endl;
+		cout << "void OrdersPacket::sort(void)" << endl;
 		OrderSort sort;
 		std::sort(orders.begin(),orders.end(),sort);
 			cout << "serazeno podle ceny" << endl;

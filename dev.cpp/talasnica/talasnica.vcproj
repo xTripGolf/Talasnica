@@ -207,14 +207,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\AverageOrder.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\AverageOrder.h"
-			>
-		</File>
-		<File
 			RelativePath=".\dataType.h"
 			>
 		</File>
@@ -227,15 +219,7 @@
 			>
 		</File>
 		<File
-			RelativePath=".\Order.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\Order.h"
-			>
-		</File>
-		<File
-			RelativePath="talasnica.cpp"
+			RelativePath=".\gateway.cpp"
 			>
 			<FileConfiguration
 				Name="Release|Win32"
@@ -255,19 +239,39 @@
 			</FileConfiguration>
 		</File>
 		<File
+			RelativePath=".\gateway.h"
+			>
+		</File>
+		<File
+			RelativePath=".\Order.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\Order.h"
+			>
+		</File>
+		<File
+			RelativePath=".\OrdersManager-static.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\OrdersManager.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\OrdersManager.h"
+			>
+		</File>
+		<File
+			RelativePath=".\OrdersPacket.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\OrdersPacket.h"
+			>
+		</File>
+		<File
 			RelativePath="talasnica.def"
-			>
-		</File>
-		<File
-			RelativePath=".\talasnica.h"
-			>
-		</File>
-		<File
-			RelativePath=".\TradePacket.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\TradePacket.h"
 			>
 		</File>
 	</Files>
