@@ -20,7 +20,7 @@ namespace Talasnica
 		unsigned long ticket;
 		std::string symbol;
 		unsigned int openTime;
-		OrderType type;
+		Talasnica::Type::Order type;
 		double lots;
 		double openPrice;
 		double stopLoss;
@@ -39,14 +39,14 @@ namespace Talasnica
 		/**
 		* vrací 1 pro long pozice a -1 pro short pozice
 		**/
-		int reverse(OrderType);
+		int reverse(Talasnica::Type::Order);
 
 	public:
 		Order(void);
 		Order(const unsigned long ticket,
 			const std::string symbol,
 				 const unsigned int openTime,
-				 const OrderType type,
+				 const Talasnica::Type::Order type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,

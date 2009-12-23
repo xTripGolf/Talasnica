@@ -30,7 +30,8 @@
                              int magicNumber
                              );
    void talasnica_reset();
-   string talasnica_getTradepacketInfo();
+   void talasnica_sortOrders();
+   string talasnica_printOrdersManager();
    /**
    * poèítadlo obchodù
    *

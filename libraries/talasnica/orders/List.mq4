@@ -23,42 +23,44 @@ bool talasnica_recalculate(){
       //Print("Po resetu " + talasnica_getTradepacketInfo());
    
       for(int i = 0; i<OrdersTotal(); i++){
-      if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES) && OrderSymbol()==Symbol() /*&& OrderComment() == tl_Comment()*/){
-      /*Print(OrderTicket()+ ", " +
-                             OrderSymbol()+ ", " +
-                             OrderOpenTime()+ ", " +
-                             OrderType()+ ", " +
-                             OrderLots()+ ", " +
-                             OrderOpenPrice()+ ", " +
-                             OrderStopLoss()+ ", " +
-                             OrderTakeProfit()+ ", " +
-                             OrderExpiration()+ ", " +
-                             OrderCloseTime()+ ", " +
-                             OrderClosePrice()+ ", " +
-                             OrderCommission()+ ", " +
-                             OrderProfit()+ ", " +
-                             OrderSwap()+ ", " +
-                             OrderComment()+ ", " +
-                             OrderMagicNumber()
-                             );*/
-         talasnica_addOrder(OrderTicket(),
-                             OrderSymbol(),
-                             OrderOpenTime(),
-                             OrderType(),
-                             OrderLots(),
-                             OrderOpenPrice(),
-                             OrderStopLoss(),
-                             OrderTakeProfit(),
-                             OrderExpiration(),
-                             OrderCloseTime(),
-                             OrderClosePrice(),
-                             OrderCommission(),
-                             OrderProfit(),
-                             OrderSwap(),
-                             OrderComment(),
-                             OrderMagicNumber()
-                             );
-      }
+        if(OrderSelect(i,SELECT_BY_POS,MODE_TRADES) && OrderSymbol()==Symbol() /*&& OrderComment() == tl_Comment()*/){
+        /*Print(OrderTicket()+ ", " +
+                               OrderSymbol()+ ", " +
+                               OrderOpenTime()+ ", " +
+                               Talasnica::Type::Order()+ ", " +
+                               OrderLots()+ ", " +
+                               OrderOpenPrice()+ ", " +
+                               OrderStopLoss()+ ", " +
+                               OrderTakeProfit()+ ", " +
+                               OrderExpiration()+ ", " +
+                               OrderCloseTime()+ ", " +
+                               OrderClosePrice()+ ", " +
+                               OrderCommission()+ ", " +
+                               OrderProfit()+ ", " +
+                               OrderSwap()+ ", " +
+                               OrderComment()+ ", " +
+                               OrderMagicNumber()
+                               );*/
+           talasnica_addOrder(OrderTicket(),
+                               OrderSymbol(),
+                               OrderOpenTime(),
+                               Talasnica::Type::Order(),
+                               OrderLots(),
+                               OrderOpenPrice(),
+                               OrderStopLoss(),
+                               OrderTakeProfit(),
+                               OrderExpiration(),
+                               OrderCloseTime(),
+                               OrderClosePrice(),
+                               OrderCommission(),
+                               OrderProfit(),
+                               OrderSwap(),
+                               OrderComment(),
+                               OrderMagicNumber()
+                               );
+        }
+        
+        talasnica_sortOrders();
    }
     return(true);
 }

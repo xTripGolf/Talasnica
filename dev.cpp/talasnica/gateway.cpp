@@ -42,7 +42,7 @@ int __stdcall talasnica_addOrder(const int ticket,
 		cout << "talasnica_addOrder() " << endl;
 		
 		try {
-			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, (Talasnica::OrderType)type, lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
+			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, Talasnica::OrderType(type), lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 			g_ordersManager.add(order);
 		}
 		catch (Talasnica::Exception e) {
@@ -75,74 +75,74 @@ char* __stdcall talasnica_printOrdersManager(void)
    *
    * poèet obchodù dle druhu
    */
-int __stdcall talasnica_packetCount(int type)
+int __stdcall talasnica_packetCount(int packetFilter)
 {
-	return g_ordersManager.count((Talasnica::PacketFilter)type);
+	return g_ordersManager.count(Talasnica::PacketFilter(packetFilter));
 }
    /**
    * poèítadlo obchodù
    *
    * poèet lotù
    */
-double __stdcall talasnica_packetVolume(int type)
+double __stdcall talasnica_packetVolume(int packetFilter)
 {
-	return g_ordersManager.volume((Talasnica::PacketFilter)type);
+	return g_ordersManager.volume(Talasnica::PacketFilter(packetFilter));
 }
    /**
    * poèítadlo obchodù
    *
    * profit
    */
-double __stdcall talasnica_packetProfit(int type)
+double __stdcall talasnica_packetProfit(int packetFilter)
 {
-	return g_ordersManager.profit((Talasnica::PacketFilter)type);
+	return g_ordersManager.profit(Talasnica::PacketFilter(packetFilter));
 }
    /**
    * swap
    *
    */
-double __stdcall talasnica_packetSwap(int type)
+double __stdcall talasnica_packetSwap(int packetFilter)
 {
-	return g_ordersManager.swap((Talasnica::PacketFilter)type);
+	return g_ordersManager.swap(Talasnica::PacketFilter(packetFilter));
 }
    /**
    * profit + swap
    *
    */
-double __stdcall talasnica_packetTotalProfit(int type)
+double __stdcall talasnica_packetTotalProfit(int packetFilter)
 {
-	return g_ordersManager.totalProfit((Talasnica::PacketFilter)type);
+	return g_ordersManager.totalProfit(Talasnica::PacketFilter(packetFilter));
 }
    /**
    * aproximovaná vstupní cena
    *
    */
-double __stdcall talasnica_packetOpenPrice(int type)
+double __stdcall talasnica_packetOpenPrice(int packetFilter)
 {
-	return g_ordersManager.averageOpenPrice((Talasnica::PacketFilter)type);
+	return g_ordersManager.averageOpenPrice(Talasnica::PacketFilter(packetFilter));
 }
    /**
    * vybere obchod
    *
    */
-int __stdcall talasnica_getTicket(int type, int index)
+int __stdcall talasnica_getTicket(int packetFilter, int index)
 {
-	return g_ordersManager.getTicket((Talasnica::PacketFilter)type, index);
+	return g_ordersManager.getTicket(Talasnica::PacketFilter(packetFilter), index);
 }
 
    /**
    * vrátí název paketu obchodù
    *
    */
-char* __stdcall talasnica_packetName(int type){
-	string name = g_ordersManager.getPacketName((Talasnica::PacketFilter)type);
+char* __stdcall talasnica_packetName(int packetFilter){
+	string name = g_ordersManager.getPacketName(Talasnica::PacketFilter(packetFilter));
 	return string2char(name);
 }
    /**
    * vrátí popis paketu obchodù
    *
    */
-char* __stdcall talasnica_packetDescription(int type){
-	string desc = g_ordersManager.getPacketDescription((Talasnica::PacketFilter)type);
+char* __stdcall talasnica_packetDescription(int packetFilter){
+	string desc = g_ordersManager.getPacketDescription(Talasnica::PacketFilter(packetFilter));
 	return string2char(desc);
 }

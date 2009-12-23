@@ -1,13 +1,5 @@
 #pragma once
-#include <string>
-#include <iostream>
-#include <map>
-//#include<vector>
-#include<algorithm>
-#include<utility>
-#include<functional>
 
-#include "Exception.h"
 #include "talasnica.h"
 
 namespace Talasnica
@@ -21,12 +13,12 @@ namespace Talasnica
 		private:
 			//
 			std::map<int,Order> ordersPool;
-			std::map<PacketFilter, OrdersPacket> packet;
-			std::map<PacketFilter, OrdersPacket> initialize_packet();
-			static std::map<PacketFilter, const std::string> descriptions;
-			static std::map<PacketFilter, const std::string> initialize_descriptions(void);
-			static std::map<PacketFilter, const std::string> names;
- 			static std::map<PacketFilter, const std::string> initialize_names(void);
+			std::map<Type::PacketFilter, OrdersPacket> packet;
+			std::map<Type::PacketFilter, OrdersPacket> initialize_packet();
+			static std::map<Type::PacketFilter, const std::string> descriptions;
+			static std::map<Type::PacketFilter, const std::string> initialize_descriptions(void);
+			static std::map<Type::PacketFilter, const std::string> names;
+ 			static std::map<Type::PacketFilter, const std::string> initialize_names(void);
 		public:
       OrdersManager(void);
 			~OrdersManager(void);
@@ -34,20 +26,20 @@ namespace Talasnica
 			void sort();
 			void reset(void);
 			int count(void);
-			int count(PacketFilter type);
+			int count(Type::PacketFilter type);
 			double volume(void);
-			double volume(PacketFilter type);
+			double volume(Type::PacketFilter type);
 			double profit(void);
-			double profit(PacketFilter type);
+			double profit(Type::PacketFilter type);
 			double swap(void);
-			double swap(PacketFilter type);
+			double swap(Type::PacketFilter type);
 			double totalProfit(void);
-			double totalProfit(PacketFilter type);
+			double totalProfit(Type::PacketFilter type);
 			double averageOpenPrice(void);
-			double averageOpenPrice(PacketFilter type);
-			int getTicket(PacketFilter type, unsigned int index);
-			std::string getPacketName(PacketFilter type);
-			std::string getPacketDescription(PacketFilter type);
+			double averageOpenPrice(Type::PacketFilter type);
+			int getTicket(Type::PacketFilter type, unsigned int index);
+			std::string getPacketName(Type::PacketFilter type);
+			std::string getPacketDescription(Type::PacketFilter type);
 		friend std::ostream& operator<<(std::ostream &os, OrdersManager &objekt);
   };
 

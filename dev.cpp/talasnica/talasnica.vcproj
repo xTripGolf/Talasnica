@@ -267,6 +267,10 @@
 			>
 		</File>
 		<File
+			RelativePath=".\talasnica.cpp"
+			>
+		</File>
+		<File
 			RelativePath="talasnica.def"
 			>
 		</File>

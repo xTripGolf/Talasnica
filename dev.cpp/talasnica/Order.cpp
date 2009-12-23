@@ -14,7 +14,7 @@ namespace Talasnica
 	Order::Order(const unsigned long ticket,
 				 const string symbol,
 				 const unsigned int openTime,
-				 const OrderType type,
+				 const Talasnica::Type::Order type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -54,16 +54,16 @@ namespace Talasnica
 		cout << "destructor Order::~Order(void)" << endl;
 	}
 
-	int Order::reverse(OrderType type) {
+	int Order::reverse(Talasnica::Type::Order type) {
    
      switch (type) {
-         case OP_BUY:
-         case OP_BUYLIMIT:
-         case OP_BUYSTOP:
+         case Talasnica::Type::OP_BUY:
+         case Talasnica::Type::OP_BUYLIMIT:
+         case Talasnica::Type::OP_BUYSTOP:
             return 1;
-         case OP_SELL:
-         case OP_SELLLIMIT:
-         case OP_SELLSTOP:
+         case Talasnica::Type::OP_SELL:
+         case Talasnica::Type::OP_SELLLIMIT:
+         case Talasnica::Type::OP_SELLSTOP:
             return -1;
          default:
             throw Exception("Neplatný typ obchodu."); 
