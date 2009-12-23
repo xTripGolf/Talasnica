@@ -207,10 +207,6 @@
 	</References>
 	<Files>
 		<File
-			RelativePath=".\dataType.h"
-			>
-		</File>
-		<File
 			RelativePath=".\Exception.cpp"
 			>
 		</File>
@@ -272,6 +268,10 @@
 		</File>
 		<File
 			RelativePath="talasnica.def"
+			>
+		</File>
+		<File
+			RelativePath=".\talasnica.h"
 			>
 		</File>
 	</Files>

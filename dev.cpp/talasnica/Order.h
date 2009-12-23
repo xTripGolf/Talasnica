@@ -3,14 +3,14 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include "dataType.h"
+#include "talasnica.h"
 #include "OrdersManager.h"
 
 namespace Talasnica
 {
 
 	class OrdersManager;
-	class OrdersPacket;
+	class AverageOrder;
 	class OrderSort;
 
 	class Order

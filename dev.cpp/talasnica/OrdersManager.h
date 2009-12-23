@@ -8,7 +8,7 @@
 #include<functional>
 
 #include "Exception.h"
-#include "dataType.h"
+#include "talasnica.h"
 
 namespace Talasnica
 {
