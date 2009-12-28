@@ -1,8 +1,8 @@
 #pragma once
 #define TALASNICA  // Exclude rarely-used stuff from Windows headers
 #include <windows.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
 
 #include <string>
 #include <iostream>
