@@ -1,11 +1,3 @@
-*.*
-!talasnica*
-talasnica*.ex4
-!.gitignore
-!libraries/talasnica/*
-!libraries/talasnica/**/*
-!dev.cpp
-!dev.cpp/talasnica/*
 *.ncb
 *.bak
 *.pdb

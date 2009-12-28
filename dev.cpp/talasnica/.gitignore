@@ -1,9 +1,0 @@
-*.ncb
-*.bak
-*.pdb
-*.obj
-*.lib
-*.ilk
-*.dll.*.manifest
-**.dll.*.manifest.*
-*.exp
