@@ -10,14 +10,14 @@ using namespace std;
 namespace Talasnica
 {
 
-	Talasnica::Type::PacketFilter operator++(Talasnica::Type::PacketFilter& c, int) {
-		cout << "PacketFilter operator++(const PacketFilter& c) with " << c << endl;
-		if(c >= Talasnica::Type::PREMOC) {
-			throw Exception("PacketFilter se dostává mimo povolený rozsah.");
+	Talasnica::Enum::PacketFilter operator++(Talasnica::Enum::PacketFilter& c, int) {
+		cout << "PacketFilterEnum operator++(const PacketFilterEnum& c) with " << c << endl;
+		if(c >= Talasnica::Enum::PREMOC) {
+			throw Exception("PacketFilterEnum se dostává mimo povolený rozsah.");
 		}
 		int t = (int)c;
 		t++;
-		c = (Talasnica::Type::PacketFilter)t; 
+		c = (Talasnica::Enum::PacketFilter)t; 
 		return c;
 	}
 
@@ -35,11 +35,11 @@ namespace Talasnica
 	/**
 
 	**/
-	map<Talasnica::Type::PacketFilter, OrdersPacket> OrdersManager::initialize_packet(void)
+	map<Talasnica::Enum::PacketFilter, OrdersPacket> OrdersManager::initialize_packet(void)
 	{
 		cout << "map<int, OrdersPacket> OrdersManager::initialize_packet(void)" << endl;
-		//map<PacketFilter, OrdersPacket> map;
-		for(Talasnica::Type::PacketFilter i = Talasnica::Type::BUY; i < Talasnica::Type::PREMOC; i++) {
+		//map<PacketFilterEnum, OrdersPacket> map;
+		for(Talasnica::Enum::PacketFilter i = Talasnica::Enum::BUY; i < Talasnica::Enum::PREMOC; i++) {
 			/*map.*/ packet.insert(std::make_pair(i,OrdersPacket(OrdersManager::descriptions[i])));
 			//map.insert(std::make_pair(i,OrdersPacket()));
 		}
@@ -68,22 +68,22 @@ namespace Talasnica
 		map<int, Order>::iterator ordersIterator;
 		for(ordersIterator = ordersPool.begin(); ordersIterator != ordersPool.end(); ordersIterator++) {
 			Order & order = ordersIterator->second;
-			Talasnica::Type::PacketFilter type = (Talasnica::Type::PacketFilter)order.type;
+			Talasnica::Enum::PacketFilter type = (Talasnica::Enum::PacketFilter)order.type;
 			packet[type].add(order);
 
 			if(order.totalProfit > 0) {
-				packet[Talasnica::Type::PROFITED].add(order);
+				packet[Talasnica::Enum::PROFITED].add(order);
 			}
 			else {
-				packet[Talasnica::Type::LOSSED].add(order);
+				packet[Talasnica::Enum::LOSSED].add(order);
 			}
 		
-			if(order.type == Talasnica::Type::OP_BUY || order.type == Talasnica::Type::OP_SELL) {
-				packet[Talasnica::Type::ALL_OPENED].add(order);
+			if(order.type == Talasnica::Enum::OP_BUY || order.type == Talasnica::Enum::OP_SELL) {
+				packet[Talasnica::Enum::ALL_OPENED].add(order);
 			}
 		}
 
-		map<Talasnica::Type::PacketFilter, OrdersPacket>::iterator packetIterator;
+		map<Talasnica::Enum::PacketFilter, OrdersPacket>::iterator packetIterator;
 		for(packetIterator = packet.begin(); packetIterator != packet.end(); packetIterator++) {
 			packetIterator->second.sort();
 		}
@@ -102,7 +102,7 @@ namespace Talasnica
 	}
 
 	//int count(void);
-	int OrdersManager::count(Talasnica::Type::PacketFilter type)
+	int OrdersManager::count(Talasnica::Enum::PacketFilter type)
 	{
 		return packet[type].count;
 	}
@@ -110,7 +110,7 @@ namespace Talasnica
 	{
 		return 0;
 	}
-	double OrdersManager::volume(Talasnica::Type::PacketFilter type)
+	double OrdersManager::volume(Talasnica::Enum::PacketFilter type)
 	{
 		return packet[type].volume;
 	}
@@ -118,7 +118,7 @@ namespace Talasnica
 	{
 		return 0;
 	}
-	double OrdersManager::profit(Talasnica::Type::PacketFilter type)
+	double OrdersManager::profit(Talasnica::Enum::PacketFilter type)
 	{
 		return packet[type].profit;
 	}
@@ -126,7 +126,7 @@ namespace Talasnica
 	{
 		return 0;
 	}
-	double OrdersManager::swap(Talasnica::Type::PacketFilter type)
+	double OrdersManager::swap(Talasnica::Enum::PacketFilter type)
 	{
 		return packet[type].swap;
 	}
@@ -134,7 +134,7 @@ namespace Talasnica
 	{
 		return 0;
 	}
-	double OrdersManager::totalProfit(Talasnica::Type::PacketFilter type)
+	double OrdersManager::totalProfit(Talasnica::Enum::PacketFilter type)
 	{
 				return packet[type].totalProfit;
 	}
@@ -142,7 +142,7 @@ namespace Talasnica
 	{
 		return 0;
 	}
-	double OrdersManager::averageOpenPrice(Talasnica::Type::PacketFilter type)
+	double OrdersManager::averageOpenPrice(Talasnica::Enum::PacketFilter type)
 	{
 		if(packet[type].jmenovatel != 0) {
 			return packet[type].citatel / packet[type].jmenovatel;
@@ -150,17 +150,17 @@ namespace Talasnica
 		return 0;
 	}
 
-	int OrdersManager::getTicket(Talasnica::Type::PacketFilter type, unsigned int index){
+	int OrdersManager::getTicket(Talasnica::Enum::PacketFilter type, unsigned int index){
 		if(index > packet[type].orders.size()) {
 			return 0;
 		}
 		return packet[type].orders[index]->ticket;
 	}
 
-	string OrdersManager::getPacketName(Talasnica::Type::PacketFilter type){
+	string OrdersManager::getPacketName(Talasnica::Enum::PacketFilter type){
 		return OrdersManager::names[type];
 	}
-	string OrdersManager::getPacketDescription(Talasnica::Type::PacketFilter type){
+	string OrdersManager::getPacketDescription(Talasnica::Enum::PacketFilter type){
 		return OrdersManager::descriptions[type];
 	}
 
@@ -178,7 +178,7 @@ namespace Talasnica
 			os << ordersIterator->second << endl;
 		}
 
-		map<Talasnica::Type::PacketFilter, OrdersPacket>::iterator averageOrdersIterator;
+		map<Talasnica::Enum::PacketFilter, OrdersPacket>::iterator averageOrdersIterator;
 		for(averageOrdersIterator = packet.packet.begin(); averageOrdersIterator != packet.packet.end(); averageOrdersIterator++) {
 			os << averageOrdersIterator->second << endl;
 		}

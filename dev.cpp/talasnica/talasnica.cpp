@@ -2,50 +2,50 @@
 
 using namespace std;
 
-	Talasnica::Type::PacketFilter Talasnica::PacketFilter(int i) {
+	Talasnica::Enum::PacketFilter Talasnica::PacketFilterEnum(int i) {
 		switch (i)
 		{
 			case 0:
-				return Talasnica::Type::BUY;
+				return Talasnica::Enum::BUY;
 			case 1:
-				return Talasnica::Type::SELL;
+				return Talasnica::Enum::SELL;
 			case 2:
-				return Talasnica::Type::BUYLIMIT;
+				return Talasnica::Enum::BUYLIMIT;
 			case 3:
-				return Talasnica::Type::SELLLIMIT;
+				return Talasnica::Enum::SELLLIMIT;
 			case 4:
-				return Talasnica::Type::BUYSTOP;
+				return Talasnica::Enum::BUYSTOP;
 			case 5:
-				return Talasnica::Type::SELLSTOP;
+				return Talasnica::Enum::SELLSTOP;
 			case 6:
-				return Talasnica::Type::PROFITED;
+				return Talasnica::Enum::PROFITED;
 			case 7:
-				return Talasnica::Type::LOSSED;
+				return Talasnica::Enum::LOSSED;
 			case 8:
-				return Talasnica::Type::ALL_OPENED;
+				return Talasnica::Enum::ALL_OPENED;
 			case 9:
-				return Talasnica::Type::PREMOC;
+				return Talasnica::Enum::PREMOC;
 			default:
-				throw Talasnica::Exception("Nelze pøevést int na PacketFilter");
+				throw Talasnica::Exception("Nelze pøevést int na PacketFilterEnum");
 		}
 	}
 
-	Talasnica::Type::Order Talasnica::OrderType(int i) {
+	Talasnica::Enum::Order Talasnica::OrderEnum(int i) {
 		switch (i)
 		{
 			case 0:
-				return Talasnica::Type::OP_BUY;
+				return Talasnica::Enum::OP_BUY;
 			case 1:
-				return Talasnica::Type::OP_SELL;
+				return Talasnica::Enum::OP_SELL;
 			case 2:
-				return Talasnica::Type::OP_BUYLIMIT;
+				return Talasnica::Enum::OP_BUYLIMIT;
 			case 3:
-				return Talasnica::Type::OP_SELLLIMIT;
+				return Talasnica::Enum::OP_SELLLIMIT;
 			case 4:
-				return Talasnica::Type::OP_BUYSTOP;
+				return Talasnica::Enum::OP_BUYSTOP;
 			case 5:
-				return Talasnica::Type::OP_SELLSTOP;
+				return Talasnica::Enum::OP_SELLSTOP;
 			default:
-				throw Talasnica::Exception("Nelze pøevést int na OrderType");
+				throw Talasnica::Exception("Nelze pøevést int na OrderEnum");
 		}
 	}

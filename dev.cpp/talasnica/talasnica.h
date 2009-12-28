@@ -12,15 +12,15 @@
 
 namespace Talasnica
 {
-	namespace Type
+	namespace Enum
 	{
 		enum Order {OP_BUY, OP_SELL, OP_BUYLIMIT, OP_SELLLIMIT, OP_BUYSTOP, OP_SELLSTOP};
 		enum PacketFilter {BUY, SELL, BUYLIMIT, SELLLIMIT, BUYSTOP, SELLSTOP, PROFITED, LOSSED, ALL_OPENED, PREMOC};
 
 		PacketFilter operator++(const PacketFilter& c, int);
 	}
-		Talasnica::Type::PacketFilter PacketFilter(int i);
-		Talasnica::Type::Order OrderType(int i);
+		Talasnica::Enum::PacketFilter PacketFilterEnum(int i);
+		Talasnica::Enum::Order OrderEnum(int i);
 
 		
 }
