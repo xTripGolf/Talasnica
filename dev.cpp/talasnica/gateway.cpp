@@ -45,7 +45,7 @@ int __stdcall talasnica_addOrder(const int ticket,
 			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, Talasnica::OrderEnum(type), lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 			g_ordersManager.add(order);
 		}
-		catch (Talasnica::Exception e) {
+		catch (Talasnica::Exception::EnumOverFlow e) {
 			return 0;
 		}
 		

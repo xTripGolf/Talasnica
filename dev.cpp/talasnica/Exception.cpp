@@ -2,17 +2,12 @@
 
 using namespace std;
 
-namespace Talasnica {
+Talasnica::Exception::EnumOverFlow::EnumOverFlow(char * message)
+{
+	this->message = string(message);
+}
 
-	Exception::Exception(char * message)
-	{
-		//Exception::Exception(string(message));
-		this->message = string(message);
-	}
-
-	Exception::~Exception(void)
-	{
-	}
-
+Talasnica::Exception::EnumOverFlow::~EnumOverFlow(void)
+{
 }
 

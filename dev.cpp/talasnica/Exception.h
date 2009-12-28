@@ -4,13 +4,15 @@
 
 namespace Talasnica
 {
-	class Exception
-	{
-	public:
-		Exception(char * message);
-		~Exception(void);
-		std::string message;
-	};	
+	namespace Exception {
+		class EnumOverFlow
+		{
+			public:
+				EnumOverFlow(char * message);
+				~EnumOverFlow(void);
+				std::string message;
+		};
+	}
 }
 
 

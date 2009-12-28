@@ -267,6 +267,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\OrdersSort.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\OrdersSort.h"
+			>
+		</File>
+		<File
 			RelativePath=".\talasnica.cpp"
 			>
 		</File>

@@ -3,7 +3,12 @@
 #include <string>
 //#include <map>
 #include <vector>
-#include <iostream>
+//#include <iostream>
+#include <algorithm>
+
+#include "talasnica.h"
+#include "Order.h"
+#include "OrdersSort.h"
 
 namespace Talasnica
 {
@@ -34,11 +39,6 @@ namespace Talasnica
 	friend std::ostream& operator<<(std::ostream &os, OrdersManager &objekt);
 	friend std::ostream& operator<<(std::ostream &os, const Order &order);
 	friend OrdersManager;
-	};
-
-	class OrderSort {
-		public:
-				bool operator()(Order * o1, Order * o2);
 	};
 
 }

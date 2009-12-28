@@ -1,17 +1,9 @@
 #pragma once
 
-#include <string>
-#include <iostream>
-#include <sstream>
 #include "talasnica.h"
-#include "OrdersManager.h"
 
 namespace Talasnica
 {
-
-	class OrdersManager;
-	class AverageOrder;
-	class OrderSort;
 
 	class Order
 	{
@@ -20,7 +12,7 @@ namespace Talasnica
 		unsigned long ticket;
 		std::string symbol;
 		unsigned int openTime;
-		Talasnica::Type::Order type;
+		Talasnica::Enum::Order type;
 		double lots;
 		double openPrice;
 		double stopLoss;
@@ -39,14 +31,14 @@ namespace Talasnica
 		/**
 		* vrací 1 pro long pozice a -1 pro short pozice
 		**/
-		int reverse(Talasnica::Type::Order);
+		int reverse(Talasnica::Enum::Order);
 
 	public:
 		Order(void);
 		Order(const unsigned long ticket,
 			const std::string symbol,
 				 const unsigned int openTime,
-				 const Talasnica::Type::Order type,
+				 const Talasnica::Enum::Order type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -62,9 +54,9 @@ namespace Talasnica
 		~Order(void);
 		int Order::getTicket(void);
 
-	friend std::ostream& operator<<(std::ostream &os, const Order &order);
+	friend ::std::ostream& operator<<(::std::ostream &os, const Talasnica::Order &order);
 	friend class Talasnica::OrdersManager;
 	friend class Talasnica::OrdersPacket;
-	friend class Talasnica::OrderSort;
+	friend class Talasnica::Sort::ByOpenPrice;
 	};
 }

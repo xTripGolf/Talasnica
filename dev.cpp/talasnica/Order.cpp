@@ -1,20 +1,16 @@
 #include "Order.h"
-#include "Exception.h"
 
 using namespace std;
 
-namespace Talasnica
+Talasnica::Order::Order(void)
 {
+	cout << "Talasnica::Order::Order(void)" << endl;
+}
 
-	Order::Order(void)
-	{
-		cout << "Order::Order(void)" << endl;
-	}
-
-	Order::Order(const unsigned long ticket,
+Talasnica::Order::Order(const unsigned long ticket,
 				 const string symbol,
 				 const unsigned int openTime,
-				 const Talasnica::Type::Order type,
+				 const Talasnica::Enum::Order type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -28,7 +24,7 @@ namespace Talasnica
 				 const string comment,
 				 const unsigned int magicNumber)
 	{
-		cout << "Order::Order(...)" << endl;
+		cout << "Talasnica::Order::Order(...)" << endl;
 		this->ticket = ticket;
 		this->symbol = symbol;
 		this->openPrice = openPrice;
@@ -49,37 +45,36 @@ namespace Talasnica
 		this->totalProfit = commission + profit + swap;
 	}
 
-	Order::~Order(void)
-	{
-		cout << "destructor Order::~Order(void)" << endl;
-	}
-
-	int Order::reverse(Talasnica::Type::Order type) {
-   
-     switch (type) {
-         case Talasnica::Type::OP_BUY:
-         case Talasnica::Type::OP_BUYLIMIT:
-         case Talasnica::Type::OP_BUYSTOP:
-            return 1;
-         case Talasnica::Type::OP_SELL:
-         case Talasnica::Type::OP_SELLLIMIT:
-         case Talasnica::Type::OP_SELLSTOP:
-            return -1;
-         default:
-            throw Exception("Neplatný typ obchodu."); 
-      }
+Talasnica::Order::~Order(void)
+{
+	cout << "destructor Order::~Order(void)" << endl;
 }
 
-	ostream& operator<<(ostream &os, const Order &order)
-	{
-		os << order.symbol;
-		//os << ": " << OrdersManager.names[order.type];
-		os << " #" << order.ticket;
-		os << " open on " << order.openTime;
-		os << " price: " << order.openPrice;
-		os << " lots " << order.lots;
-		os << " total profit " << order.totalProfit;
-		os << endl;
+int Talasnica::Order::reverse(Talasnica::Enum::Order type) {
+   switch (type) {
+		case Talasnica::Enum::OP_BUY:
+    case Talasnica::Enum::OP_BUYLIMIT:
+    case Talasnica::Enum::OP_BUYSTOP:
+			return 1;
+    case Talasnica::Enum::OP_SELL:
+    case Talasnica::Enum::OP_SELLLIMIT:
+    case Talasnica::Enum::OP_SELLSTOP:
+			return -1;
+    default:
+			throw Talasnica::Exception::EnumOverFlow("Neplatný typ obchodu."); 
+   }
+}
+
+ostream& Talasnica::operator<<(ostream &os, const Talasnica::Order &order)
+{
+	os << order.symbol;
+	//os << ": " << OrdersManager.names[order.type];
+	os << " #" << order.ticket;
+	os << " open on " << order.openTime;
+	os << " price: " << order.openPrice;
+	os << " lots " << order.lots;
+	os << " total profit " << order.totalProfit;
+	os << endl;
 		
 		
 		/* nevypisuji zatím toto
@@ -94,8 +89,6 @@ namespace Talasnica
 		this->comment = comment;
 		this->magicNumber = magicNumber;*/
 
-								return os;
+	return os;
 		
-	} 
-
 }

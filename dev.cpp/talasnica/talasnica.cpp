@@ -2,6 +2,17 @@
 
 using namespace std;
 
+	Talasnica::Enum::PacketFilter operator++(Talasnica::Enum::PacketFilter& c, int) {
+		cout << "PacketFilterEnum operator++(const PacketFilterEnum& c) with " << c << endl;
+		if(c >= Talasnica::Enum::PREMOC) {
+			throw Talasnica::Exception::EnumOverFlow("PacketFilterEnum se dostává mimo povolený rozsah.");
+		}
+		int t = (int)c;
+		t++;
+		c = (Talasnica::Enum::PacketFilter)t; 
+		return c;
+	}
+
 	Talasnica::Enum::PacketFilter Talasnica::PacketFilterEnum(int i) {
 		switch (i)
 		{
@@ -26,7 +37,7 @@ using namespace std;
 			case 9:
 				return Talasnica::Enum::PREMOC;
 			default:
-				throw Talasnica::Exception("Nelze pøevést int na PacketFilterEnum");
+				throw Talasnica::Exception::EnumOverFlow("Nelze pøevést int na PacketFilterEnum");
 		}
 	}
 
@@ -46,6 +57,6 @@ using namespace std;
 			case 5:
 				return Talasnica::Enum::OP_SELLSTOP;
 			default:
-				throw Talasnica::Exception("Nelze pøevést int na OrderEnum");
+				throw Talasnica::Exception::EnumOverFlow("Nelze pøevést int na OrderEnum");
 		}
 	}

@@ -1,26 +1,30 @@
 #pragma once
 
-#include <string>
+#include <cstdlib>
 #include <iostream>
-#include <map>
-//#include<vector>
-#include<algorithm>
-#include<utility>
-#include<functional>
 
 #include "Exception.h"
 
 namespace Talasnica
 {
+	class Order;
+	class OrdersManager;
+	class OrdersPacket;
+
+	namespace Sort {
+		class ByOpenPrice;
+	}
+
 	namespace Enum
 	{
 		enum Order {OP_BUY, OP_SELL, OP_BUYLIMIT, OP_SELLLIMIT, OP_BUYSTOP, OP_SELLSTOP};
 		enum PacketFilter {BUY, SELL, BUYLIMIT, SELLLIMIT, BUYSTOP, SELLSTOP, PROFITED, LOSSED, ALL_OPENED, PREMOC};
 
-		PacketFilter operator++(const PacketFilter& c, int);
 	}
-		Talasnica::Enum::PacketFilter PacketFilterEnum(int i);
-		Talasnica::Enum::Order OrderEnum(int i);
 
-		
+	Talasnica::Enum::PacketFilter PacketFilterEnum(int i);
+	Talasnica::Enum::Order OrderEnum(int i);
+	
 }
+
+Talasnica::Enum::PacketFilter operator++(Talasnica::Enum::PacketFilter& c, int);

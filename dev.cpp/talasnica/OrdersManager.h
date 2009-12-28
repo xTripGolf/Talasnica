@@ -1,5 +1,6 @@
 #pragma once
 
+#include <map>
 #include "talasnica.h"
 
 namespace Talasnica
@@ -26,21 +27,21 @@ namespace Talasnica
 			void sort();
 			void reset(void);
 			int count(void);
-			int count(Talasnica::Enum::PacketFilter type);
+			int count(Talasnica::Enum::PacketFilter);
 			double volume(void);
-			double volume(Talasnica::Enum::PacketFilter type);
+			double volume(Talasnica::Enum::PacketFilter);
 			double profit(void);
-			double profit(Talasnica::Enum::PacketFilter type);
+			double profit(Talasnica::Enum::PacketFilter);
 			double swap(void);
-			double swap(Talasnica::Enum::PacketFilter type);
+			double swap(Talasnica::Enum::PacketFilter);
 			double totalProfit(void);
-			double totalProfit(Talasnica::Enum::PacketFilter type);
+			double totalProfit(Talasnica::Enum::PacketFilter);
 			double averageOpenPrice(void);
-			double averageOpenPrice(Talasnica::Enum::PacketFilter type);
-			int getTicket(Talasnica::Enum::PacketFilter type, unsigned int index);
-			std::string getPacketName(Talasnica::Enum::PacketFilter type);
-			std::string getPacketDescription(Talasnica::Enum::PacketFilter type);
-		friend std::ostream& operator<<(std::ostream &os, OrdersManager &objekt);
+			double averageOpenPrice(Talasnica::Enum::PacketFilter);
+			int getTicket(Talasnica::Enum::PacketFilter, unsigned int index);
+			std::string getPacketName(Talasnica::Enum::PacketFilter);
+			std::string getPacketDescription(Talasnica::Enum::PacketFilter);
+			friend ::std::ostream& operator<<(::std::ostream &os, ::Talasnica::OrdersManager &ordersManager);
   };
 
 }

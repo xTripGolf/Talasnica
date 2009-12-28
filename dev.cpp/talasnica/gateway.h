@@ -1,14 +1,9 @@
 #pragma once
 #define TALASNICA  // Exclude rarely-used stuff from Windows headers
-#include <windows.h>
-#include <cstdlib>
-#include <cstdio>
 
-#include <string>
-#include <iostream>
+#include <sstream>
 
 #include "talasnica.h"
-#include "Exception.h"
 #include "OrdersManager.h"
 #include "Order.h"
 
