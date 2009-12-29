@@ -2,11 +2,15 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
+
+//#include "../Logger/Logger.h"
 
 #include "Exception.h"
 
 namespace Talasnica
 {
+
 	class Order;
 	class OrdersManager;
 	class OrdersPacket;
@@ -14,6 +18,18 @@ namespace Talasnica
 	namespace Sort {
 		class ByOpenPrice;
 	}
+
+	/*namespace Type {
+		class Order {
+		public:
+			static const int OP_BUY = 1;
+			static const int OP_SELL = 2;
+			static const int OP_BUYLIMIT = 3;
+			static const int OP_SELLLIMIT = 4;
+			static const int OP_BUYSTOP = 5;
+			static const int OP_SELLSTOP = 6;
+		};
+	}*/
 
 	namespace Enum
 	{
