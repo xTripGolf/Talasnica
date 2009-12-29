@@ -5,7 +5,7 @@ talasnica*.ex4
 !libraries/talasnica/*
 !libraries/talasnica/**/*
 !dev.cpp
-!dev.cpp/talasnica/*
+!dev.cpp/**/*
 *.ncb
 *.bak
 *.pdb
