@@ -9,5 +9,5 @@
 *.exe.*.manifest
 *.exe.*.manifest.*
 *.exp
-**.dep
-**.idb
+*.dep
+*.idb

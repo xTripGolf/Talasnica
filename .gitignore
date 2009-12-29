@@ -1,4 +1,11 @@
-*.*
+*.ex4
+*.mq4
+*.mqh
+*.mqt
+samples/*
+*.log
+!dev.cpp/**/*.log
+mqlcache.dat
 !talasnica*
 talasnica*.ex4
 !.gitignore
