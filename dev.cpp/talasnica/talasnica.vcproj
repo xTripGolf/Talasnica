@@ -2,8 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="talasnica"
+	Name="Talasnica"
 	ProjectGUID="{60D18A85-34B3-4BCB-9129-B59A2AF02A39}"
+	RootNamespace="Talasnica"
 	TargetFrameworkVersion="0"
 	>
 	<Platforms>

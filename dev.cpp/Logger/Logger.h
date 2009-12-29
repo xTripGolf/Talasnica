@@ -3,10 +3,26 @@
 
 #define eoln "\n"
 #define logERROR "ERROR : "<<__FILE__<<":"<<(long int)__LINE__
-#include <stdlib.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdio>
+
+#include <fstream>
 
 //#define _LOG_OFF_
+
+namespace Logger {
+	class Log
+	{
+	private:
+		//std::ostream stream;
+		std::ofstream out;
+	public:
+		//Log(void);
+		Log(char *fname);
+		~Log(void);
+	};
+}
+
 
 struct Log{
 	FILE *f;
