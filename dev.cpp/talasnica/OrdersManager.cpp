@@ -161,9 +161,9 @@ ostream& Talasnica::operator<<(ostream &os, ::Talasnica::OrdersManager &ordersMa
 		os << ordersIterator->second << endl;
 	}
 
-	::std::map<Talasnica::Enum::PacketFilter, Talasnica::OrdersPacket>::iterator averageOrdersIterator;
-	for(averageOrdersIterator = ordersManager.packet.begin(); averageOrdersIterator != ordersManager.packet.end(); averageOrdersIterator++) {
-		os << averageOrdersIterator->second << endl;
+	::std::map<Talasnica::Enum::PacketFilter, Talasnica::OrdersPacket>::iterator packetIterator;
+	for(packetIterator = ordersManager.packet.begin(); packetIterator != ordersManager.packet.end(); packetIterator++) {
+		os << packetIterator->second << endl;
 	}
 	return os;
 }
