@@ -38,7 +38,7 @@
 int InfoboxFontSize = 10;
 string InfoboxFontName = "Courier";
 
-int InfoboxRows[]; // øádky, které se zobrazí v infoboxu
+//int InfoboxRows[]; // øádky, které se zobrazí v infoboxu
 
 /**********************************************************************
 funkce pro práci s infoBoxem
@@ -100,8 +100,8 @@ void talasnica_createTradeList() {
    LabelCreate(INFOBOX_TABLEHEADER, 5, 20, ROH_HORE_PRAVO, tableHeader, InfoboxFontSize, Yellow);
 
    for(i = 0; i < 10; i++) {
-      index = InfoboxRows[i];
-      LabelCreate(talasnica_packetName(index), 5, 40 + i * move, ROH_HORE_PRAVO, talasnica_packetName(index), InfoboxFontSize, DarkGray);
+      //index = InfoboxRows[i];
+      LabelCreate(talasnica_packetName(i), 5, 40 + i * move, ROH_HORE_PRAVO, talasnica_packetName(i), InfoboxFontSize, DarkGray);
    }
    
    LabelCreate(INFOBOX_STOPS, 5, 40 + i * move, ROH_HORE_PRAVO, INFOBOX_STOPS, InfoboxFontSize, DarkGray);
@@ -160,22 +160,22 @@ void talasnica_refreshTradeList() {
 
    double tickValue = MarketInfo(Symbol(), MODE_TICKVALUE);
    
-   int index;
+   //int index;
    
    color barva;
    
-   for(int i = 0; i < ArraySize(InfoboxRows); i++) {
-      index = InfoboxRows[i];
-      label = formatText2Cell(talasnica_packetName(index), INFOBOX_CELLSIZE_NAME) +
-              formatText2Cell(talasnica_packetCount(index), INFOBOX_CELLSIZE_COUNT) +
-              formatText2Cell(DoubleToStr(talasnica_packetVolume(index), 2), INFOBOX_CELLSIZE_VOLUME) +
-              formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(index), Digits), INFOBOX_CELLSIZE_PRICE) +
-              formatText2Cell(DoubleToStr(talasnica_packetTotalProfit(index), 2), INFOBOX_CELLSIZE_PROFIT);
-      if (talasnica_packetCount(index) == 0) {
+   for(int i = 0; i < 10; i++) {
+      //index = InfoboxRows[i];
+      label = formatText2Cell(talasnica_packetName(i), INFOBOX_CELLSIZE_NAME) +
+              formatText2Cell(talasnica_packetCount(i), INFOBOX_CELLSIZE_COUNT) +
+              formatText2Cell(DoubleToStr(talasnica_packetVolume(i), 2), INFOBOX_CELLSIZE_VOLUME) +
+              formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(i), Digits), INFOBOX_CELLSIZE_PRICE) +
+              formatText2Cell(DoubleToStr(talasnica_packetTotalProfit(i), 2), INFOBOX_CELLSIZE_PROFIT);
+      if (talasnica_packetCount(i) == 0) {
          barva = DarkGray;
       }
       else {              
-         if (talasnica_packetTotalProfit(index) < 0) {
+         if (talasnica_packetTotalProfit(i) < 0) {
             barva = Magenta;
          }
          /*else if (talasnica_packetTotalProfit(index) < BerProfitPips * tickValue * StartLots) {
@@ -185,7 +185,7 @@ void talasnica_refreshTradeList() {
             barva = LawnGreen;
          }
       }
-      ObjectSetText(talasnica_packetName(index), label, InfoboxFontSize, InfoboxFontName, barva);
+      ObjectSetText(talasnica_packetName(i), label, InfoboxFontSize, InfoboxFontName, barva);
    }
   
    // hedged
