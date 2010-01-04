@@ -146,24 +146,3 @@ int Talasnica::OrdersManager::count(void) {
 	string Talasnica::OrdersManager::getPacketDescription(Talasnica::Enum::PacketFilter packetFilter){
 		return Talasnica::OrdersManager::descriptions[packetFilter];
 	}
-
-ostream& Talasnica::operator<<(ostream &os, ::Talasnica::OrdersManager &ordersManager)
-{
-	os << "*********** TALASNICA TRADE ordersManager *********** " << endl;
-	os << "Celkový poèet obchodù " << ordersManager.count() << endl;
-	os << " všechny obchody jsou zde " << endl;
-
-	//copy(ordersManager.ordersPool.begin(),ordersManager.ordersPool.end(),ostream_iterator<Order>(cout,"\n"));
-	//copy(ordersManager.packet[OP_BUY].begin(),ordersManager.packet[OP_BUY].end(),ostream_iterator<Order>(os,"\n"));
-		
-	map<int, Talasnica::Order>::iterator ordersIterator;
-	for(ordersIterator = ordersManager.ordersPool.begin(); ordersIterator != ordersManager.ordersPool.end(); ordersIterator++) {
-		os << ordersIterator->second << endl;
-	}
-
-	::std::map<Talasnica::Enum::PacketFilter, Talasnica::OrdersPacket>::iterator packetIterator;
-	for(packetIterator = ordersManager.packet.begin(); packetIterator != ordersManager.packet.end(); packetIterator++) {
-		os << packetIterator->second << endl;
-	}
-	return os;
-}

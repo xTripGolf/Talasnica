@@ -40,29 +40,6 @@ void Talasnica::OrdersPacket::add(Order &order){
 	totalProfit += order.totalProfit;
 }
 
-ostream& Talasnica::operator<<(ostream &os, const OrdersPacket &packet)
-{
-
-	os << endl << "---------------------" << endl << packet.description << endl;
-
-	os << "count: " << packet.count << endl;
-	os << "volume: " << packet.volume << endl;
-	os << "profit: " << packet.profit << endl;
-	os << "swap: " << packet.swap << endl;
-	
-	/*vector<Order *>::iterator ordersIterator;
-	for(ordersIterator = packet.orders.begin(); ordersIterator != packet.orders.end(); ordersIterator++) {
-			os << *(ordersIterator) << endl;
-	}*/
-
-	for(int i =0; i != packet.orders.size(); i++) {
-		os << *(packet.orders[i]) << endl;
-	}
-
-	return os;
-		
-}
-
 void Talasnica::OrdersPacket::sort(void)
 {
 	cout << "void OrdersPacket::sort(void)" << endl;
