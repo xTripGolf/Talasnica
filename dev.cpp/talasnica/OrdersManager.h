@@ -39,8 +39,8 @@ namespace Talasnica
 			double averageOpenPrice(void);
 			double averageOpenPrice(Talasnica::Enum::PacketFilter);
 			int getTicket(Talasnica::Enum::PacketFilter, unsigned int index);
-			std::string getPacketName(Talasnica::Enum::PacketFilter);
-			std::string getPacketDescription(Talasnica::Enum::PacketFilter);
+			static std::string getPacketName(Talasnica::Enum::PacketFilter);
+			static std::string getPacketDescription(Talasnica::Enum::PacketFilter);
 			friend std::ostream& operator<<(std::ostream &os, Talasnica::OrdersManager &ordersManager);
   };
 }
