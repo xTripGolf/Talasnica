@@ -2,7 +2,7 @@ LIBRARY talasnica
 
 EXPORTS	talasnica_addOrder
 		talasnica_reset
-		talasnica_getTradepacketInfo
+		talasnica_printOrdersManager
 		talasnica_sortOrders
 		talasnica_packetCount
 		talasnica_packetVolume
