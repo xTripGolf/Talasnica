@@ -276,6 +276,14 @@
 			>
 		</File>
 		<File
+			RelativePath=".\ostream.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\ostream.h"
+			>
+		</File>
+		<File
 			RelativePath=".\talasnica.cpp"
 			>
 		</File>
@@ -285,6 +293,14 @@
 		</File>
 		<File
 			RelativePath=".\talasnica.h"
+			>
+		</File>
+		<File
+			RelativePath=".\type.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\type.h"
 			>
 		</File>
 	</Files>
