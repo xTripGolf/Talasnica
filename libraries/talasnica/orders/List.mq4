@@ -59,8 +59,7 @@ bool talasnica_recalculate(){
                                OrderMagicNumber()
                                );
         }
-        
-        talasnica_sortOrders();
    }
+    talasnica_sortOrders();
     return(true);
 }
