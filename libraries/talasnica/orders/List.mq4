@@ -27,7 +27,7 @@ bool talasnica_recalculate(){
         /*Print(OrderTicket()+ ", " +
                                OrderSymbol()+ ", " +
                                OrderOpenTime()+ ", " +
-                               Talasnica::Enum::Order()+ ", " +
+                               OrderType()+ ", " +
                                OrderLots()+ ", " +
                                OrderOpenPrice()+ ", " +
                                OrderStopLoss()+ ", " +
@@ -44,7 +44,7 @@ bool talasnica_recalculate(){
            talasnica_addOrder(OrderTicket(),
                                OrderSymbol(),
                                OrderOpenTime(),
-                               OrderEnum(),
+                               OrderType(),
                                OrderLots(),
                                OrderOpenPrice(),
                                OrderStopLoss(),
