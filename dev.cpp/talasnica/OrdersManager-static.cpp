@@ -40,7 +40,6 @@ namespace Talasnica
 		map.insert(std::make_pair(Talasnica::Enum::LOSSED,std::string("Ztrátové")));
 		map.insert(std::make_pair(Talasnica::Enum::ALL_OPENED,std::string("Všechny")));
 		map.insert(std::make_pair(Talasnica::Enum::PREMOC,std::string("Nespárované")));
-
 		return map;
  	}
 }

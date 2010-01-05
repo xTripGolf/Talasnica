@@ -11,27 +11,26 @@ std::ostream& Talasnica::Exception::operator<<(::std::ostream &os, const Talasni
 
 ostream& Talasnica::operator<<(ostream &os, const Talasnica::Order &order)
 {
-	os << order.symbol;
-	//os << ": " << OrdersManager.names[order.type];
-	os << " #" << order.ticket;
-	os << " open on " << order.openTime;
-	os << " price: " << order.openPrice;
-	os << " lots " << order.lots;
-	os << " total profit " << order.totalProfit;
-	os << endl;
-		
-		
-		/* nevypisuji zatím toto
-		this->stopLoss = stopLoss;
-		this->takeProfit = takeProfit;
-		this->expiration = expiration;
-		this->closeTime = closeTime;
-		this->closePrice = closePrice;
-		this->commission = commission;
-		this->profit = profit;
-		this->swap = swap;
-		this->comment = comment;
-		this->magicNumber = magicNumber;*/
+		os << "\t\tticket=" << order.ticket << endl;
+		os << "\t\tsymbol=" << order.symbol << endl;
+		os << "\t\topenTime=" << order.openTime << endl;
+
+		//string typeDesc = Talasnica::OrdersManager.getPacketDescription(order.type);
+		string typeDesc("...");
+
+		os << "\t\ttype=" << order.type << "(" << typeDesc << ")" << endl;
+		os << "\t\tlots=" << order.lots << endl;
+		os << "\t\topenPrice=" << order.openPrice << endl;
+		os << "\t\tstopLoss=" << order.stopLoss << endl;
+		os << "\t\ttakeProfit=" << order.takeProfit << endl;
+		os << "\t\texpiration=" << order.expiration << endl;
+		os << "\t\tcloseTime=" << order.closeTime << endl;
+		os << "\t\tclosePrice=" << order.closePrice << endl;
+		os << "\t\tcommission=" << order.commission << endl;
+		os << "\t\tprofit=" << order.profit << endl;
+		os << "\t\tswap=" << order.swap << endl;
+		os << "\t\tcomment=" << order.comment << endl;
+		os << "\t\tmagicNumber=" << order.magicNumber << endl;
 
 	return os;
 		
