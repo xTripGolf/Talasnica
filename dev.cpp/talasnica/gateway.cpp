@@ -67,7 +67,7 @@ int __stdcall talasnica_addOrder(const int ticket,
 		//cout << "talasnica_addOrder() " << endl;
 		
 		try {
-			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, Talasnica::OrderEnum(type), lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
+			Talasnica::Order order((unsigned long)ticket, string(symbol), (unsigned int)openTime, Talasnica::Type::Order(type), lots, openPrice, stopLoss, takeProfit, (unsigned int)expiration, (unsigned int)closeTime, closePrice, commission, profit, swap, string(comment), (unsigned int)magicNumber);
 			g_ordersManager.add(order);
 		}
 		catch (Talasnica::Exception::EnumOverFlow e) {
@@ -119,7 +119,7 @@ int __stdcall talasnica_packetCount(int packetFilter)
 	log << "\tint __stdcall talasnica_packetCount(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		return g_ordersManager.count(Talasnica::PacketFilterEnum(packetFilter));
+		return g_ordersManager.count(Talasnica::Type::PacketFilter(packetFilter));
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -136,7 +136,7 @@ double __stdcall talasnica_packetVolume(int packetFilter)
 	log << "\tdouble __stdcall talasnica_packetVolume(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		return g_ordersManager.volume(Talasnica::PacketFilterEnum(packetFilter));
+		return g_ordersManager.volume(Talasnica::Type::PacketFilter(packetFilter));
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -153,7 +153,7 @@ double __stdcall talasnica_packetProfit(int packetFilter)
 	log << "\tdouble __stdcall talasnica_packetProfit(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		return g_ordersManager.profit(Talasnica::PacketFilterEnum(packetFilter));
+		return g_ordersManager.profit(Talasnica::Type::PacketFilter(packetFilter));
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -169,7 +169,7 @@ double __stdcall talasnica_packetSwap(int packetFilter)
 	log << "\tdouble __stdcall talasnica_packetSwap(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		return g_ordersManager.swap(Talasnica::PacketFilterEnum(packetFilter));
+		return g_ordersManager.swap(Talasnica::Type::PacketFilter(packetFilter));
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -185,7 +185,7 @@ double __stdcall talasnica_packetTotalProfit(int packetFilter)
 	log << "\tdouble __stdcall talasnica_packetTotalProfit(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		return g_ordersManager.totalProfit(Talasnica::PacketFilterEnum(packetFilter));
+		return g_ordersManager.totalProfit(Talasnica::Type::PacketFilter(packetFilter));
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -201,7 +201,7 @@ double __stdcall talasnica_packetOpenPrice(int packetFilter)
 	log << "\tdouble __stdcall talasnica_packetOpenPrice(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		return g_ordersManager.averageOpenPrice(Talasnica::PacketFilterEnum(packetFilter));
+		return g_ordersManager.averageOpenPrice(Talasnica::Type::PacketFilter(packetFilter));
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -217,7 +217,7 @@ int __stdcall talasnica_getTicket(int packetFilter, int index)
 	log << "\tint __stdcall talasnica_getTicket(int packetFilter, int index)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter<< "\t\tindex=" << index << endl;
 	try {
-		return g_ordersManager.getTicket(Talasnica::PacketFilterEnum(packetFilter), index);
+		return g_ordersManager.getTicket(Talasnica::Type::PacketFilter(packetFilter), index);
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
 		errLog << e << endl;
@@ -233,7 +233,8 @@ char* __stdcall talasnica_packetName(int packetFilter){
 	log << "\tchar* __stdcall talasnica_packetName(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		string name = g_ordersManager.getPacketName(Talasnica::PacketFilterEnum(packetFilter));
+		//string name = g_ordersManager.getPacketName(Talasnica::Type::PacketFilter(packetFilter));
+		string name = Talasnica::Type::PacketFilter.names[packetFilter];
 		return string2char(name);
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {
@@ -249,7 +250,8 @@ char* __stdcall talasnica_packetDescription(int packetFilter){
 	log << "\tchar* __stdcall talasnica_packetDescription(int packetFilter)" << endl;
 	log << "\t\tpacketFilter=" << packetFilter << endl;
 	try {
-		string desc = g_ordersManager.getPacketDescription(Talasnica::PacketFilterEnum(packetFilter));
+		//string desc = g_ordersManager.getPacketDescription(Talasnica::Type::PacketFilter(packetFilter));
+		string desc = Talasnica::Type::PacketFilter.descriptions[packetFilter];
 		return string2char(desc);
 	}
 	catch (Talasnica::Exception::EnumOverFlow e) {

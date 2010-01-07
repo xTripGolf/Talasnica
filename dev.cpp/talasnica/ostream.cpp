@@ -15,10 +15,10 @@ ostream& Talasnica::operator<<(ostream &os, const Talasnica::Order &order)
 		os << "\t\tsymbol=" << order.symbol << endl;
 		os << "\t\topenTime=" << order.openTime << endl;
 
-		//string typeDesc = Talasnica::OrdersManager.getPacketDescription(order.type);
-		string typeDesc("...");
+		//string typeDesc("...");
+		//os << "\t\ttype=" << order.type << "(" << typeDesc << ")" << endl;
 
-		os << "\t\ttype=" << order.type << "(" << typeDesc << ")" << endl;
+		os << "\t\ttype=" << order.type << endl;
 		os << "\t\tlots=" << order.lots << endl;
 		os << "\t\topenPrice=" << order.openPrice << endl;
 		os << "\t\tstopLoss=" << order.stopLoss << endl;
@@ -36,6 +36,12 @@ ostream& Talasnica::operator<<(ostream &os, const Talasnica::Order &order)
 		
 }
 
+ostream& Talasnica::Type::operator<<(std::ostream &os, const Talasnica::Type::Order &orderType)
+{
+	os << "order type: " << orderType.value << endl;
+	return os;
+}
+
 ostream& Talasnica::operator<<(ostream &os, Talasnica::OrdersManager &ordersManager)
 {
 	os << "*********** TALASNICA TRADE ordersManager *********** " << endl;
@@ -50,7 +56,7 @@ ostream& Talasnica::operator<<(ostream &os, Talasnica::OrdersManager &ordersMana
 		os << ordersIterator->second << endl;
 	}
 
-	::std::map<Talasnica::Enum::PacketFilter, Talasnica::OrdersPacket>::iterator packetIterator;
+	::std::map<Talasnica::Type::PacketFilter, Talasnica::OrdersPacket>::iterator packetIterator;
 	for(packetIterator = ordersManager.packet.begin(); packetIterator != ordersManager.packet.end(); packetIterator++) {
 		os << packetIterator->second << endl;
 	}
@@ -60,7 +66,7 @@ ostream& Talasnica::operator<<(ostream &os, Talasnica::OrdersManager &ordersMana
 ostream& Talasnica::operator<<(ostream &os, const OrdersPacket &packet)
 {
 
-	os << endl << "---------------------" << endl << packet.description << endl;
+	//os << endl << "---------------------" << endl << packet.description << endl;
 
 	os << "count: " << packet.count << endl;
 	os << "volume: " << packet.volume << endl;
@@ -78,4 +84,9 @@ ostream& Talasnica::operator<<(ostream &os, const OrdersPacket &packet)
 
 	return os;
 		
+}
+
+ostream& Talasnica::Type::operator<<(ostream &os, const Talasnica::Type::PacketFilter &packetFilter){
+	os << "packetFilter" << endl;
+	return os;
 }

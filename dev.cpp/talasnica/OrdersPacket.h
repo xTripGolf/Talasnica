@@ -27,11 +27,9 @@ namespace Talasnica
 		double swap;
 		double totalProfit;
 		int type;
-		std::string description;
 		std::vector<Order *> orders;
 	public:
 		OrdersPacket(void);
-		OrdersPacket(std::string);
 		~OrdersPacket(void);
 		void add(Order &);
 		void sort(void);

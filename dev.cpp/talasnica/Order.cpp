@@ -2,15 +2,15 @@
 
 using namespace std;
 
-Talasnica::Order::Order(void)
+/*Talasnica::Order::Order(void)
 {
 	cout << "Talasnica::Order::Order(void)" << endl;
-}
+}*/
 
 Talasnica::Order::Order(const unsigned long ticket,
 				 const string symbol,
 				 const unsigned int openTime,
-				 const Talasnica::Enum::Order type,
+				 /*const*/ Talasnica::Type::Order type,
 				 const double lots,
 				 const double openPrice,
 				 const double stopLoss,
@@ -29,7 +29,10 @@ Talasnica::Order::Order(const unsigned long ticket,
 		this->symbol = symbol;
 		this->openPrice = openPrice;
 		this->type = type;
-		this->lots = reverse(type) * lots;
+
+		int reverse = type.reverse();
+		this->lots = reverse * lots;
+
 		this->openPrice = openPrice;
 		this->stopLoss = stopLoss;
 		this->takeProfit = takeProfit;
@@ -50,17 +53,3 @@ Talasnica::Order::~Order(void)
 	cout << "destructor Order::~Order(void)" << endl;
 }
 
-int Talasnica::Order::reverse(Talasnica::Enum::Order type) {
-   switch (type) {
-		case Talasnica::Enum::OP_BUY:
-    case Talasnica::Enum::OP_BUYLIMIT:
-    case Talasnica::Enum::OP_BUYSTOP:
-			return 1;
-    case Talasnica::Enum::OP_SELL:
-    case Talasnica::Enum::OP_SELLLIMIT:
-    case Talasnica::Enum::OP_SELLSTOP:
-			return -1;
-    default:
-			throw Talasnica::Exception::EnumOverFlow("Neplatný typ obchodu."); 
-   }
-}

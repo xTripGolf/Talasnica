@@ -2,17 +2,10 @@
 
 using namespace std;
 
-Talasnica::OrdersPacket::OrdersPacket(void)
-{
-	cout << "OrdersPacket::OrdersPacket(void)" << endl;
-	OrdersPacket::OrdersPacket(string("Unknown description"));
-}
-
-Talasnica::OrdersPacket::OrdersPacket(string description)
+Talasnica::OrdersPacket::OrdersPacket()
 {
 	cout << "OrdersPacket::OrdersPacket(string description)" << endl;
 	//this->type = type;
-	this->description = description;
 	citatel = 0;
 	jmenovatel = 0;
 	count = 0;
@@ -29,7 +22,7 @@ Talasnica::OrdersPacket::~OrdersPacket(void)
 
 void Talasnica::OrdersPacket::add(Order &order){
 	cout << "void OrdersPacket::add(Order &order)" << endl;
-	cout << "OrdersPacket " << description << endl << " add " << order << endl;
+	//cout << "OrdersPacket " << description << endl << " add " << order << endl;
 	orders.push_back(&order);
 	citatel += order.lots * order.openPrice;
 	jmenovatel += order.lots;

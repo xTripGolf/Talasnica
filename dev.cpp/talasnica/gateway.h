@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include "talasnica.h"
+#include "type.h"
 #include "OrdersManager.h"
 #include "Order.h"
 
