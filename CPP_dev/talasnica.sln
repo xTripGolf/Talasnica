@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "talasnica", "talasnica\talasnica.vcproj", "{8022C98E-4365-4CF8-8E1D-522586E63763}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "test", "test\test.vcproj", "{3937D0EA-AB4A-4A29-9B26-32F7CB273FCC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zapisnicar", "zapisnicar\zapisnicar.vcproj", "{1EC7BE50-ABC0-40C2-89E6-851A5A46298D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8022C98E-4365-4CF8-8E1D-522586E63763}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8022C98E-4365-4CF8-8E1D-522586E63763}.Debug|Win32.Build.0 = Debug|Win32
+		{8022C98E-4365-4CF8-8E1D-522586E63763}.Release|Win32.ActiveCfg = Release|Win32
+		{8022C98E-4365-4CF8-8E1D-522586E63763}.Release|Win32.Build.0 = Release|Win32
+		{3937D0EA-AB4A-4A29-9B26-32F7CB273FCC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3937D0EA-AB4A-4A29-9B26-32F7CB273FCC}.Debug|Win32.Build.0 = Debug|Win32
+		{3937D0EA-AB4A-4A29-9B26-32F7CB273FCC}.Release|Win32.ActiveCfg = Release|Win32
+		{3937D0EA-AB4A-4A29-9B26-32F7CB273FCC}.Release|Win32.Build.0 = Release|Win32
+		{1EC7BE50-ABC0-40C2-89E6-851A5A46298D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1EC7BE50-ABC0-40C2-89E6-851A5A46298D}.Debug|Win32.Build.0 = Debug|Win32
+		{1EC7BE50-ABC0-40C2-89E6-851A5A46298D}.Release|Win32.ActiveCfg = Release|Win32
+		{1EC7BE50-ABC0-40C2-89E6-851A5A46298D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
