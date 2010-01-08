@@ -1,0 +1,15 @@
+LIBRARY	"talasnica"
+
+EXPORTS	talasnica_addOrder
+		talasnica_reset
+		talasnica_sortOrders
+		talasnica_packetCount
+		talasnica_packetVolume
+		talasnica_packetProfit
+		talasnica_packetSwap
+		talasnica_packetTotalProfit
+		talasnica_packetOpenPrice
+		talasnica_getTicket
+		talasnica_packetName
+		
+
