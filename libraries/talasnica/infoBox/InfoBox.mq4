@@ -152,10 +152,10 @@ void talasnica_refreshTradeList() {
 
    string label;
    
-   label = "STOPS - još èaka " + talasnica_packetCount(OP_BUYSTOP) + " gore " + talasnica_packetCount(OP_SELLSTOP) + " dole ";
+   label = "STOPS - još èaka " + talasnica_packetCount(Symbol(), OP_BUYSTOP) + " gore " + talasnica_packetCount(Symbol(), OP_SELLSTOP) + " dole ";
    ObjectSetText(INFOBOX_STOPS, label, InfoboxFontSize, InfoboxFontName, White);
    
-   label = "LIMITS - još èaka " + talasnica_packetCount(OP_BUYLIMIT) + " gore " + talasnica_packetCount(OP_SELLLIMIT) + " dole ";
+   label = "LIMITS - još èaka " + talasnica_packetCount(Symbol(), OP_BUYLIMIT) + " gore " + talasnica_packetCount(Symbol(), OP_SELLLIMIT) + " dole ";
    ObjectSetText(INFOBOX_LIMITS, label, InfoboxFontSize, InfoboxFontName, White);
 
    double tickValue = MarketInfo(Symbol(), MODE_TICKVALUE);
@@ -167,15 +167,15 @@ void talasnica_refreshTradeList() {
    for(int i = 0; i < 10; i++) {
       //index = InfoboxRows[i];
       label = formatText2Cell(talasnica_packetName(i), INFOBOX_CELLSIZE_NAME) +
-              formatText2Cell(talasnica_packetCount(i), INFOBOX_CELLSIZE_COUNT) +
-              formatText2Cell(DoubleToStr(talasnica_packetVolume(i), 2), INFOBOX_CELLSIZE_VOLUME) +
-              formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(i), Digits), INFOBOX_CELLSIZE_PRICE) +
-              formatText2Cell(DoubleToStr(talasnica_packetTotalProfit(i), 2), INFOBOX_CELLSIZE_PROFIT);
-      if (talasnica_packetCount(i) == 0) {
+              formatText2Cell(talasnica_packetCount(Symbol(), i), INFOBOX_CELLSIZE_COUNT) +
+              formatText2Cell(DoubleToStr(talasnica_packetVolume(Symbol(), i), 2), INFOBOX_CELLSIZE_VOLUME) +
+              formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(Symbol(), i), Digits), INFOBOX_CELLSIZE_PRICE) +
+              formatText2Cell(DoubleToStr(talasnica_packetTotalProfit(Symbol(), i), 2), INFOBOX_CELLSIZE_PROFIT);
+      if (talasnica_packetCount(Symbol(), i) == 0) {
          barva = DarkGray;
       }
       else {              
-         if (talasnica_packetTotalProfit(i) < 0) {
+         if (talasnica_packetTotalProfit(Symbol(), i) < 0) {
             barva = Magenta;
          }
          /*else if (talasnica_packetTotalProfit(index) < BerProfitPips * tickValue * StartLots) {

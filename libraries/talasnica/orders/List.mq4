@@ -19,7 +19,7 @@ funkce pro poèítání obchodù
 bool talasnica_recalculate(){
    
       //Print("Pøed resetem " + talasnica_getTradepacketInfo());
-      talasnica_reset();
+      talasnica_reset(Symbol());
       //Print("Po resetu " + talasnica_getTradepacketInfo());
    
       for(int i = 0; i<OrdersTotal(); i++){
@@ -60,6 +60,6 @@ bool talasnica_recalculate(){
                                );
         }
    }
-    talasnica_sortOrders();
+    talasnica_sortOrders(Symbol());
     return(true);
 }
