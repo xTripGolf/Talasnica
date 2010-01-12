@@ -29,56 +29,51 @@
                              string comment,
                              int magicNumber
                              );
-   void talasnica_reset();
-   void talasnica_sortOrders();
-   string talasnica_printOrdersManager();
+   void talasnica_reset(string symbol);
+   void talasnica_sortOrders(string symbol);
    /**
    * poèítadlo obchodù
    *
    * poèet obchodù v packetu
    */
-   int talasnica_packetCount(int packetFilter);
+   int talasnica_packetCount(string symbol, int packetFilter);
    /**
    * poèítadlo obchodù
    *
    * poèet lotù  v packetu
    */
-    double talasnica_packetVolume(int packetFilter);
+    double talasnica_packetVolume(string symbol, int packetFilter);
    /**
    * poèítadlo obchodù
    *
    * celkový profit v packetu
    */
-   double talasnica_packetProfit(int packetFilter);
+   double talasnica_packetProfit(string symbol, int packetFilter);
    /**
    * celkový swap v packetu
    *
    */
-   double talasnica_packetSwap(int packetFilter);
+   double talasnica_packetSwap(string symbol, int packetFilter);
    /**
    * profit + swap v packetu
    *
    */
-   double talasnica_packetTotalProfit(int packetFilter);
+   double talasnica_packetTotalProfit(string symbol, int packetFilter);
    /**
    * aproximovaná vstupní cena v packetu
    *
    */
-   double talasnica_packetOpenPrice(int packetFilter);
+   double talasnica_packetOpenPrice(string symbol, int packetFilter);
    /**
    * vrací ticket obchodu v packetu
    **/
-   int talasnica_getTicket(int packetFilter, int orderIndex);
+   int talasnica_getTicket(string symbol, int packetFilter, int orderIndex);
    /**
    * vrátí název paketu
    *
    */
    string talasnica_packetName(int packetFilter);
-   /**
-   * vrátí popis paketu
-   *
-   */
-   string talasnica_packetDescription(int packetFilter);
+ 
    
 #import
 

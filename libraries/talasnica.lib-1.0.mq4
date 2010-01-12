@@ -175,7 +175,7 @@ int tl_OrderSend (int type, double volume, double price, double stoploss=0, doub
 bool tl_OrderModify (double price, double stoploss = 0, double takeprofit = 0) {
    int chance = 3; // poèet pokusù
    int tries = 0; // poèítadlo pokusù
-   int colorIndex = 2 * Talasnica::Type::Order(); // index v paletì _arrows_colors
+   int colorIndex = 2 * OrderType(); // index v paletì _arrows_colors
    bool modified = false;
  
    price = NormalizeDouble(price, Digits);
@@ -222,7 +222,7 @@ bool tl_OrderModify (double price, double stoploss = 0, double takeprofit = 0) {
 bool tl_OrderClose () {
    int chance = 3; // poèet pokusù
    int tries = 0; // poèítadlo pokusù
-   int colorIndex = 3 * Talasnica::Type::Order(); // index v paletì ArrowColors
+   int colorIndex = 3 * OrderType(); // index v paletì ArrowColors
    bool closed = false;
    
  if (!GlobalVariableCheck("InTrade")) {
@@ -230,10 +230,10 @@ bool tl_OrderClose () {
      {
       GlobalVariableSet("InTrade", TimeCurrent());  // set lock indicator
        
-      if(Talasnica::Type::Order() == OP_BUY) {
+      if(OrderType() == OP_BUY) {
        closed = OrderClose(OrderTicket(), OrderLots(), Bid, Slippage, ArrowColors[colorIndex]);
       }
-      else  if(Talasnica::Type::Order() == OP_SELL) {
+      else  if(OrderType() == OP_SELL) {
        closed = OrderClose(OrderTicket(), OrderLots(), Ask, Slippage, ArrowColors[colorIndex]);
       }
       else {
@@ -348,8 +348,8 @@ string tl_OrderComment() {
 datetime tl_OrderOpenTime() {
    return(OrderOpenTime());
 }
-datetime tl_Talasnica::Type::Order() {
-   return(Talasnica::Type::Order());
+datetime tl_OrderType() {
+   return(OrderType());
 }
 /****************************************************************
 pomocné funkce pro obchodování
@@ -358,7 +358,7 @@ pomocné funkce pro obchodování
   int tl_OrderReverse(int type = -1) {
 
    if(type == -1) {
-      type = Talasnica::Type::Order();
+      type = OrderType();
    }
    
      switch (type) {
@@ -378,7 +378,7 @@ pomocné funkce pro obchodování
   double tl_OrderEnterPrice(int type = -1) {
 
    if(type == -1) {
-      type = Talasnica::Type::Order();
+      type = OrderType();
    }
    
      switch (type) {
@@ -397,7 +397,7 @@ pomocné funkce pro obchodování
 
   double tl_OrderOutputPrice() {
 
-   int type = Talasnica::Type::Order();
+   int type = OrderType();
    
      switch (type) {
          case OP_BUY:
@@ -511,7 +511,7 @@ bool _izabraj() {
             
             TradeList[index] = OrderTicket();
             index++;
-            type = Talasnica::Type::Order();
+            type = OrderType();
             
             _C[type]++;
             _V[type] += OrderLots();          
@@ -576,7 +576,7 @@ void _poredjaj() {
 
    for(i = 0; i < ArraySize(TradeList); i++) {
       OrderSelect(TradeList[i], SELECT_BY_TICKET);
-      switch(Talasnica::Type::Order()) {
+      switch(OrderType()) {
          case OP_BUY:
             Bulls[counter[OP_BUY]][A_PRICE] = OrderOpenPrice();
             Bulls[counter[OP_BUY]][A_VOLUME] = OrderLots();
