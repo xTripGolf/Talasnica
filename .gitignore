@@ -24,5 +24,24 @@ talasnica*.ex4
 *.exe.*.manifest
 *.exe.*.manifest.*
 *.exp
-**.dep
-**.idb
+*.dep
+*.idb
+# varengold speciální ignorace
+files/*
+files/**/*
+include/talasnica.mqh
+libraries/ExpertSample.dll
+libraries/MT4Integration.dll
+libraries/talasnica-lib.mq4
+scripts/talasnica_draw_trades.mq4
+scripts/talasnica_export.mq4
+scripts/talasnica_info.mq4
+scripts/talasnica_multiOpen.mq4
+scripts/talasnica_panClose.mq4
+scripts/talasnica_panMove.mq4
+status.txt
+talasnica-BB.mq4
+talasnica-II.mq4
+talasnica-dll.mq4
+talasnica.mq4
+talasnica_EA.mq4
