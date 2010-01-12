@@ -22,7 +22,7 @@
    string talasnica_dateTimeToFileName(){
    
       string separator = "-";
-      string fileName = talasnica_dateToFileName() + separator + longFormat(Hour()) + separator + longFormat(Minute()) + separator + longFormat(Seconds());
+      string fileName = talasnica_dateToFileName() + "___" + longFormat(Hour()) + separator + longFormat(Minute()) + separator + longFormat(Seconds());
       
       return(fileName);
    }

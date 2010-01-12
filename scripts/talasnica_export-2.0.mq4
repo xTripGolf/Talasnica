@@ -9,6 +9,7 @@
 #include <WinUser32.mqh>
 #include <talasnica_session.mqh>
 #include <talasnica_logger.mqh>
+#include <talasnica_dll.mqh>
 #include <stdlib.mqh>
 #include <talasnica_dateTime.mqh>
 #property show_inputs
@@ -63,6 +64,7 @@ int start()
                      "COMMENT",
                      "MAGIC NUMBER"
                      );
+ 
    
    if(export_trades){
     export_trades();
@@ -128,14 +130,14 @@ void export(int pool, int total) {
         if(OrderSelect(i,SELECT_BY_POS,pool)){
            FileWrite(handle, OrderTicket(),
                                OrderSymbol(),
-                               OrderOpenTime(),
-                               OrderType(),
+                               talasnica_formatTime(OrderOpenTime(), "%A %d.%B %Y %H:%M:%S"),
+                               talasnica_orderName(OrderType()),
                                OrderLots(),
                                OrderOpenPrice(),
                                OrderStopLoss(),
                                OrderTakeProfit(),
-                               OrderExpiration(),
-                               OrderCloseTime(),
+                               talasnica_formatTime(OrderExpiration(), "%A %d.%B %Y %H:%M:%S"),
+                               talasnica_formatTime(OrderCloseTime(), "%A %d.%B %Y %H:%M:%S"),
                                OrderClosePrice(),
                                OrderCommission(),
                                OrderProfit(),
@@ -146,3 +148,5 @@ void export(int pool, int total) {
         }
       }
 }
+
+
