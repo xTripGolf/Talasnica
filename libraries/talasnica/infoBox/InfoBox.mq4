@@ -38,7 +38,8 @@
 int InfoboxFontSize = 10;
 string InfoboxFontName = "Courier";
 
-//int InfoboxRows[]; // øádky, které se zobrazí v infoboxu
+int packetSize;
+string packetNames[];
 
 /**********************************************************************
 funkce pro práci s infoBoxem
@@ -99,9 +100,14 @@ void talasnica_createTradeList() {
    int i, index;
    LabelCreate(INFOBOX_TABLEHEADER, 5, 20, ROH_HORE_PRAVO, tableHeader, InfoboxFontSize, Yellow);
 
-   for(i = 0; i < 10; i++) {
+  packetSize = talasnica_getPacketSize();
+  ArrayResize(packetNames, packetSize);
+  talasnica_initArrayPacketNames(packetNames, packetSize);
+  
+   for(i = 0; i < packetSize; i++) {
+   Print(i + " " + packetNames[i]);
       //index = InfoboxRows[i];
-      LabelCreate(talasnica_packetName(i), 5, 40 + i * move, ROH_HORE_PRAVO, talasnica_packetName(i), InfoboxFontSize, DarkGray);
+      LabelCreate(packetNames[i], 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
    }
    
    LabelCreate(INFOBOX_STOPS, 5, 40 + i * move, ROH_HORE_PRAVO, INFOBOX_STOPS, InfoboxFontSize, DarkGray);
@@ -163,10 +169,10 @@ void talasnica_refreshTradeList() {
    //int index;
    
    color barva;
-   
-   for(int i = 0; i < 10; i++) {
+    
+   for(int i = 0; i < packetSize; i++) {
       //index = InfoboxRows[i];
-      label = formatText2Cell(talasnica_packetName(i), INFOBOX_CELLSIZE_NAME) +
+      label = formatText2Cell(packetNames[i], INFOBOX_CELLSIZE_NAME) +
               formatText2Cell(talasnica_packetCount(Symbol(), i), INFOBOX_CELLSIZE_COUNT) +
               formatText2Cell(DoubleToStr(talasnica_packetVolume(Symbol(), i), 2), INFOBOX_CELLSIZE_VOLUME) +
               formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(Symbol(), i), Digits), INFOBOX_CELLSIZE_PRICE) +

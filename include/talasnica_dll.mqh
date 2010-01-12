@@ -106,6 +106,17 @@
 
    **/
    string talasnica_formatTime(datetime unixFormat, string format);
+   
+   /**
+* nastaví jména packetù do pole
+
+**/
+bool talasnica_initArrayPacketNames(string& arr[],int);
+/**
+* vrací velikost pole packetù
+
+**/
+int talasnica_getPacketSize();
  
    
 #import
