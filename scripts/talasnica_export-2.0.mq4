@@ -16,6 +16,7 @@
 extern bool export_trades = true;
 extern bool export_history = false;
 extern bool export_all_symbol = true;
+bool development_mode = true;
 
 int handle;
 //+------------------------------------------------------------------+
@@ -26,7 +27,11 @@ int start()
    string name = "talasnica export trades";
 
    talasnica_session_setId(name);
-   Print("volamo talasnica_session_getId() z main " + talasnica_session_getId());
+   if(development_mode) {
+      talasnica_session_setEnv(ENVIRONMENT_DEVELOPMENT);
+   }
+   talasnica_logger_init(talasnica_session_getEnv(), talasnica_session_getId());
+   //Print("volamo talasnica_session_getId() z main " + talasnica_session_getId());
   
    talasnica_logger_log("STARTUJE TALASNICA EXPORT SCRIPT", LOG_SCRIPT);
    

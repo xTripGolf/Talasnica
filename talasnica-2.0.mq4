@@ -9,6 +9,7 @@
 #include <talasnica_session.mqh>
 #include <talasnica_order.mqh>
 #include <talasnica_infoBox.mqh>
+#include <talasnica_logger.mqh>
 
 extern bool development_mode = true;
 
@@ -37,6 +38,7 @@ int init()
    if(development_mode) {
       talasnica_session_setEnv(ENVIRONMENT_DEVELOPMENT);
    }
+   talasnica_logger_init(talasnica_session_getEnv(), talasnica_session_getId());
    
    Comment(talasnica_session_getComment());
    

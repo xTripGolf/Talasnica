@@ -16,6 +16,11 @@
 /*****************************************
 loging
 ******************************************/
+// pøenáší nastavení session z hlavního scriptu
+bool talasnica_logger_init(string environment, string id){
+   talasnica_session_setId(id);
+   talasnica_session_setEnv(environment);
+}
 
 /**
 * zapíše øetìzec do logovacího souboru

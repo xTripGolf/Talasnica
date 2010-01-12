@@ -25,6 +25,7 @@
 //| EX4 imports                                                      |
 //+------------------------------------------------------------------+
 #import "talasnica/logger/Logger.ex4"
+   bool talasnica_logger_init(string environment, string id);
    int talasnica_logger_log(string str, int level);
    string talasnica_logger_getPath();
 #import
