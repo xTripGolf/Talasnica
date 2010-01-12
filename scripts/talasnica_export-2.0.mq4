@@ -7,12 +7,15 @@
 #property link      "http://www.mithrades.com"
 
 #include <WinUser32.mqh>
+#include <talasnica_session.mqh>
 #include <talasnica_logger.mqh>
 #include <stdlib.mqh>
+#include <talasnica_dateTime.mqh>
 #property show_inputs
 
 extern bool export_trades = true;
 extern bool export_history = false;
+extern bool export_all_symbol = true;
 
 int handle;
 //+------------------------------------------------------------------+
@@ -20,17 +23,15 @@ int handle;
 //+------------------------------------------------------------------+
 int start()
   {
+   string name = "talasnica export trades";
+
+   talasnica_session_setId(name);
+   Print("volamo talasnica_session_getId() z main " + talasnica_session_getId());
   
    talasnica_logger_log("STARTUJE TALASNICA EXPORT SCRIPT", LOG_SCRIPT);
    
    //----
-   handle = FileOpen(Symbol() + "-" + 
-             Year()+ "-" + 
-             Month() + "-" + 
-             Day() + "-" +
-             Hour() + "-" +
-             Minute() + "-" +
-             Seconds() + ".txt", FILE_CSV|FILE_WRITE|FILE_READ, ';');
+   handle = FileOpen(getFileName(), FILE_CSV|FILE_WRITE|FILE_READ, ';');
 
    if(handle < 1)
    {
@@ -75,6 +76,38 @@ int start()
   }
 //+------------------------------------------------------------------+
 
+string getFileName() {
+
+   string pool;
+   string symbol;
+   string separator = "-";
+
+   if(export_all_symbol) {
+      symbol = "ALL";
+   }
+   else {
+      symbol = Symbol();
+   }
+
+   if(export_trades && export_history) {
+      pool = "trades-and-history";
+   }
+   else {
+      if(export_trades) {
+         pool = "trades";
+      }
+   
+      if(export_history) {
+         pool = "history";
+      }   
+   }
+     
+
+   
+   string file = talasnica_logger_getPath() + symbol + separator + pool + separator + talasnica_dateTimeToFileName() + ".csv";
+ 
+   return(file);
+}
 
 void export_trades() {
   export(MODE_TRADES, OrdersTotal());

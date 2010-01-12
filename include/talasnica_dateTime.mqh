@@ -1,5 +1,5 @@
 //+------------------------------------------------------------------+
-//|                                             talasnica_logger.mq4 |
+//|                                           talasnica_dateTime.mq4 |
 //|                                 Copyright © 2005, MITHRADES a.s. |
 //|                                        http://www.mithrades.com  |
 //+------------------------------------------------------------------+
@@ -9,24 +9,25 @@
 //+------------------------------------------------------------------+
 //| defines                                                          |
 //+------------------------------------------------------------------+
-/**
-* konstanty pro úroveò výpisu logování
-* @todo dodìlat
-*/
+// #define MacrosHello   "Hello, world!"
+// #define MacrosYear    2005
 
-#define LOG_INIT 2
-#define LOG_ERROR 4
-#define LOG_INFO 8
-#define LOG_SCRIPT 16
-#define LOG_ 0
 //+------------------------------------------------------------------+
+//| DLL imports                                                      |
+//+------------------------------------------------------------------+
+// #import "user32.dll"
+//   int      SendMessageA(int hWnd,int Msg,int wParam,int lParam);
+
+// #import "my_expert.dll"
+//   int      ExpertRecalculate(int wParam,int lParam);
+// #import
 
 //+------------------------------------------------------------------+
 //| EX4 imports                                                      |
 //+------------------------------------------------------------------+
-#import "talasnica/logger/Logger.ex4"
-   int talasnica_logger_log(string str, int level);
-   string talasnica_logger_getPath();
+#import "talasnica/dateTime/DateTime.ex4"
+   string talasnica_dateToFileName();
+   string talasnica_dateTimeToFileName();
 #import
-//+------------------------------------------------------------------+
 
+//+------------------------------------------------------------------+

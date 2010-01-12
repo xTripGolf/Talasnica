@@ -11,6 +11,7 @@
 //#include "./../../../include/talasnica_dll.mqh"
 //#include "./../../../include/talasnica_logger.mqh"
 #include "./../../../include/talasnica_session.mqh"
+#include "./../../../include/talasnica_dateTime.mqh"
 
 /*****************************************
 loging
@@ -51,7 +52,15 @@ loging
 */
 
 string talasnica_logger_getFileName () {
-   return (AccountName() + "/" + talasnica_session_getEnvName() + "/" + talasnica_session_getId() + "_" + Symbol() + "_ "+ Year() + "-" + Month() + "-" + Day() + ".log");
+   string filename = talasnica_logger_getPath() + Symbol() + "_" + talasnica_dateToFileName() + ".log";
+   //Print("talasnica_logger_getFileName > " + filename);
+   return (filename);
+}
+
+string talasnica_logger_getPath () {
+   string filename = AccountName() + "/" + talasnica_session_getId() + "." + talasnica_session_getEnvName() + "/";
+   //Print("talasnica_logger_getPath () > " + filename);
+   return (filename);
 }
 
 /**

@@ -24,7 +24,9 @@ string _id = "talasnica default id";
 int _environment = ENVIRONMENT_PRODUCTION;
 
 void talasnica_session_setId(string id) {
+   Print("talasnica_session_setId(string id) id = " + id);
    _id = id;
+   Print("set _id = " + _id);
 }
 
 
@@ -34,6 +36,7 @@ void talasnica_session_setId(string id) {
 */
 
 string talasnica_session_getId() {
+   Print("talasnica_session_getId() return id = " + _id);
    return(_id);
 }
 
