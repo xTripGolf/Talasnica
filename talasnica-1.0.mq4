@@ -237,7 +237,7 @@ int start()
    if(tl_Zamceno() > 0) {
       double zvoniti = NormalizeDouble(ZvonitiZaOutput * Point, Digits);
       if(NormalizeDouble(MathAbs((Ask + Bid)/2 - tl_E(OP_SVETAURUS)), Digits) < zvoniti || NormalizeDouble(MathAbs((Ask + Bid)/2 - tl_E(OP_SVEMEDVED)), Digits) < zvoniti) {
-         PlaySound("alert.wav");
+         //PlaySound("alert.wav");
       }
      
    }
