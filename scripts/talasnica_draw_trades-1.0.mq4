@@ -25,6 +25,7 @@ int start()
   double price1, price2;
   string name;
   color color1 = DarkOrange, color2 = DarkTurquoise, color3 = DarkViolet;
+  int type;
   
   ObjectsDeleteAll(0, OBJ_TRIANGLE);
   ObjectsDeleteAll(0, OBJ_TREND);
@@ -43,19 +44,30 @@ int start()
      time3 = TimeCurrent();
      price1 = OrderOpenPrice();
      price2 = OrderClosePrice();
+     type = OrderType();
+     
+     if(type > OP_SELL) {
+      continue;
+     }
      
      name = "openTriangle_" + i;
      //Print(name, " ", time1, " - ", time2, " :: ", price1, " - ", price2);
      ObjectCreate(name, OBJ_TRIANGLE, 0, time1, price1, time2, price2, time2, price1);
-     ObjectSet(name, OBJPROP_COLOR, color1);
+     if(type == OP_BUY) {
+      ObjectSet(name, OBJPROP_COLOR, color1);
+     }
+     else {
+      ObjectSet(name, OBJPROP_COLOR, color2);
+     }
      
+     /*
      name = "inputLine_" + i;
      ObjectCreate(name, OBJ_TREND, 0, time2, price1, time3, price1);
      ObjectSet(name, OBJPROP_COLOR, color2); 
      
      name = "outputLine_" + i;
      ObjectCreate(name, OBJ_TREND, 0, time2, price2, time3, price2);
-     ObjectSet(name, OBJPROP_COLOR, color3);
+     ObjectSet(name, OBJPROP_COLOR, color3);*/
      
      
     }
