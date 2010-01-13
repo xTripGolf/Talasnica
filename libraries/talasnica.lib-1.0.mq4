@@ -459,7 +459,7 @@ bool tl_OrderCnt(){
 
 /******************
 *
-* druhý prùchod prochází již jen obchody vlastního systému a páru (z ordersPoolu)
+* druhý prùchod prochází již jen obchody vlastního systému a páru (z tradeListu)
 * naplní jejich seznam a seøadí podle otevírací ceny
 *
 *******************/
@@ -542,7 +542,7 @@ bool _izabraj() {
 
 /******************
 *
-* druhý prùchod prochází již jen obchody vlastního systému a páru (z ordersPoolu)
+* druhý prùchod prochází již jen obchody vlastního systému a páru (z tradeListu)
 * naplní jejich seznam a seøadí podle otevírací ceny
 *
 *******************/
