@@ -103,13 +103,7 @@ void talasnica_createTradeList() {
 
   packetSize = talasnica_getPacketSize();
   ArrayResize(packetNames, packetSize);
-  //ArrayResize(packetNames, 4);
-  int size = talasnica_initArrayPacketNames(packetNames);
-  Print("Packet count is " + size);
-  
-  for(i=0; i < ArraySize(packetNames); i++) {
-   Print(i + ": " + packetNames[i]);
-  }
+  talasnica_initArrayPacketNames(packetNames, packetSize);
   
    for(i = 0; i < packetSize; i++) {
    //Print(i + " " + packetNames[i]);

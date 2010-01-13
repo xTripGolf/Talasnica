@@ -111,7 +111,7 @@
 * nastaví jména packetù do pole
 
 **/
-bool talasnica_initArrayPacketNames(string& arr[]);
+bool talasnica_initArrayPacketNames(string& arr[], int arraySize);
 /**
 * vrací velikost pole packetù
 
