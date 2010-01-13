@@ -38,6 +38,7 @@
 int InfoboxFontSize = 10;
 string InfoboxFontName = "Courier";
 
+// tyto hodnoty naèteme z dll knihovny
 int packetSize;
 string packetNames[];
 
@@ -102,10 +103,16 @@ void talasnica_createTradeList() {
 
   packetSize = talasnica_getPacketSize();
   ArrayResize(packetNames, packetSize);
-  talasnica_initArrayPacketNames(packetNames, packetSize);
+  //ArrayResize(packetNames, 4);
+  int size = talasnica_initArrayPacketNames(packetNames);
+  Print("Packet count is " + size);
+  
+  for(i=0; i < ArraySize(packetNames); i++) {
+   Print(i + ": " + packetNames[i]);
+  }
   
    for(i = 0; i < packetSize; i++) {
-   Print(i + " " + packetNames[i]);
+   //Print(i + " " + packetNames[i]);
       //index = InfoboxRows[i];
       LabelCreate(packetNames[i], 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
    }
