@@ -103,7 +103,9 @@ void talasnica_createTradeList() {
 
   packetSize = talasnica_getPacketSize();
   ArrayResize(packetNames, packetSize);
-  talasnica_initArrayPacketNames(packetNames, packetSize);
+  if(!talasnica_loadPacketNamesTable(packetNames, packetSize)){
+   Print("Velikost pole pro naètení jmen tabulek má chybnou velikost. Tabulka nebyla naètena správnì.");
+  }
   
    for(i = 0; i < packetSize; i++) {
    //Print(i + " " + packetNames[i]);

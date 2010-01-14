@@ -4,6 +4,7 @@
 *.mqt
 samples/*
 *.log
+!TODO
 !dev.cpp/**/*.log
 mqlcache.dat
 !talasnica*
