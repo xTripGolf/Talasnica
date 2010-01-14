@@ -120,12 +120,13 @@
      string packetNames[];
      packetSize = talasnica_getPacketSize();
      ArrayResize(packetNames, packetSize);
-     if(!talasnica_loadPacketNamesTable(packetNames, packetSize)){
-      Print("Velikost pole pro naètení jmen tabulek má chybnou velikost. Tabulka nebyla naètena správnì.");
+     string err = talasnica_loadPacketNamesTable(packetNames, packetSize)
+     if(err > ""){
+      Print(err);
      }
    **/
-   bool talasnica_loadPacketNamesTable(string& arr[], int arraySize);  
-   bool talasnica_loadPacketsTable(string& arr[], int arraySize, string symbol);
+   string talasnica_loadPacketNamesTable(string& arr[], int arraySize);  
+   string talasnica_loadPacketsTable(string& arr[], int arraySize, string symbol);
    
 
  

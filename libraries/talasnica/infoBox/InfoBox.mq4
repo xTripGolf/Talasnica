@@ -53,8 +53,10 @@ bool talasnica_drawPacketNamesTable()
 
   arraySize = talasnica_getPacketSize();
   ArrayResize(packetNames, arraySize);
-  if(!talasnica_loadPacketNamesTable(packetNames, arraySize)){
-   Print("Velikost pole pro naètení jmen tabulek má chybnou velikost. Tabulka nebyla naètena správnì.");
+  string err = talasnica_loadPacketNamesTable(packetNames, arraySize);
+  if(err > ""){
+   Print(err);
+   talasnica_logger_err(err);
   }
   
   int move = 16;
@@ -73,8 +75,10 @@ bool talasnica_drawPacketsTable()
   arraySize = talasnica_getPacketSize();
   arraySize++;
   ArrayResize(rows, arraySize);
-  if(!talasnica_loadPacketsTable(rows, arraySize, Symbol())){
-   Print("Velikost pole pro naètení tabulky paketù má chybnou velikost. Tabulka nebyla naètena správnì.");
+  string err = talasnica_loadPacketsTable(rows, arraySize, Symbol());
+  if(err > ""){
+   Print(err);
+   talasnica_logger_err(err);
   }
   
   int move = 16;
