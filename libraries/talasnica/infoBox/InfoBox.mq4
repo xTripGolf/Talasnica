@@ -12,19 +12,6 @@
 #include "./../../../include/talasnica_logger.mqh"
 //#include "./../../../include/talasnica_session.mqh"
 
-#define INFOBOX_TABLEHEADER "header"
-
-#define INFOBOX_STOPS "koliko èaka stopu" // poèet odložených obchodù
-#define INFOBOX_LIMITS "koliko èaka limitek" // poèet odložených obchodù
-
-#define INFOBOX_CELLSIZE_NAME 6
-#define INFOBOX_CELLSIZE_COUNT 5
-#define INFOBOX_CELLSIZE_VOLUME 6
-#define INFOBOX_CELLSIZE_PRICE 8
-#define INFOBOX_CELLSIZE_PROFIT 10
-
-#define INFOBOX_CELLSIZE_TICKET 8
-
 // Posunu do rohu
 // 0 - Levy nahore
 // 1 - Pravy nahore
@@ -35,10 +22,7 @@
 #define ROH_DULE_LEVO 2
 #define ROH_DULE_PRAVO 3
 
-int InfoboxFontSize = 10;
 string InfoboxFontName = "Courier";
-
-
 
 /**********************************************************************
 funkce pro práci s infoBoxem
@@ -56,8 +40,10 @@ bool talasnica_drawPacketNamesTable()
   string err = talasnica_loadPacketNamesTable(packetNames, arraySize);
   
   int move = 16;
+  int fontSize = 10;
+  
   for(int i = 0; i < arraySize; i++) {
-     LabelCreate("packet_name_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
+     LabelCreate("packet_name_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], fontSize, DarkGray);
   }
   
   errorLabel(err, "packet_name_error_");
@@ -76,15 +62,108 @@ bool talasnica_drawPacketsTable()
   ArrayResize(rows, arraySize);
   string err = talasnica_loadPacketsTable(rows, arraySize, Symbol());
   
-  int move = 16;
+  int sirkaRadku = 20;
+  int fontSize = 10;
+  color barva = DarkOliveGreen;
+  int cisloRadku = 0;
+  
    for(int i = 0; i < arraySize; i++) {
-      LabelCreate("packet_row_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, rows[i], InfoboxFontSize, DarkGray);
+      switch(i){
+         // hlavièka
+         case 0:
+            barva = DarkOrange;
+            cisloRadku = 1;
+            break;
+         // buy
+         case 1:
+            barva = colorByProfit(OP_BUY);
+            cisloRadku = 2;
+            break;
+         // sell
+         case 2:
+            barva = colorByProfit(OP_SELL);
+            cisloRadku = 3;
+            break;
+         // buy limit
+          case 3:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 6;
+            break;
+         // sell limit
+          case 4:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 7;
+            break;
+         // buy stop
+          case 5:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 8;
+            break;
+         // sell stop
+          case 6:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 9;
+            break;
+         // ztrátové
+          case 7:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 10;
+            break;
+         // profitabilní
+          case 8:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 11;
+            break;
+         // all opened
+          case 9:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 4;
+            break;
+         // all
+          case 10:
+            barva = colorByProfit(PACKET_ALL);
+            cisloRadku = 5;
+            break;
+         // premoc min
+          case 11:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 12;
+            break;
+         // premoc max
+          case 12:
+            barva = colorByProfit(PACKET_ALL_OPENED);
+            cisloRadku = 13;
+            break;
+         default:
+            fontSize = 10;
+            barva = DarkOliveGreen;
+            cisloRadku = i+1;
+      }
+      LabelCreate("packet_row_" + i, 5, cisloRadku * sirkaRadku, ROH_HORE_PRAVO, rows[i], fontSize, barva);
    }
    
    errorLabel(err, "packet_row_error_");
    
 }
 
+
+color colorByProfit(int packet) {
+   color barva;
+   double profit = talasnica_packetTotalProfit(Symbol(), packet);
+   if(profit == 0)
+   {
+      barva = Red;
+   }
+   else if (profit > 0)
+   {
+      barva = Chartreuse;//MediumSpringGreen;
+   }
+   else
+   {
+      barva = OrangeRed;
+   }
+   return(barva);
+}
 
 void errorLabel(string err, string labelName)
 {
@@ -96,7 +175,7 @@ void errorLabel(string err, string labelName)
       int i = 0;
       int move = 25;
       while(start < strlen){
-         LabelCreate(labelName + i, 12, 40 + i * move, ROH_HORE_PRAVO, StringSubstr(err, start, subLen), InfoboxFontSize + 5, Red);
+         LabelCreate(labelName + i, 12, 40 + i * move, ROH_HORE_PRAVO, StringSubstr(err, start, subLen), 16, Red);
          start += subLen;
          i++;
    }
@@ -180,12 +259,6 @@ void CreateInfoBoxHedged() {
 void talasnica_refreshTradeList() {
 
    string label;
-   
-   label = "STOPS - još èaka " + talasnica_packetCount(Symbol(), OP_BUYSTOP) + " gore " + talasnica_packetCount(Symbol(), OP_SELLSTOP) + " dole ";
-   ObjectSetText(INFOBOX_STOPS, label, InfoboxFontSize, InfoboxFontName, White);
-   
-   label = "LIMITS - još èaka " + talasnica_packetCount(Symbol(), OP_BUYLIMIT) + " gore " + talasnica_packetCount(Symbol(), OP_SELLLIMIT) + " dole ";
-   ObjectSetText(INFOBOX_LIMITS, label, InfoboxFontSize, InfoboxFontName, White);
 
    double tickValue = MarketInfo(Symbol(), MODE_TICKVALUE);
    
@@ -197,12 +270,7 @@ void talasnica_refreshTradeList() {
    string packetNames[];
 
    for(int i = 0; i < arraySize; i++) {
-      //index = InfoboxRows[i];
-      label = formatText2Cell(packetNames[i], INFOBOX_CELLSIZE_NAME) +
-              formatText2Cell(talasnica_packetCount(Symbol(), i), INFOBOX_CELLSIZE_COUNT) +
-              formatText2Cell(DoubleToStr(talasnica_packetVolume(Symbol(), i), 2), INFOBOX_CELLSIZE_VOLUME) +
-              formatText2Cell(DoubleToStr(talasnica_packetOpenPrice(Symbol(), i), Digits), INFOBOX_CELLSIZE_PRICE) +
-              formatText2Cell(DoubleToStr(talasnica_packetTotalProfit(Symbol(), i), 2), INFOBOX_CELLSIZE_PROFIT);
+      
       if (talasnica_packetCount(Symbol(), i) == 0) {
          barva = DarkGray;
       }
@@ -217,7 +285,7 @@ void talasnica_refreshTradeList() {
             barva = LawnGreen;
          }
       }
-      ObjectSetText(talasnica_packetName(i), label, InfoboxFontSize, InfoboxFontName, barva);
+      ObjectSetText(talasnica_packetName(i), label, 10, InfoboxFontName, barva);
    }
   
    // hedged

@@ -7,6 +7,25 @@
 #property link      "http://www.xtrip.net"
 
 //+------------------------------------------------------------------+
+//| defines                                                          |
+//+------------------------------------------------------------------+
+// #define MacrosHello   "Hello, world!"
+// #define MacrosYear    2005
+
+#define PACKET_BUY 0
+#define PACKET_SELL 1
+#define PACKET_BUYLIMIT 2
+#define PACKET_SELLLIMIT 3
+#define PACKET_BUYSTOP 4
+#define PACKET_SELLSTOP 5
+#define PACKET_PROFITED 6
+#define PACKET_LOSSED 7
+#define PACKET_ALL_OPENED 8
+#define PACKET_ALL 9
+#define PACKET_PREMOC_MIN 10
+#define PACKET_PREMOC_MAX 11
+
+//+------------------------------------------------------------------+
 //| DLL imports                                                      |
 //+------------------------------------------------------------------+
 #import "talasnica/talasnica.dll"
