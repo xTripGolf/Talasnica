@@ -28,6 +28,10 @@
    bool talasnica_logger_init(string environment, string id);
    int talasnica_logger_log(string str, int level);
    string talasnica_logger_getPath();
+   /**
+   * vypíše chybu jako label na obrazovku, velkým a výrazným písmem
+   **/
+   void talasnica_logger_err(string err);
 #import
 //+------------------------------------------------------------------+
 

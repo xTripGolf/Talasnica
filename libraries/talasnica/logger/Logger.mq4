@@ -76,3 +76,16 @@ string tl_Vcil() {
    return (Symbol() + " at " + TimeToStr(TimeCurrent(),TIME_DATE|TIME_SECONDS));
 }
 
+void talasnica_logger_err(string err)
+{
+   string name = "error_log";
+   ObjectCreate(name, OBJ_LABEL, 0, 0, 0);
+   ObjectSet(name, OBJPROP_CORNER, 0);
+   //Posun dle osy X
+   ObjectSet(name, OBJPROP_XDISTANCE, 40 );
+   //Posun dle osy Y
+   //ObjectSet(name, OBJPROP_YDISTANCE, 0 );
+   //Nastavim Text a Barvu textu
+   ObjectSetText (name, err , 36, "Courier", Red);
+}
+
