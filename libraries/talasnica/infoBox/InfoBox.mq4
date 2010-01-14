@@ -54,15 +54,14 @@ bool talasnica_drawPacketNamesTable()
   arraySize = talasnica_getPacketSize();
   ArrayResize(packetNames, arraySize);
   string err = talasnica_loadPacketNamesTable(packetNames, arraySize);
-  if(err > ""){
-   Print(err);
-   talasnica_logger_err(err);
-  }
   
   int move = 16;
-   for(int i = 0; i < arraySize; i++) {
-      LabelCreate("packet_name_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
-   }
+  for(int i = 0; i < arraySize; i++) {
+     LabelCreate("packet_name_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
+  }
+  
+  errorLabel(err, "packet_name_error_");
+
 
 }
 bool talasnica_drawPacketsTable()
@@ -76,16 +75,34 @@ bool talasnica_drawPacketsTable()
   arraySize++;
   ArrayResize(rows, arraySize);
   string err = talasnica_loadPacketsTable(rows, arraySize, Symbol());
-  if(err > ""){
-   Print(err);
-   talasnica_logger_err(err);
-  }
   
   int move = 16;
    for(int i = 0; i < arraySize; i++) {
       LabelCreate("packet_row_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, rows[i], InfoboxFontSize, DarkGray);
    }
+   
+   errorLabel(err, "packet_row_error_");
+   
 }
+
+
+void errorLabel(string err, string labelName)
+{
+  if(err > ""){
+      Print(err);
+      int strlen =  StringLen(err);
+      int subLen = 32;
+      int start = 0;
+      int i = 0;
+      int move = 25;
+      while(start < strlen){
+         LabelCreate(labelName + i, 12, 40 + i * move, ROH_HORE_PRAVO, StringSubstr(err, start, subLen), InfoboxFontSize + 5, Red);
+         start += subLen;
+         i++;
+   }
+  }
+}
+
 
 
 /**
