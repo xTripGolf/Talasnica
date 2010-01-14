@@ -65,81 +65,66 @@ bool talasnica_drawPacketsTable()
   int sirkaRadku = 20;
   int fontSize = 10;
   color barva = DarkOliveGreen;
-  int cisloRadku = 0;
   
    for(int i = 0; i < arraySize; i++) {
       switch(i){
          // hlavièka
          case 0:
             barva = DarkOrange;
-            cisloRadku = 1;
             break;
          // buy
          case 1:
             barva = colorByProfit(OP_BUY);
-            cisloRadku = 2;
             break;
          // sell
          case 2:
             barva = colorByProfit(OP_SELL);
-            cisloRadku = 3;
             break;
          // buy limit
           case 3:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 6;
             break;
          // sell limit
           case 4:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 7;
             break;
          // buy stop
           case 5:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 8;
             break;
          // sell stop
           case 6:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 9;
             break;
          // ztrátové
           case 7:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 10;
             break;
          // profitabilní
           case 8:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 11;
             break;
          // all opened
           case 9:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 4;
             break;
          // all
           case 10:
             barva = colorByProfit(PACKET_ALL);
-            cisloRadku = 5;
             break;
          // premoc min
           case 11:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 12;
             break;
          // premoc max
           case 12:
             barva = colorByProfit(PACKET_ALL_OPENED);
-            cisloRadku = 13;
             break;
          default:
             fontSize = 10;
             barva = DarkOliveGreen;
-            cisloRadku = i+1;
       }
-      LabelCreate("packet_row_" + i, 5, cisloRadku * sirkaRadku, ROH_HORE_PRAVO, rows[i], fontSize, barva);
+      LabelCreate("packet_row_" + i, 5, 15 + i * sirkaRadku, ROH_HORE_PRAVO, rows[i], fontSize, barva);
    }
    
    errorLabel(err, "packet_row_error_");
