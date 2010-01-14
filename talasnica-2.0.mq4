@@ -43,7 +43,7 @@ int init()
    Comment(talasnica_session_getComment());
    
    talasnica_recalculate();
-   talasnica_createTradeList();
+   talasnica_drawPacketsTable();
  
    // nezùstal zaseknutý globální InTrade ?
    // Jednou se mi to stalo, nešly obchody a já nevìdìl co s tím
@@ -103,7 +103,7 @@ int start()
   {
    
    talasnica_recalculate();
-   talasnica_refreshTradeList();
+   //talasnica_refreshTradeList();
   
   //Print("Po naètení " + talasnica_getTradepacketInfo());
   

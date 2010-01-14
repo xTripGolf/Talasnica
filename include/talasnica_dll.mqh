@@ -124,8 +124,7 @@
       Print("Velikost pole pro naètení jmen tabulek má chybnou velikost. Tabulka nebyla naètena správnì.");
      }
    **/
-   bool talasnica_loadPacketNamesTable(string& arr[], int arraySize);
-   
+   bool talasnica_loadPacketNamesTable(string& arr[], int arraySize);  
    bool talasnica_loadPacketsTable(string& arr[], int arraySize, string symbol);
    
 

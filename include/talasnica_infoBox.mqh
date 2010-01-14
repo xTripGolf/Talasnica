@@ -26,7 +26,8 @@
 //| EX4 imports                                                      |
 //+------------------------------------------------------------------+
  #import "talasnica/infoBox/InfoBox.ex4"
-   void talasnica_createTradeList();
    void talasnica_refreshTradeList();
+   bool talasnica_drawPacketNamesTable();  
+   bool talasnica_drawPacketsTable();
  #import
 //+------------------------------------------------------------------+

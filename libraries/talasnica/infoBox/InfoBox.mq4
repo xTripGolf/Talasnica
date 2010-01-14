@@ -38,13 +38,52 @@
 int InfoboxFontSize = 10;
 string InfoboxFontName = "Courier";
 
-// tyto hodnoty naèteme z dll knihovny
-int packetSize;
-string packetNames[];
+
 
 /**********************************************************************
 funkce pro práci s infoBoxem
 **********************************************************************/
+
+bool talasnica_drawPacketNamesTable()
+{
+
+   // tyto hodnoty naèteme z dll knihovny
+   int arraySize;
+   string packetNames[];
+
+  arraySize = talasnica_getPacketSize();
+  ArrayResize(packetNames, arraySize);
+  if(!talasnica_loadPacketNamesTable(packetNames, arraySize)){
+   Print("Velikost pole pro naètení jmen tabulek má chybnou velikost. Tabulka nebyla naètena správnì.");
+  }
+  
+  int move = 16;
+   for(int i = 0; i < arraySize; i++) {
+      LabelCreate("packet_name_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
+   }
+
+}
+bool talasnica_drawPacketsTable()
+{
+
+   // tyto hodnoty naèteme z dll knihovny
+   int arraySize;
+   string rows[];
+
+  arraySize = talasnica_getPacketSize();
+  arraySize++;
+  ArrayResize(rows, arraySize);
+  if(!talasnica_loadPacketsTable(rows, arraySize, Symbol())){
+   Print("Velikost pole pro naètení tabulky paketù má chybnou velikost. Tabulka nebyla naètena správnì.");
+  }
+  
+  int move = 16;
+   for(int i = 0; i < arraySize; i++) {
+      LabelCreate("packet_row_" + i, 5, 40 + i * move, ROH_HORE_PRAVO, rows[i], InfoboxFontSize, DarkGray);
+   }
+}
+
+
 /**
 * Funkce na vytvareni popisku na grafu
 */
@@ -78,46 +117,6 @@ void LabelCreate(string _LabelName, int _OsaX, int _OsaY, int _Roh = 2, string _
    ObjectSetText (_LabelName, _Text , _FontSize, InfoboxFontName, _Color);
 }
 
-
-
-
-
-
-/**
-* vytvoøí informaèní box
-*
-*/
-
-void talasnica_createTradeList() {
-
-   string tableHeader = formatText2Cell("type", INFOBOX_CELLSIZE_NAME)
-                        + formatText2Cell("count", INFOBOX_CELLSIZE_COUNT)
-                        + formatText2Cell("volume", INFOBOX_CELLSIZE_VOLUME)
-                        + formatText2Cell("price", INFOBOX_CELLSIZE_PRICE)
-                        + formatText2Cell("profit", INFOBOX_CELLSIZE_PROFIT);
-   
-   int move = 16;
-
-   int i, index;
-   LabelCreate(INFOBOX_TABLEHEADER, 5, 20, ROH_HORE_PRAVO, tableHeader, InfoboxFontSize, Yellow);
-
-  packetSize = talasnica_getPacketSize();
-  ArrayResize(packetNames, packetSize);
-  if(!talasnica_loadPacketNamesTable(packetNames, packetSize)){
-   Print("Velikost pole pro naètení jmen tabulek má chybnou velikost. Tabulka nebyla naètena správnì.");
-  }
-  
-   for(i = 0; i < packetSize; i++) {
-   //Print(i + " " + packetNames[i]);
-      //index = InfoboxRows[i];
-      LabelCreate(packetNames[i], 5, 40 + i * move, ROH_HORE_PRAVO, packetNames[i], InfoboxFontSize, DarkGray);
-   }
-   
-   LabelCreate(INFOBOX_STOPS, 5, 40 + i * move, ROH_HORE_PRAVO, INFOBOX_STOPS, InfoboxFontSize, DarkGray);
-   i++;
-   LabelCreate(INFOBOX_LIMITS, 5, 40 + i * move, ROH_HORE_PRAVO, INFOBOX_LIMITS, InfoboxFontSize, DarkGray);
-   
-}
 
 /**
 * vytvoøí textová pole pro seznam zámkù
@@ -172,8 +171,11 @@ void talasnica_refreshTradeList() {
    //int index;
    
    color barva;
-    
-   for(int i = 0; i < packetSize; i++) {
+    // tyto hodnoty naèteme z dll knihovny
+   int arraySize;
+   string packetNames[];
+
+   for(int i = 0; i < arraySize; i++) {
       //index = InfoboxRows[i];
       label = formatText2Cell(packetNames[i], INFOBOX_CELLSIZE_NAME) +
               formatText2Cell(talasnica_packetCount(Symbol(), i), INFOBOX_CELLSIZE_COUNT) +
