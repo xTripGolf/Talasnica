@@ -103,7 +103,7 @@ int start()
   {
    
    talasnica_recalculate();
-   //talasnica_refreshTradeList();
+   talasnica_drawPacketsTable();
   
   //Print("Po naètení " + talasnica_getTradepacketInfo());
   

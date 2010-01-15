@@ -22,6 +22,8 @@
 #define ROH_DULE_LEVO 2
 #define ROH_DULE_PRAVO 3
 
+#define VYSKA_RADKU_TEXT 20
+
 string InfoboxFontName = "Courier";
 
 /**********************************************************************
@@ -54,77 +56,89 @@ bool talasnica_drawPacketsTable()
 {
 
    // tyto hodnoty naèteme z dll knihovny
-   int arraySize;
    string rows[];
 
-  arraySize = talasnica_getPacketSize();
-  arraySize++;
-  ArrayResize(rows, arraySize);
-  string err = talasnica_loadPacketsTable(rows, arraySize, Symbol());
+  ArrayResize(rows, PACKET_TABLE_ROWS);
+  string err = talasnica_loadPacketsTable(rows, PACKET_TABLE_ROWS, Symbol());
   
-  int sirkaRadku = 20;
+  int vyskaRadku = VYSKA_RADKU_TEXT;
+  int posun = 5;
   int fontSize = 10;
   color barva = DarkOliveGreen;
   
-   for(int i = 0; i < arraySize; i++) {
+   for(int i = 0; i < PACKET_TABLE_ROWS; i++) {
       switch(i){
-         // hlavièka
+         // oddìlovaèe øádkù
          case 0:
-            barva = DarkOrange;
+         case 2:
+         case 5:
+         case 7:
+         case 10:
+         case 16:
+         case 19:
+            barva = LawnGreen;
+            vyskaRadku = 10;
+            break;        
+         // hlavièka
+         case 1:
+            barva = LawnGreen;
             break;
          // buy
-         case 1:
+         case 3:
             barva = colorByProfit(OP_BUY);
             break;
          // sell
-         case 2:
+         case 4:
             barva = colorByProfit(OP_SELL);
             break;
          // buy limit
-          case 3:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 12:
+            barva = colorByCount(PACKET_BUY_LIMIT);
             break;
          // sell limit
-          case 4:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 13:
+            barva = colorByCount(PACKET_SELL_LIMIT);
             break;
          // buy stop
-          case 5:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 14:
+            barva = colorByCount(PACKET_BUY_STOP);
             break;
          // sell stop
-          case 6:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 15:
+            barva = colorByCount(PACKET_SELL_STOP);
             break;
          // ztrátové
-          case 7:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 9:
+            barva = colorByProfit(PACKET_LOSSED);
             break;
          // profitabilní
           case 8:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+            barva = colorByProfit(PACKET_PROFITED);
             break;
          // all opened
-          case 9:
+          case 6:
             barva = colorByProfit(PACKET_ALL_OPENED);
             break;
          // all
-          case 10:
-            barva = colorByProfit(PACKET_ALL);
+          case 11:
+            barva = colorByCount(PACKET_ALL);
             break;
          // premoc min
-          case 11:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 17:
+            barva = colorByProfit(PACKET_PREMOC_MIN);
             break;
          // premoc max
-          case 12:
-            barva = colorByProfit(PACKET_ALL_OPENED);
+          case 18:
+            barva = colorByProfit(PACKET_PREMOC_MAX);
             break;
          default:
             fontSize = 10;
             barva = DarkOliveGreen;
       }
-      LabelCreate("packet_row_" + i, 5, 15 + i * sirkaRadku, ROH_HORE_PRAVO, rows[i], fontSize, barva);
+      posun += vyskaRadku;
+      LabelCreate("packet_row_" + i, 5, posun, ROH_HORE_PRAVO, rows[i], fontSize, barva);
+      // výchozí hodnota
+      vyskaRadku = VYSKA_RADKU_TEXT;
    }
    
    errorLabel(err, "packet_row_error_");
@@ -135,9 +149,9 @@ bool talasnica_drawPacketsTable()
 color colorByProfit(int packet) {
    color barva;
    double profit = talasnica_packetTotalProfit(Symbol(), packet);
-   if(profit == 0)
+   if(profit > -1 && profit < 1)
    {
-      barva = Red;
+      barva = Teal;
    }
    else if (profit > 0)
    {
@@ -149,6 +163,39 @@ color colorByProfit(int packet) {
    }
    return(barva);
 }
+
+color colorByVolume(int packet) {
+   color barva;
+   double volume = talasnica_packetVolume(Symbol(), packet);
+   if(volume > -0.01 && volume < 0.01)
+   {
+      barva = Teal;
+   }
+   else if (volume > 0)
+   {
+      barva = Chartreuse;//MediumSpringGreen;
+   }
+   else
+   {
+      barva = OrangeRed;
+   }
+   return(barva);
+}
+
+color colorByCount(int packet) {
+   color barva;
+   double count = talasnica_packetCount(Symbol(), packet);
+   if(count > 0)
+   {
+      barva = Gold;
+   }
+   else
+   {
+      barva = Teal;
+   }
+   return(barva);
+}
+
 
 void errorLabel(string err, string labelName)
 {
@@ -233,76 +280,12 @@ void CreateInfoBoxHedged() {
    }*/
 }
 
-/**
-*
-*
-*
-*
-*
-*/
 
-void talasnica_refreshTradeList() {
-
-   string label;
-
-   double tickValue = MarketInfo(Symbol(), MODE_TICKVALUE);
-   
-   //int index;
-   
-   color barva;
-    // tyto hodnoty naèteme z dll knihovny
-   int arraySize;
-   string packetNames[];
-
-   for(int i = 0; i < arraySize; i++) {
-      
-      if (talasnica_packetCount(Symbol(), i) == 0) {
-         barva = DarkGray;
-      }
-      else {              
-         if (talasnica_packetTotalProfit(Symbol(), i) < 0) {
-            barva = Magenta;
-         }
-         /*else if (talasnica_packetTotalProfit(index) < BerProfitPips * tickValue * StartLots) {
-            barva = Aqua;
-         }*/
-         else {
-            barva = LawnGreen;
-         }
-      }
-      ObjectSetText(talasnica_packetName(i), label, 10, InfoboxFontName, barva);
-   }
-  
-   // hedged
-   CreateInfoBoxHedged();
-   /*i = 0;
-   int bulls = talasnica_packetCount(OP_BUY);
-   int bears = talasnica_packetCount(OP_SELL);
-   int iBears, iBulls;
-   string name = "hedged_" + i;
-   double profitZamku;
-   while (ObjectFind(name) >= 0) {
-      iBears = bears - i - 1;
-      iBulls = bulls - i - 1;
-      profitZamku = tl_getProfit(OP_BUY, iBulls) + tl_getProfit(OP_SELL, iBears);
-      label = formatText2Cell(DoubleToStr(tl_getTicket(OP_BUY, iBulls), 0), INFOBOX_CELLSIZE_TICKET) +
-              formatText2Cell(DoubleToStr(tl_getTicket(OP_SELL, iBears), 0), INFOBOX_CELLSIZE_TICKET) +
-              formatText2Cell(DoubleToStr(profitZamku, 2), INFOBOX_CELLSIZE_PROFIT);
-      if(profitZamku > 0) {
-         barva = LawnGreen;
-      }
-      else {
-         barva = Yellow;
-      }
-      ObjectSetText(name, label, InfoboxFontSize, InfoboxFontName, barva);
-      i++;
-      name = "hedged_" + i;
-   }*/
- }
 
 /**
 * naformátuje text do tabulky
 *
+* nepoužívá se, dll si to formátuje samo
 */
 
 string formatText2Cell(string text, int cellSize = 12) {

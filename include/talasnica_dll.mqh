@@ -12,12 +12,14 @@
 // #define MacrosHello   "Hello, world!"
 // #define MacrosYear    2005
 
+#define PACKET_TABLE_ROWS 20
+   
 #define PACKET_BUY 0
 #define PACKET_SELL 1
-#define PACKET_BUYLIMIT 2
-#define PACKET_SELLLIMIT 3
-#define PACKET_BUYSTOP 4
-#define PACKET_SELLSTOP 5
+#define PACKET_BUY_LIMIT 2
+#define PACKET_SELL_LIMIT 3
+#define PACKET_BUY_STOP 4
+#define PACKET_SELL_STOP 5
 #define PACKET_PROFITED 6
 #define PACKET_LOSSED 7
 #define PACKET_ALL_OPENED 8
